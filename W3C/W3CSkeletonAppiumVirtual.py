@@ -16,11 +16,10 @@ import sys
 import os
 import datetime
 from termcolor import colored
-
+androidTest = False
 import multiprocessing
 
 # from reusableFxns import *
-androidTest = False
 iosTest = False
 useApp = False
 
@@ -38,8 +37,8 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # Uncomment one of those lines
 ###################################################################
 
-# androidTest = True
-iosTest = True
+androidTest = True
+# iosTest = True
 
 
 ###################################################################
@@ -57,22 +56,14 @@ region = 'US'
 ###################################################################
 
 useApp = True
-
-
 # appLocation = 'https://github.com/truongsinh/android_flutter_host/releases/download/0.0.1/app-free-debug.apk'
 # appLocation = 'maps'
-# appLocation = 'https://mobile-app-archive-prod-us-east-1.s3.amazonaws.com/Android/release/Tasty_QA_11858/1480002_1.48.0-QA/Tasty-1.48.0-QA-RC.apk'
-# appLocation = 'storage:filename=app-gms-debug.apk'
-# appLocation = 'storage:filename=app-tcpProd-release (1).apk'
-appLocation = 'storage:e57bfe5b-673d-4edd-adfc-a317d069a65b'
-
-# appLocation = 'storage:25e76be0-bc67-49d1-a785-a22bfd0e1d90'
+# appLocation = 'storage:4e4adc31-c706-42f8-a531-d8b353f55f16', #android Android_15.03.00_nr_20210311.1.apk
+# appLocation = 'storage:74de627f-dc76-4e2a-a899-d6c7b1090372'
 # appLocation = 'storage:f9232cab-fb1c-4340-b3f9-e3d8f2398abb'
-# appLocation = 'storage:filename=Android.SauceLabs.Mobile.Sample.app.2.7.1.apk'
-# 'app': 'storage:f5988b56-89f1-4db8-b9a8-d4e2a8f0887c', #ios smartsheets
-# 'app': 'storage:59549449-8b97-47c5-9343-f76799cc4fe4', #android smartsheets
-# 'app':'storage:filename=Android.SauceLabs.Mobile.Sample.app.2.7.1.apk'
+# appLocation = 'storage:filename=Android_15.03.00_nr_20210311.1.apk'
 
+appLocation = 'storage:filename=sauce-storage:Android_15.03.00_nr_20210311.1.apk'
 
 
 
@@ -89,27 +80,22 @@ run = 1
 
 def run_sauce_test():
     projectParameters = {
-        # 'tags':[''],
-        'appiumVersion': '1.17.1',
-        # 'name': 'Testing Indeed App at Run Time: ' + str(datetime.datetime.now()),
-        'name': 'Validating search by Order Completion status: "Incomplete" in iMFM – 10.0',
-        'build': 'SI-Mobile_Automation, Pipeline Execution at: Run_16-Sep-2021 07 PM',
-        #
+        'tags':['W3C Appium'],
+        # 'appiumVersion': '1.18.1',
+        # 'name': 'Testing URL at Run Time: ' + str(datetime.datetime.now()),
         # 'commandTimeout': 200,
         # "idleTimeout": 200,
-        # # 'name': 'Testing Time Zones',
-        # # 'name': 'Testing https://www.childrensplace.com/ca/homeat Run Time: ' + str(datetime.datetime.now()),
+        # 'name': 'Testing App ' + appLocation +' at Run Time: ' + str(datetime.datetime.now()),
         # "timeZone": "Alaska",
         # 'sauce:throttleNetwork': 'offline',
         # 'tunnelIdentifier': 'tj1',
         # 'appWaitActivity': "*, .*",
-        # 'isHeadless': True,
+    'sauce:options':{
+        # 'platformName': 'WIN10',
+        'name': 'Testing interact.ipa at Run Time: ' + str(datetime.datetime.now()),
+        # 'appiumVersion': '1.19.0',
 
-    # 'sauce:options':{
-
-        # 'extendedDebugging':'true',
-
-        # },
+        },
     # },
         # 'autoAcceptAlerts':'true',
         # 'locationServicesEnabled': True,
@@ -119,71 +105,63 @@ def run_sauce_test():
         # # 'pageLoadStrategy': 'eager',
         # 'nativeEvents': 'true',
         # 'sendKeyStrategy': 'setValue',
-        # 'appiumVersion': '1.13.1',
+        # 'appiumVersion': '1.9.1',
         # 'resetKeyboard': 'true',
         # 'useJSONSource': 'true',
         # 'clearSystemFiles':'true',
+        # 'app': 'storage:f5988b56-89f1-4db8-b9a8-d4e2a8f0887c', #ios smartsheets
+        # 'app': 'storage:273d4796-7238-42c4-ac3a-06e15c10b229', #ios indeed
+        # 'app': 'storage:4e4adc31-c706-42f8-a531-d8b353f55f16', #android Android_15.03.00_nr_20210311.1.apk
+
+
+        # 'app': 'storage:59549449-8b97-47c5-9343-f76799cc4fe4', #android smartsheets
+        # 'app':'storage:filename=Android.SauceLabs.Mobile.Sample.app.2.7.1.apk'
 
     }
 
     androidParameters = { # Define Android parameters here
+        # 'appium:deviceName' : "Google Pixel GoogleAPI Emulator",
+        # 'appium:deviceName' : 'Android',
+        # 'appium:platformVersion' : '8.1',
+        # 'platformName' : 'Android',
+        # 'appium:appium:deviceName': 'Android',
         'deviceOrientation' : 'portrait',
         # 'relaxedSecurityEnabled': True,
         # 'autoGrantPermissions': True,
         # 'ignoreUnimportantViews': True,
-        'automationName': 'UiAutomator2',
-        'newCommandTimeout':30000,
+        # 'automationName': 'UiAutomator2',
         # 'gpsEnabled': True,
         # 'maxDuration': 10800,
         # 'recordScreenshots': False
-        'browserName': 'chrome',
-        # 'platformVersion': 'latest',
-        # 'apppackage':'com.buzzfeed.tasty',
-        # "appActivity":".LauncherActivity",
-        'deviceName': 'Google Pixel 3 GoogleAPI Emulator',
-        # 'deviceName': 'Google_Pixel_3_real_us1',
-        # 'deviceName': 'Google Pixel 3.*',
+        # 'appium:platformVersion': 'latest',
 
-        # 'platformVersion': '9.0',
-        'platformVersion': '11.0',
+        # 'appium:deviceName': 'Amazon_Kindle_Fire_HD_10_real',
+        'appium:deviceName': 'Samsung Galaxy Tab S3 GoogleAPI Emulator',
+        'appium:platformVersion': '8.0',
         'platformName': 'Android',
-        # 'testdroid_testTimeout': 1200,
         # 'gpsEnabled': False
-        # "appActivity": "com.mobileapp.MainActivity",
-		# "appPackage": "com.childrensplace.tcpmobileapp",
-        # 'autoAcceptAlerts':'true',
-        # 'goog:chromeOptions':{
-        #     'w3c':False
-        # }
 
 
     }
 
     iosParameters = { # Define iOS Parameters here
 
-        'deviceName' : 'iPhone 11 Pro Simulator',
-        # 'deviceName' : 'iPhone 12 Pro Simulator',
-        'deviceOrientation' : 'portrait',
-        'platformVersion' : '13.4',
+        # 'appium:deviceName' : 'iPhone X Simulator',
+        # 'deviceName' : 'iPhone Simulator',
+		"appium:automationName": "XCuiTest",
+		"appium:newCommandTimeout": 60,
+		"appium:deviceOrientation": "portrait",
+		"appium:deviceName": "iPhone 8",
+		"appium:nativeWebScreenshot": True,
+		"appium:platformVersion": "12.2",
         'platformName' : 'iOS',
-        'simpleIsVisibleCheck': True,
-        # 'waitForQuiescence': False,
-        # 'noReset': False,
-        # 'fullReset': True,
-        # 'recordLogs': False,
-        # 'priority': 0,
-        # 'showIOSLog': False,
-        'automationName': 'XCuiTest',
-        # 'showXcodeLog': False,
-        # 'recordScreenshots': False,
-        # 'videoUploadOnPass': False
         # 'avoidProxy': True,
         # 'platformName' : 'iOS',
         # 'autoWebview': 'true',
         # 'bundleId': 'com.apple.Maps',
         # 'browserName': 'safari',
         # 'nativeWebTap': True, # iOS only capability.
-        'autoAcceptAlerts': True,
+        # 'autoAcceptAlerts': True,
         # 'locationServicesEnabled': True,
         # 'locationServicesAuthorized': True
 
@@ -208,27 +186,26 @@ def run_sauce_test():
         sauceParameters.update(androidParameters)
 
         if useApp:
-            sauceParameters['app'] = appLocation
-            # sauceParameters.update({'build': ' '.join(sauceParameters.get('tags')) + ' platform: ' +sauceParameters['platformName'] + ' version: '+ sauceParameters['platformVersion'] + ' device: ' + sauceParameters['deviceName']})  # Use app if it's specified
-            sauceParameters.update({'build': ' '.join(sauceParameters.get('tags')) + ' platform: ' +sauceParameters['platformName'] + ' version: '+ sauceParameters['platformVersion']})  # Use app if it's specified
+            sauceParameters['appium:app'] = appLocation
+            sauceParameters.update({'build': ' '.join(sauceParameters.get('tags')) + ' platform: ' + sauceParameters['platformName'] + ' version: '+ sauceParameters['appium:platformVersion'] + ' device: ' + sauceParameters['appium:deviceName']})  # Use app if it's specified
         else:
             sauceParameters['browserName'] = 'Chrome' # Otherwise use Chrome
             #Note! Replace 'Chrome' with 'Browser' for older versions of Android to use the stock browser
-            sauceParameters.update({'build': ' '.join(sauceParameters.get('tags')) + ' platform: ' +sauceParameters['platformName'] + ' version: '+ sauceParameters['platformVersion']})
-            # sauceParameters.update({'build': ' '.join(sauceParameters.get('tags')) + ' platform: ' +sauceParameters['platformName'] + ' version: '+ sauceParameters['platformVersion'] + ' device: ' + sauceParameters['deviceName']})
+            sauceParameters.update({'build': ' '.join(sauceParameters.get('tags')) + ' platform: ' +sauceParameters['platformName'] + ' version: '+ sauceParameters['appium:platformVersion'] + ' device: ' + sauceParameters['appium:deviceName']})
 
     elif iosTest:
         sauceParameters.update(iosParameters)
 
         if useApp:
             sauceParameters['app'] = appLocation
-            # sauceParameters.update({'build': ' '.join(sauceParameters.get('tags')) + ' platform: ' +sauceParameters['platformName'] + ' version: '+ sauceParameters['platformVersion'] + ' device: ' + sauceParameters['deviceName']})
+            sauceParameters.update({'build': ' '.join(sauceParameters.get('tags')) + ' platform: ' +sauceParameters['platformName'] + ' version: '+ sauceParameters['appium:platformVersion'] + ' device: ' + sauceParameters['appium:deviceName']})
         else:
             sauceParameters['browserName'] = 'safari'
             # sauceParameters['browserName'] = 'safari'
-            sauceParameters.update({'build': ' '.join(sauceParameters.get('tags')) + ' platform: ' +sauceParameters['platformName'] + ' version: '+ sauceParameters['platformVersion'] + ' device: ' + sauceParameters['deviceName'] + ' name: ' +sauceParameters['name']})
+            # sauceParameters.update({'build': ' '.join(sauceParameters.get('tags')) + ' platform: ' +sauceParameters['platformName'] + ' version: '+ sauceParameters['appium:platformVersion'] + ' device: ' + sauceParameters['appium:deviceName']})
+            # sauceParameters.update({'build': ' '.join(sauceParameters.get('tags')) + ' platform: ' +sauceParameters['platformName'] + ' version: '+ sauceParameters['appium:platformVersion'] + ' device: ' + sauceParameters['deviceName']})
 
-    # print colored("Testing on " + str(sauceParameters['platformName']) + ' ' + str(sauceParameters['deviceName']), 'green')
+    # print colored("Testing on " + str(sauceParameters['platformName']) + ' ' + str(sauceParameters['appium:deviceName']), 'green')
 
 
     ###################################################################
@@ -242,12 +219,11 @@ def run_sauce_test():
 
 
     if region != 'EU':
-        print (colored("You are using the US data center", 'green'))
+        # print (colored("You are using the US data center", 'green'))
         driver = webdriver.Remote(
             # command_executor='https://jaxon.lee:f7958d00-80d2-413b-8bb2-2c86fa1bd419@ondemand.saucelabs.com:443/wd/hub',
-            command_executor='https://'+os.environ['SAUCE_USERNAME']+':'+os.environ['SAUCE_ACCESS_KEY']+'@ondemand.us-west-1.saucelabs.com:443/wd/hub',
-
-            # command_executor='https://'+os.environ['SAUCE_USERNAME']+':'+os.environ['SAUCE_ACCESS_KEY']+'@ondemand.saucelabs.com:443/wd/hub',
+            # command_executor='https://'+os.environ['SAUCE_USERNAME']+':'+os.environ['SAUCE_ACCESS_KEY']+'@ondemand.us-west-1.saucelabs.com:443/wd/hub',
+            command_executor='https://'+os.environ['SAUCE_USERNAME']+':'+os.environ['SAUCE_ACCESS_KEY']+'@ondemand.saucelabs.com:443/wd/hub',
 
             desired_capabilities=sauceParameters)
     elif region == 'EU':
@@ -260,193 +236,22 @@ def run_sauce_test():
     # # Test logic goes here
     # ###################################################################
     # # Navigating to a website
-    # print (colored(str(datetime.datetime.now()), 'green'))
+    print (colored(str(datetime.datetime.now()), 'green'))
     # datetime.datetime.now()
     # print (driver.capabilities)
     # sleep(15)
-    print (colored(str(datetime.datetime.now()), 'green', attrs=['blink', 'underline']))
-    # sleep(5)
-    # driver.get('https://www.saucelabs.com')
-    # driver.execute_script('mobile: shell', {"command": "su root service call alarm 3 s16 Europe/Volgograd"})
-    # driver.get('https://time.is/')
 
-    # try:
-    #     print (colored("looking for Page", 'green'))
-    #     WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CLASS_NAME, "banner-is-active")))
-    #     # interact = driver.find_element_by_accessibility_id("I already have an account")
-    #     interact = driver.find_element_by_class_name("banner-is-active")
-    #     # interact = self.driver.find_element_by_name('interact')
-    #     # triple_click = TouchAction()
-    #     # TouchAction().tap(interact)
-    #     triple_click = TouchAction(driver)
-    #     print (colored("found page", 'green'))
-    #
-    #     # the parameters for tap are element, x-offset, y-offset, and count
-    #     triple_click.tap(interact, 0, 0, 8)
-    #     print (colored("found page", 'green'))
-    #
-    #     triple_click.perform()
-    #     # triple_click.tap(interact)
-    #     print (colored("found page", 'green'))
-    #
-    #     sauce_result = "passed"
-    #
-    #     # print (colored(driver.contexts, 'blue'))
-    # except:
-    #     print (colored("Not loaded storelocatorlink__img", 'red'))
-    #     driver.get('https://www.childrensplace.com/ca/home')
-    #     sleep(10)
-    #     sauce_result = "failed" if str(driver.current_url) != 'https://www.childrensplace.com/us/home' else "passed"
-    #     driver.get('https://www.google.com')
-    #     sleep(5)
-    #     driver.get('https://www.childrensplace.com/ca/home')
-
-
-    # driver.get('https://www.childrensplace.com/ca/home')
-    # # # interact = driver.find_element_by_name("q")
-    # # # interact.click()
-    # # # interact.send_keys('google')
-    # # # interact.submit()
-    # sleep(10)
-    # # # interact = driver.find_element_by_link_text('Maps')
-    # # # interact.click()
-    # #
-    # # sleep(100)
-    # if str(driver.current_url) != 'https://www.childrensplace.com/us/home':
-    #     print(colored("URL is https://www.childrensplace.com/us/home", 'green', attrs=['blink', 'underline']))
-    # else:
-    #     print(colored("URL is NOT https://www.childrensplace.com/us/home", 'red', attrs=['blink', 'underline']))
-    #     print(colored(str(driver.current_url), 'red', attrs=['blink', 'underline']))
-    #
-    # try:
-    #     print (colored("looking for Page", 'green'))
-    #     WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CLASS_NAME, "storelocatorlink__img")))
-    #     # interact = driver.find_element_by_accessibility_id("I already have an account")
-    #     # interact.click()
-    #     print (colored("found page", 'green'))
-    #
-    #     sauce_result = "passed"
-    #
-    #     # print (colored(driver.contexts, 'blue'))
-    # except:
-    #     print (colored("Not loaded storelocatorlink__img", 'red'))
-    #     driver.get('https://www.childrensplace.com/ca/home')
-    #     sleep(10)
-    #     sauce_result = "failed" if str(driver.current_url) != 'https://www.childrensplace.com/us/home' else "passed"
-    #     driver.get('https://www.google.com')
-    #     sleep(5)
-    #     driver.get('https://www.childrensplace.com/ca/home')
-
-
-
-
-
-
-    # source = driver.page_source
-    # print(colored(source, 'red'))
-    # driver.execute_script("sauce:job-result={}".format(sauce_result))
-    # driver.execute_script('mobile: launchApp', {'bundleId': 'com.apple.mobileslideshow'})
-# /private/var/mobile/Media/DCIM/
-    # driver.push_file("test.jpeg", source_path="/Users/terranceloughry/Desktop/test.jpeg", )
-    # print('file pushed')
-    # driver.execute_script('mobile: launchApp', {'bundleId': 'com.apple.mobileslideshow'})
-
-
-
-    # sleep(5)
-    # # driver.switch_to().alert().accept()
-    # source = driver.page_source
-    # print(colored(source, 'red'))
-    # driver.execute_script('mobile: launchApp', {'bundleId': 'com.apple.mobileslideshow'})
-    #
-    # sleep(10)
-
-    # try:
-    #     print (colored("looking for email", 'green'))
-    #     # print (colored(str(datetime.datetime.now()), 'green', attrs=['blink', 'underline']))
-    #     driver.execute_script('sauce:context=looking for email')
-    #     WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".header-topnav__track-order")))
-    #     # source = driver.page_source
-    #     # driver.execute_script('sauce:context=email is present on screen')
-    #     # driver.execute_script('sauce:context=looking for input')
-    #
-    #     # WebDriverWait(driver, 35).until(EC.element_to_be_clickable((By.CLASS_NAME, "Sign in")))
-    #     # WebDriverWait(driver, 35).until(EC.presence_of_element_located((By.CLASS_NAME, "Sign in")))
-    #     print (colored(str(datetime.datetime.now()), 'green', attrs=['blink', 'underline']))
-    #     # interact = driver.find_element_by_name("session[username_or_email]")
-    #     # interact = driver.find_elements_by_xpath("//input[contains(@name, 'session[username_or_email]')]")
-    #
-    #     # interact = driver.find_elements_by_tag_name("input")
-    #     # driver.execute_script('sauce:context=found input')
-    #
-    #     # interact = driver.find_element_by_accessibility_id("I already have an account")
-    #     # interact = driver.find_elements_by_class_name("css-1dbjc4n r-ymttw5 r-1f1sjgu")
-    #     # interact = driver.find_element_by_name("session[username_or_email]")
-    #     # print(interact)
-    #     # interact.click()
-    #     # interact[1].click()
-    #     # interact[0].click()
-    #     # print (colored("found sign in", 'green'))
-    #     # interact[0].send_keys('tj@saucelabs.com')
-    #     # interact[0].blur()
-    #
-    #
-    #     # interact = driver.find_elements_by_xpath("//input[contains(@name, 'session[password]')]")
-    #
-    #     # interact[0].click()
-    #     # interact[0].send_keys('SauceLabs!817')
-    #     # interact[0].submit()
-    #
-    #     # print (colored("clicked sign in", 'green'))
-    #     # sleep(10)
-    #     # print (colored(driver.contexts, 'blue'))
-    # except:
-    #     print (colored("Did not find header-topnav__track-order", 'red'))
-
-
-    # try:
-    #     print (colored("looking for password", 'green'))
-    #     print (colored(str(datetime.datetime.now()), 'green', attrs=['blink', 'underline']))
-    #
-    #     WebDriverWait(driver, 35).until(EC.presence_of_element_located((By.CSS_SELECTOR, "session[password]")))
-    #     # WebDriverWait(driver, 35).until(EC.element_to_be_clickable((By.CLASS_NAME, "Sign in")))
-    #     # WebDriverWait(driver, 35).until(EC.presence_of_element_located((By.CLASS_NAME, "Sign in")))
-    #     print (colored(str(datetime.datetime.now()), 'green', attrs=['blink', 'underline']))
-    #
-    #     # interact = driver.find_element_by_accessibility_id("I already have an account")
-    #     # interact = driver.find_element_by_name("session[password]")
-    #     interact = driver.find_element_by_css_selector("session[password]")
-    #     interact.click()
-    #     print (colored("found sign in", 'green'))
-    #     interact.send_keys('SauceLabs!817')
-    #     interact.submit()
-    #     # print (colored("clicked sign in", 'green'))
-    #     # sleep(10)
-    #     # interact = driver.find_element_by_class("session[password]")
-    #
-    #     # print (colored(driver.contexts, 'blue'))
-    # except:
-    #     print (colored("Did not find password", 'red'))
-
-    #
-    # driver.refresh()
-    # sleep(3)
-    # driver.refresh()
-    # sleep(3)
-    # driver.refresh()
-    # driver.get('https://twitter.com/settings/country')
-    # sleep(10)
-    # console.log(driver.capabilities['testobject_test_report_url'])
-    # print(driver.capabilities['testobject_test_live_view_url'])
-    # print (colored(driver.capabilities['testobject_device'], 'green', attrs=['reverse', 'blink']))
+    # # console.log(driver.capabilities['testobject_test_report_url'])
+    # # print(driver.capabilities['testobject_test_live_view_url'])
+    # # print (colored(driver.capabilities['testobject_device'], 'green', attrs=['reverse', 'blink']))
     #
     #
     # # driver.set_location(30.271493, -97.6222673, 14)
     # # sleep(10)
-    # driver.launch_app(com.apple.Preferences)
+    # # driver.launch_app(com.apple.Preferences)
     # # driver.activate_app("com.apple.Preferences");
     # #
-    # driver.get('https://twitter.com/login')
+    # driver.get('https://saucelabs.com')
     # # interact = driver.find_element_by_name("q")
     # # interact.click()
     # # interact.send_keys('google')
@@ -467,10 +272,9 @@ def run_sauce_test():
 #         print (colored("Not loaded", 'red'))
 #         # print (colored(interact.get_attribute('value'), 'blue'))
 # # interact = driver.find_element_by_css_selector("input[type='email']")
-#     # sauce_result = "failed" if str(driver.current_url) != 'https://www.gymboree.com/ca/home' else "passed"
-#     sauce_result = "failed" if 1 != 2 else "passed"
+#     sauce_result = "failed" if str(driver.current_url) != 'https://www.gymboree.com/ca/home' else "passed"
 #     driver.execute_script("sauce:job-result={}".format(sauce_result))
-    #
+#     #
     #
     # try:
     #     print (colored("looking for I already have an account", 'green'))
@@ -506,8 +310,8 @@ def run_sauce_test():
         # interact.click()
         # print (colored("found No Thanks Button", 'green'))
 
-    # source = driver.page_source
-    # print(colored(source.split(' '), 'red'))
+    source = driver.page_source
+    print(colored(source, 'red'))
 
     # dest_path = '/User/Desktop/signature.png'
     # data = bytes('/storage/emulated/0/Download/jpg.jpg', 'utf-8')

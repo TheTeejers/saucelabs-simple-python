@@ -64,7 +64,7 @@ useApp = True
 # appLocation = 'https://mobile-app-archive-prod-us-east-1.s3.amazonaws.com/Android/release/Tasty_QA_11858/1480002_1.48.0-QA/Tasty-1.48.0-QA-RC.apk'
 # appLocation = 'storage:filename=app-gms-debug.apk'
 # appLocation = 'storage:filename=app-tcpProd-release (1).apk'
-appLocation = 'storage:e57bfe5b-673d-4edd-adfc-a317d069a65b'
+appLocation = 'storage:5e553b48-fb19-4399-8213-e1ce4ac629e7'
 
 # appLocation = 'storage:25e76be0-bc67-49d1-a785-a22bfd0e1d90'
 # appLocation = 'storage:f9232cab-fb1c-4340-b3f9-e3d8f2398abb'
@@ -90,10 +90,10 @@ run = 1
 def run_sauce_test():
     projectParameters = {
         # 'tags':[''],
-        'appiumVersion': '1.17.1',
-        # 'name': 'Testing Indeed App at Run Time: ' + str(datetime.datetime.now()),
-        'name': 'Validating search by Order Completion status: "Incomplete" in iMFM – 10.0',
-        'build': 'SI-Mobile_Automation, Pipeline Execution at: Run_16-Sep-2021 07 PM',
+        # 'appiumVersion': '1.17.1',
+        'name': 'Testing Parsable App at Run Time: ' + str(datetime.datetime.now()),
+        # 'name': 'Validating search by Order Completion status: "Incomplete" in iMFM – 10.0',
+        # 'build': 'SI-Mobile_Automation, Pipeline Execution at: Run_16-Sep-2021 07 PM',
         #
         # 'commandTimeout': 200,
         # "idleTimeout": 200,
@@ -161,12 +161,12 @@ def run_sauce_test():
 
     iosParameters = { # Define iOS Parameters here
 
-        'deviceName' : 'iPhone 11 Pro Simulator',
+        'deviceName' : 'iPhone 12 Simulator',
         # 'deviceName' : 'iPhone 12 Pro Simulator',
         'deviceOrientation' : 'portrait',
-        'platformVersion' : '13.4',
+        'platformVersion' : '15',
         'platformName' : 'iOS',
-        'simpleIsVisibleCheck': True,
+        # 'simpleIsVisibleCheck': True,
         # 'waitForQuiescence': False,
         # 'noReset': False,
         # 'fullReset': True,
@@ -270,38 +270,73 @@ def run_sauce_test():
     # driver.execute_script('mobile: shell', {"command": "su root service call alarm 3 s16 Europe/Volgograd"})
     # driver.get('https://time.is/')
 
-    # try:
-    #     print (colored("looking for Page", 'green'))
-    #     WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CLASS_NAME, "banner-is-active")))
-    #     # interact = driver.find_element_by_accessibility_id("I already have an account")
-    #     interact = driver.find_element_by_class_name("banner-is-active")
-    #     # interact = self.driver.find_element_by_name('interact')
-    #     # triple_click = TouchAction()
-    #     # TouchAction().tap(interact)
-    #     triple_click = TouchAction(driver)
-    #     print (colored("found page", 'green'))
-    #
-    #     # the parameters for tap are element, x-offset, y-offset, and count
-    #     triple_click.tap(interact, 0, 0, 8)
-    #     print (colored("found page", 'green'))
-    #
-    #     triple_click.perform()
-    #     # triple_click.tap(interact)
-    #     print (colored("found page", 'green'))
-    #
-    #     sauce_result = "passed"
-    #
-    #     # print (colored(driver.contexts, 'blue'))
-    # except:
-    #     print (colored("Not loaded storelocatorlink__img", 'red'))
-    #     driver.get('https://www.childrensplace.com/ca/home')
-    #     sleep(10)
-    #     sauce_result = "failed" if str(driver.current_url) != 'https://www.childrensplace.com/us/home' else "passed"
-    #     driver.get('https://www.google.com')
-    #     sleep(5)
-    #     driver.get('https://www.childrensplace.com/ca/home')
+    try:
+        print (colored("looking for login-email_email_input", 'green'))
+        WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.ID, "login-email_email_input")))
+        print (colored("found login-email_email_input", 'green'))
+        interact = driver.find_element_by_accessibility_id("login-email_email_input")
+        interact.click()
+        print (colored("clicked login-email_email_input", 'green'))
+        interact.clear()
+        interact.send_keys("ex.qa@parsable.com")
+
+        interact = driver.find_element_by_accessibility_id("login-email_continue_button")
+        interact.click()
+        print (colored("clicked login-email_continue_button", 'green'))
+
+        interact = driver.find_element_by_accessibility_id("Continue")
+        interact.click()
+        print (colored("clicked Continue", 'green'))
+        # interact = driver.find_element_by_class_name("banner-is-active")
+        # interact = self.driver.find_element_by_name('interact')
+        # triple_click = TouchAction()
+        # TouchAction().tap(interact)
+        # triple_click = TouchAction(driver)
+        # print (colored("found page", 'green'))
+
+        # the parameters for tap are element, x-offset, y-offset, and count
+        # triple_click.tap(interact, 0, 0, 8)
+        # print (colored("found page", 'green'))
+        #
+        # triple_click.perform()
+        # # triple_click.tap(interact)
+        # print (colored("found page", 'green'))
+        #
+        # sauce_result = "passed"
+
+        # print (colored(driver.contexts, 'blue'))
+    except:
+        print (colored("did not find ogin-email_email_input", 'red'))
+        # driver.get('https://www.childrensplace.com/ca/home')
+        # sleep(10)
+        # sauce_result = "failed" if str(driver.current_url) != 'https://www.childrensplace.com/us/home' else "passed"
+        # driver.get('https://www.google.com')
+        # sleep(5)
+        # driver.get('https://www.childrensplace.com/ca/home')
+
+    try:
+        print (colored("looking for password input", 'green'))
+        WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CSS_SELECTOR, "password")))
+        print (colored("found password", 'green'))
+        interact = driver.find_element_by_css_selector("*")
+        interact.click()
+        print (colored("clicked #password", 'green'))
+        # interact.clear()
+        interact.send_keys("Pass1234!")
+        # interact.submit()
+        # driver.hide_keyboard()
 
 
+        interact = driver.find_element_by_name("Sign In")
+        interact.click()
+        print (colored("clicked submit-login", 'green'))
+        interact = driver.find_element_by_xpath("//XCUIElementTypeButton[@name=\"Sign In\"]")
+        interact.click()
+        sleep(5)
+    except:
+        print (colored("did not find ogin-email_email_input", 'red'))
+        source = driver.page_source
+        print(colored(source, 'red'))
     # driver.get('https://www.childrensplace.com/ca/home')
     # # # interact = driver.find_element_by_name("q")
     # # # interact.click()

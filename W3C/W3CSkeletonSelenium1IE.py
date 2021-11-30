@@ -71,7 +71,7 @@ sauceParameters = {
     #     # 'iedriverVersion': '3.4.0',
     #     # 'chromedriverVersion': '2.40',
     #     # 'requireWindowFocus' : True,
-        'maxDuration': 5000,
+    #     # 'maxDuration': 1800,
     #     # 'idleTimeout': 1000,
     #     # 'commandTimeout': 600,
     #     # 'videoUploadOnPass':False,
@@ -80,19 +80,15 @@ sauceParameters = {
 
     # },
     # 'count': 1,
-    'platformName': 'macos 11.00',
-    # 'platformName': 'windows 10',
-    'browserName': 'firefox',
-    'acceptInsecureCerts': True,
+    'platformName': 'windows 10',
+    # 'browserName': 'firefox',
     # 'browserName': 'MicrosoftEdge',
-    # 'browserName': 'internet explorer',
+    'browserName': 'internet explorer',
     # 'browserName': 'chrome',
     # 'browserName': 'safari',
     # 'version': '13',
     # 'browserVersion': 'dev',
-    'browserVersion': '92',
-    # 'extendedDebugging':'true',
-
+    # 'browserVersion': '11.285',
     # 'seleniumVersion': '3.141.59',
     # 'maxDuration': 1800,
     # 'commandTimeout': 300,
@@ -100,21 +96,22 @@ sauceParameters = {
     # 'build': 'Trying to break it',
     # 'tunnelIdentifier': 'tj',
     # 'public':'private',
+    'unhandledPromptBehavior':'ignore',
+    'pageLoadStrategy': 'none',
     'sauce:options': {
         'name':'Test One',
+        'seleniumVersion': '3.141.59',
+        'iedriverVersion': '3.141.59',
+        'pageLoadStrategy': 'none',
+        'screenResolution': '1280x1024'
         # 'tags':'13128733',
         # 'extendedDebugging':'true',
-        # 'prerun':{
-        #     'executable':'storage:filename=disable_fraud.sh',
-        #     'background': 'false'
-        # }
-        'build':'Selenium 4 tests',
-        # 'screenResolution':'2560x1600',
+        # 'build':'Different versions of Chrome Tests with HTTP vs HTTPS vs plain localhost',
+        # 'screenResolution':'1600x1200',
 
         # 'avoidProxy': 'true',
         # 'capturePerformance': 'true',
-        'seleniumVersion': '4.0.0',
-        "idleTimeout": 450,
+        # 'seleniumVersion': '3.141.59',
         # 'public':'private',
         # 'name': 'https://dev.testinghub.autodesk.com/ test of drop down menu',
         # 'extendedDebugging':'true',
@@ -151,12 +148,11 @@ sauceParameters = {
     #     #     },
     #     'args': ['--auto-open-devtools-for-tabs'],
     # },
-    'moz:firefoxOptions':{
-        # "log": {"level": "trace"},
-        # 'geckodriverVersion':'0.27.0',
-        # 'args': ['--headless']
-    },
-    'moz:debuggerAddress': True
+    # 'moz:firefoxOptions':{
+    #     # "log": {"level": "trace"},
+    #     # 'geckodriverVersion':'0.27.0',
+    #     # 'args': ['--headless']
+    # },
 }
 
 
@@ -207,9 +203,9 @@ print (driver.capabilities)
 # testURL = 'http://localhost:8000'
 # testURL = 'https://localhost:8000'
 # testURL = 'trytjloughry.com:8000'
-# testURL = 'https://media.raven.news/'
+testURL = 'https://www.amazon.com'
 # testURL = "https://www.filebin.net"
-testURL = 'https://saucelabs.com'
+# testURL = 'https://saucelabs.com'
 
 #
 #
@@ -220,71 +216,8 @@ driver.execute_script('sauce:job-name=Testing ' + driver.capabilities['browserNa
 #     "rate": 4
 # })
 
-
-
-# driver.get(testURL)
-#
-# driver.execute_script("sauce:intercept", {
-#     "url": "https://saucelabs.com/",
-#         "response": {
-#             "status": 400,
-#             "headers": {
-#                 "x-custom-header": "foobar"
-#             },
-#             "body": [{
-#                 "title": "Hello",
-#                 "order": 1,
-#                 "completed": False,
-#                 "url": "https://google.com"
-#             }]
-#         }
-#     })
-# driver.get("https://saucelabs.com")
-#
-# driver.execute_script("sauce:intercept", {
-#     "url": "https://saucelabs.com/*",
-#     "error": "Failed"})
-# sleep(5)
-# driver.get("https://saucelabs.com/pricing")
-# sleep(2)
-# # driver.execute_script('sauce:intercept', {
-# #     "url": "https://saucelabs.com/",
-# #     "redirect": "https://google.com"
-# # })
-# # driver.execute_script('sauce:intercept', {
-# #     "url": "https://saucelabs.com/",
-# #     "redirect": "https://google.com"
-# # })
-# # sleep(2)
-# driver.execute_script("sauce:intercept", {
-#     "url": "*saucelabs*",
-#     "error": "Failed"})
-#
-# driver.get("https://docs.saucelabs.com/insights/debug/#sauceintercept--redirect")
-# sleep(2)
-
-# driver.execute_script("sauce:intercept", {
-#     "url": "https://*media.raven.news/",
-#     "error": "Failed"})
-# sleep(5)
-# driver.get("https://media.raven.news")
-# sleep(2)
-# # driver.execute_script('sauce:intercept', {
-# #     "url": "https://saucelabs.com/",
-# #     "redirect": "https://google.com"
-# # })
-# # driver.execute_script('sauce:intercept', {
-# #     "url": "https://saucelabs.com/",
-# #     "redirect": "https://google.com"
-# # })
-# # sleep(2)
-# driver.execute_script("sauce:intercept", {
-#     "url": "https://*media.raven.news/**",
-#     "error": "Failed"})
-#
-# driver.get("https://media.raven.news")
-# sleep(2)
-
+driver.get(testURL)
+print("made it here")
 # performance = driver.execute('sauce:log', {type: 'sauce:performance'});
 # lighthouseScore = performance.score;
 # driver.execute_script("sauce:break")
@@ -292,42 +225,111 @@ driver.execute_script('sauce:job-name=Testing ' + driver.capabilities['browserNa
 # #filebin.net testing
 # driver.get("https://www.filebin.net")
 #
-# try:
-#     print (colored("looking for input type 'file'", 'green'))
-#     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, "upfile")))
-#     # WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME, "react-fine-uploader-file-input")))
-#     print (colored("found input type 'file'", 'green'))
-#
-#     interact = driver.find_element_by_css_selector("[type='file']")
-#     # interact
-#     # interact.click()
-#     # JavascriptExecutor driver = (JavascriptExecutor)getDriver();
-#     # driver.execute_script("arguments[0].click();", interact);
-#     # driver.execute_script("sauce:job-result={}".format(sauce_result))
-#     interact.send_keys('/Users/terranceloughry/Desktop/possumSmall.jpeg')
-#     print (colored("uploading image", 'green'))
-#     # print (colored(driver.contexts, 'blue'))
-# except:
-#     print (colored("Can not find input type 'file'", 'red'))
-#
-# try:
-#     print (colored("looking for input type 'submit'", 'green'))
-#     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, "upfile")))
-#     # WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME, "react-fine-uploader-submit-input")))
-#     print (colored("found input type 'submit'", 'green'))
-#
-#     interact = driver.find_element_by_css_selector("[type='submit']")
-#     # interact
-#     interact.click()
-#     # JavascriptExecutor driver = (JavascriptExecutor)getDriver();
-#     # driver.execute_script("arguments[0].click();", interact);
-#     # driver.execute_script("sauce:job-result={}".format(sauce_result))
-#
-#     # print (colored(driver.contexts, 'blue'))
-# except:
-#     print (colored("Can not find input type 'submit'", 'red'))
+try:
+    print (colored("looking for page load", 'green'))
+    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "a-page")))
+    # WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME, "react-fine-uploader-file-input")))
+    print (colored("page loaded", 'green'))
+    print (colored("looking for search input", 'green'))
 
-sleep(10)
+    interact = driver.find_element_by_id("twotabsearchtextbox")
+    interact.clear()
+    interact.click()
+    # JavascriptExecutor driver = (JavascriptExecutor)getDriver();
+    # driver.execute_script("arguments[0].click();", interact);
+    # driver.execute_script("sauce:job-result={}".format(sauce_result))
+    interact.send_keys('Thomas Jefferson books')
+    interact = driver.find_element_by_id("nav-search-submit-button")
+    # interact = driver.find_element_by_xpath("//input[value='Go']")
+
+    interact.click()
+
+    # print (colored("uploading image", 'green'))
+    # print (colored(driver.contexts, 'blue'))
+except:
+    print (colored("Can not find input type 'file'", 'red'))
+
+try:
+    print (colored("looking for button type 'Next'", 'green'))
+    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//a[contains(text(),'Next')]")))
+    # WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME, "react-fine-uploader-submit-input")))
+    print (colored("found button type 'next'", 'green'))
+
+    interact = driver.find_element_by_xpath("//a[text()=\"Next\"]")
+    # # interact
+    # interact.click()
+    # JavascriptExecutor driver = (JavascriptExecutor)getDriver();
+    driver.execute_script("arguments[0].scrollIntoView(true);", interact);
+    # driver.execute_script("sauce:job-result={}".format(sauce_result))
+    driver.execute_script("arguments[0].click();", interact);
+
+    # print (colored(driver.contexts, 'blue'))
+except:
+    print (colored("Can not find button type 'next'", 'red'))
+
+
+try:
+    print (colored("looking for text type 'Privacy Notice'", 'green'))
+    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//a[contains(text(),'Privacy Notice')]")))
+    # WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME, "react-fine-uploader-submit-input")))
+    print (colored("found text type 'Privacy Notice'", 'green'))
+    # interact = driver.find_element_by_xpath("//a[contains(text(),'Privacy Notice')]")
+    # # # interact
+    # # interact.click()
+    # # JavascriptExecutor driver = (JavascriptExecutor)getDriver();
+    # driver.execute_script("arguments[0].scrollIntoView(true);", interact);
+    # sleep(2)
+    # driver.execute_script("arguments[0].scrollIntoView(true);", interact);
+
+    interact = driver.find_element_by_xpath("//a[contains(text(),1)]")
+    driver.execute_script("arguments[0].scrollIntoView(true);", interact);
+    print (interact.text)
+    # interact = driver.find_elements_by_link_text('1')
+    # print (len(interact))
+    save_items = []
+    interact = driver.find_element_by_css_selector("a[href$='ref=sr_pg_1']")
+    interact.click()
+    sleep(4)
+
+
+    # for item in driver.find_elements_by_partial_link_text("1"):
+    #     # Get class
+    #     # item_class = item.get_attribute()
+    #     # print(item_class)
+    #     print(item)
+    #     print(item.text)
+
+        # Get name:
+        # item_name = item.get_attribute("name")
+
+        # And so on...
+
+
+        # Check for a match
+        # if item_class == "W_input" and item_name == "14235541231062":
+        #     # Do your operation (or add to a list)
+        #     save_items.append(item)
+
+    # for x in range (len(timeElement)):
+    #     print(colored(timeElement[x].text, 'blue'))
+    #     print(type(timeElement[x]))
+    # driver.execute_script("arguments[0].scrollIntoView(true);", interact);
+
+    # interact = driver.find_element_by_xpath("//a[text()=\"Next\"]")
+    # # interact
+    # interact.click()
+    # JavascriptExecutor driver = (JavascriptExecutor)getDriver();
+    # driver.execute_script("arguments[0].scrollIntoView(true);", interact);
+    # # interact
+    # interact.click()
+    # JavascriptExecutor driver = (JavascriptExecutor)getDriver();
+    # driver.execute_script("arguments[0].scrollIntoView(true);", interact);
+    # driver.execute_script("sauce:job-result={}".format(sauce_result))
+
+    # print (colored(driver.contexts, 'blue'))
+except:
+    print (colored("Can not find input type 'submit'", 'red'))
+# sleep(10)
 # driver.execute_script("sauce:job-result={}".format('passed'))
 # driver.execute_script("sauce:job-result={}".format('failed'))
 

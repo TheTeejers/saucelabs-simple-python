@@ -1,4 +1,4 @@
-###################################################################
+####################################################################
 # Skeleton for Appium tests on Sauce Labs RDC
 ####################################################################
 
@@ -44,15 +44,15 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # Choose if you want Android of iOS capabilities
 # Uncomment one of those lines
 ###################################################################
-# androidTest = True
-iosTest = True
+androidTest = True
+# iosTest = True
 
 ###################################################################
 # Choose The Platform and Data Center you want to test on
 # Uncomment one of those lines
 ###################################################################
-US_Datacenter=True
-# EU_Datacenter=True
+# US_Datacenter=True
+EU_Datacenter=True
 
 # US_Datacenter_TO=True
 # EU_Datacenter_TO=True
@@ -83,13 +83,10 @@ def run_sauce_test():
     ###################################################################
     projectParameters = {
         'name': 'Run: ' + str(datetime.datetime.now()),
-        'recordDeviceVitals': True,
-        # 'name': 'AEM home page options validation -256390 home page displayed',
-        # "timeZone": "Honolulu",
         # 'commandTimeout':600,
         # 'build': "really?",
         # "recordDeviceVitals": 'true',
-        # 'tunnelIdentifier': 'tjnew1',
+        # 'tunnelIdentifier': 'tj1',
         # 'locale' : "fr_CA",
         # 'testobject_api_key' : '6BE172925CB6420AAEF39D7B8ED575F3',
         # 'testobject_api_key' : 'BCE49A0E8472461DBBA727592D8DE4D0',
@@ -110,15 +107,12 @@ def run_sauce_test():
 
         # "public": "public",
         # "appiumVersion":"1.20.1",
-        # 'tunnelIdentifier':'one',
-        # 'parentTunnel':'TJLoughry'
+        # 'tunnelIdentifier':'try1tj'
 
         # 'sauceLabsImageInjectionEnabled': 'true',
-        # "eventLoopIdleDelaySec": 4,
+
         # 'wdaEventloopIdleDelay': '5',
         # "waitForQuiescence": False,
-        # "waitForQuietness": False,
-
 
         # "cacheId": "1234",
         # "noReset": "true",
@@ -128,7 +122,7 @@ def run_sauce_test():
 
 
 
-        # 'appiumVersion': '1.18.1',
+        # 'appiumVersion': '1.16.0',
         # 'testobject_test_live_view_url': True
         # "testobject_session_creation_timeout": "180000",
         # 'name': 'Run: ' + getNumber(),
@@ -145,54 +139,41 @@ def run_sauce_test():
         # 'testobject_api_key' : '62E11503C94443CD9D76483D92D3D3F1', # test on 1Cashify app
         # 'testobject_api_key' : '37696AA9E1274A94B65339806E21A5C4', # test on Varo SIT Debug app
         # 'testobject_api_key' : '7F9F9BD657414E73A556F1AD9941C951', # test on FlashFlood iOS app
-        # 'testobject_api_key' : '9DB6106BD03943729266E0E77EBF26E2', # test on FlashFlood iOS app
-
         # 'maxInstances': 5,
     }
 
     unifiedPlatformAppStorage = {
-        # 'app': 'storage:filename=interact.ipa',
+        'app': 'storage:filename=yellowapp.apk',
         # 'app': 'storage:264d3821-e02c-4aa6-a678-e9df4f164d9e', #bersa-uat
-        # 'app': 'storage:521f9d7b-2106-49b8-80c5-4b9b8c617a5d', #childplace app android
-        # 'app': 'storage:bc8ce2eb-4c15-4463-9521-4af2639ba664', #swag-labs iOS US SIM
-        # 'app': 'storage:640aa9b0-a50a-46a6-bae7-0e47fa70f211', #swag-labs android EU
-        'app': 'storage:1f77b56e-e9aa-4c4d-951c-31c1b97a18b9', #SelfHelp ios Real
-        # 'app': 'storage:co.uk.simplyhealth.simplyplan.staging',
-        # 'app': 'storage:ad8710ff-d8b4-4448-a017-0686f4d8c1bb', #swag-labs Android US
-        # 'app': 'storage:b427aa17-d3a2-4a38-9b5f-277888910265',
-
-
-
-
-
-
+        # 'app': 'storage:2a231e42-0425-4e5c-8023-a7c68f59f970', #swag-labs
 
     }
 
     androidParameters = { # Define Android parameters here
         # 'platformVersion' : '10',
         # 'automationName': 'uiautomator2',
-        'deviceName' : 'Google.*',
-        # 'deviceName' : 'Samsung.*Galaxy.*',
-        # 'appium:deviceName' : 'Samsung Galaxy S20.*',
-        # 'deviceName' : '.*Pixel.*',
-        # 'deviceName' : '	Google_Pixel_5a_real_us',
+        # 'deviceName' : 'Samsung.*',
+        'deviceName' : 'Samsung Galaxy S.*',
+        # 'appium:deviceName' : 'Samsung Galaxy S.*',
+        # 'deviceName' : 'Samsung_Galaxy_S[1-2]0_real',
+        # 'deviceName' : 'Google_Pixel_4_XL_real_us',
 
         'browserName' : 'chrome',
-        # 'deviceOrientation' : 'PORTRAIT',
-        # 'appium:platformName' : 'Android',
+        'deviceOrientation' : 'portrait',
         'platformName' : 'Android',
-        'platformVersion' : '11',
-        'recordVideo':False,
-        # "orientation": "portrait",
-        "orientation": "PORTRAIT",
+        # 'appium:platformName' : 'Android',
+        # 'platformVersion' : '9',
         # "recordDeviceVitals": 'true',
         # "sauce:options":{
-
+        #
         # }
         # 'testobject_app_id': '9',
         # 'appID': '10',
-
+        "autoWebview": False,
+        # "nativeWebScreenshot": True,
+        "elementResponseAttributes": "rect",
+        # "shouldUseCompactResponses": False,
+        # "nativeWebScreenshot": True,
         # "newCommandTimeout": "7000",
         # "testobject_cache_device" :'true',
         # "reportDirectory": "reports",
@@ -208,24 +189,20 @@ def run_sauce_test():
         # "unicodeKeyboard": 'true',
         # "ignoreUnimportantViews": 'true',
         # "disableAndroidWatchers": 'true',
-        # "automationName": "uiautomator2",
+        "automationName": "uiautomator2",
         # 'maxSessions': 5,
-        # 'chromeDriverVersion': '91.0.4472.19'
-        # 'chromeDriverVersion': '83.0.4103.39'
 
     }
 
     iosParameters = { # Define iOS Parameters here
-        # 'phoneOnly': 'false',
-        'tabletOnly': 'true',
-        'includeSafariInWebviews': True,
-        # 'deviceName' : 'iPhone 11',
+        # 'phoneOnly': 'true',
+        # 'deviceName' : 'iPhone 11.*',
         # 'deviceName' : 'iPhone X Simulator',
-        # 'deviceName' : 'iPhone_8_14_7_real_us',
+        # 'deviceName' : 'iPhone_11_13_real_us',
         # 'deviceOrientation' : 'portrait',
         # 'browserName' : 'Chrome',
         # 'browserName' : 'safari',
-        'platformVersion' : '12',
+        'platformVersion' : '14',
         'platformName' : 'iOS',
         # "recordDeviceVitals": 'true',
         # "bundleId" : "com.apple.Preferences",
@@ -234,11 +211,7 @@ def run_sauce_test():
         # 'testobject_test_name': "iPhone App: #{scenario.name}",
         # 'testobject_app_id': ['1'],
         'autoAcceptAlerts': 'true',
-        # 'w3c': True,
-        # "nativeWebTap": True,
-        # "realMobile": True,
-        # "javascriptEnabled": True,
-        # 'safariInitialUrl': 'https://www.saucelabs.com'
+        'safariInitialUrl': 'https://www.google.com'
         # 'nativeWebTap': True, # iOS only capability.
     }
 
@@ -267,9 +240,8 @@ def run_sauce_test():
         sauceParameters.update(unifiedPlatformAppStorage)
         print (colored('You are testing on the Sauce Labs US Datacenter', 'green', attrs=['blink', 'underline']))
         driver = webdriver.Remote(
-            command_executor='https://'+os.environ['SAUCE_USERNAME']+':'+os.environ['SAUCE_ACCESS_KEY']+'@ondemand.us-west-1.saucelabs.com:443/wd/hub',
-            # command_executor='https://enriquegh:66af84ca-670f-4647-84c2-54b703833015@ondemand.us-west-1.saucelabs.com:443/wd/hub',
-            # command_executor='https://TJLoughry:69e79050-5358-440b-b38e-453e30f71d6f@ondemand.us-west-1.saucelabs.com:443/wd/hub',
+            # command_executor='https://'+os.environ['SAUCE_USERNAME']+':'+os.environ['SAUCE_ACCESS_KEY']+' @ondemand.us-west-1.saucelabs.com:443/wd/hub',
+            # command_executor='https://Eldadm:0d795a24ab054d24843d56e3872c7de3@ondemand.us-west-1.saucelabs.com:443/wd/hub',
             # command_executor='https://'+os.environ['SAUCE_USERNAME']+':'+os.environ['SAUCE_ACCESS_KEY']+'@ondemand.saucelabs.com:443/wd/hub',
             # command_executor='https://<user>.<access_key>.us-west-1.saucelabs.com:443/wd/hub',
             desired_capabilities=sauceParameters)
@@ -278,8 +250,8 @@ def run_sauce_test():
         sauceParameters.update(unifiedPlatformAppStorage)
         print (colored('You are testing on the Sauce Labs EU Datacenter', 'green', attrs=['blink', 'underline']))
         driver = webdriver.Remote(
-            command_executor='https://'+os.environ['SAUCE_USERNAME']+':'+os.environ['SAUCE_ACCESS_KEY']+'@ondemand.eu-central-1.saucelabs.com:443/wd/hub',
-            # command_executor='https://'+os.environ['SAUCE_USERNAME']+':'+os.environ['SAUCE_ACCESS_KEY']+' @ondemand.eu-central-1.saucelabs.com:443/wd/hub/session',
+            command_executor='https://'+os.environ['SAUCE_USERNAME']+':'+os.environ['SAUCE_ACCESS_KEY']+' @ondemand.eu-central-1.saucelabs.com:443/wd/hub',
+            # command_executor='https://Eldadm:0d795a24ab054d24843d56e3872c7de3@ondemand.eu-central-1.saucelabs.com:443/wd/hub',
             desired_capabilities=sauceParameters)
 
     if US_Datacenter_TO==True:
@@ -304,97 +276,13 @@ def run_sauce_test():
         print (colored(', not both', 'red', attrs=['underline']))
 
 
-    # driver.execute_script("mobile: shell", {"args":["--allow-insecure=adb_shell"]});
-    # driver.execute_script('mobile: shell', {"command": "su root service call alarm 3 s16 Europe/Volgograd"})
-    # print (driver.execute_script('mobile: shell', {"command": "wm size"}))
-# adb shell wm size
-    # driver.get('https://www.google.com/search?q=current+time&oq=current+time&aqs=chrome..69i57j0i402l2j0i131i433i512j69i64l3j69i61.2821j0j4&sourceid=chrome&ie=UTF-8')
-
-    # sleep(10)
-    size = driver.get_window_size()
-    print(size)
     print (driver.capabilities)
-    print (driver.capabilities['testobject_test_report_url'])
-    driver.implicitly_wait(5)
 
 
-
-    driver.implicitly_wait(0)
-    # print (colored(str(datetime.datetime.now()), 'green', attrs=['blink', 'underline']))
-    # source = driver.page_source
-    # print(colored(source, 'red'))
-    # try:
-    #     print (colored("looking for Allow Once", 'green'))
-    #     # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
-    #     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'Allow Once')))
-    #     # print (colored("found login_overview_btn_sign_in", 'green'))
-    #
-    #
-    #
-    #     interact = driver.find_element_by_name("Allow Once")
-    #     interact.click()
-    #     sleep(5)
-    #     # print (colored("clicked type == 'login_overview_btn_sign_in", 'green'))
-    #     # interact.click()
-    #
-    #     print (colored("clicked Allow Once", 'green'))
-    #     sleep(10)
-    #     source = driver.page_source
-    #     print(colored(source, 'red'))
-    # except:
-    #     print (colored("Can not find Allow Once", 'red'))
-
-    # sleep(10)
-    # media = driver.media_devices.get_user_media({audio: true, video: true})
-    # print (media)
-
-    # (async () => {
-    #     await navigator.mediaDevices.getUserMedia({audio: true, video: true});
-    #     let devices = await navigator.mediaDevices.enumerateDevices();
-    #     console.log(devices);
-    # })();
-
-    # driver.execute_script('mobile: launchApp', {'bundleId': 'com.apple.mobileslideshow'})
-# /private/var/mobile/Media/DCIM/
-    # driver.push_file("@com.apple.DocumentsApp:sampletext.txt", "/Users/terranceloughry/Desktop/sampletext.txt")
-    # driver.push_file("@com.apple.DocumentsApp:is_it.gif", "/Users/terranceloughry/Desktop/Thor_Reaction_Gifs/is_it.gif")
-    # driver.push_file("/Users/terranceloughry/Desktop/test.jpeg", "@com.apple.mobileslideshow:test.jpeg")
-    # driver.push_file("@com.apple.mobileslideshow:test.jpeg", "/Users/terranceloughry/Desktop/test.jpeg")
-    # driver.push_file("/Users/terranceloughry/Desktop/paterntest.jpeg", "@com.apple.mobileslideshow:paterntest.jpeg")
-
-    # driver.push_file("@com.apple.Keynote/Patern_test.jpeg", "")
-
-    # print('file pushed')
-
-    # driver.execute_script('mobile: launchApp', {'bundleId': 'com.apple.DocumentsApp'})
-    # driver.execute_script('mobile: launchApp', {'bundleId': 'com.apple.mobileslideshow'})
-    # driver.execute_script('mobile: launchApp', {'bundleId': 'com.apple.Safari'})
-
-
-    # driver.get("https://www.portal.ehealth.gov.hk/app/index.html")
-    # sleep(5)
-    # webview = driver.contexts[0]
-    # print(webview)
-    # driver.switch_to.context(webview)
-    # source = driver.page_source
-    # print(colored(source, 'red'))
-    #
-    # sleep(5)
-    # driver.refresh()
-    # webview = driver.contexts[1]
-    # print(webview)
-    # driver.switch_to.context(webview)
-    # version = driver.execute_script("return navigator.userAgent.match('Chrome/[^ ]+')[0]")
-    # print(version)
-    # source = driver.page_source
-    # print(colored(source, 'blue'))
-
-
-    #
-    # print ('Test Name == ', colored(driver.capabilities['testobject_test_name'], 'green', attrs=['reverse', 'blink']))
-    # print ('Device Name == ', colored(driver.capabilities['testobject_device_name'], 'green', attrs=['reverse', 'blink']))
-    # print ('Device descriptor == ', colored(driver.capabilities['testobject_device'], 'green', attrs=['reverse', 'blink']))
-    # print ('Platform Version == ', colored(driver.capabilities['platformVersion'], 'green', attrs=['reverse', 'blink']))
+    print ('Test Name == ', colored(driver.capabilities['testobject_test_name'], 'green', attrs=['reverse', 'blink']))
+    print ('Device Name == ', colored(driver.capabilities['testobject_device_name'], 'green', attrs=['reverse', 'blink']))
+    print ('Device descriptor == ', colored(driver.capabilities['testobject_device'], 'green', attrs=['reverse', 'blink']))
+    print ('Platform Version == ', colored(driver.capabilities['platformVersion'], 'green', attrs=['reverse', 'blink']))
     # ###################################################################
     # # Test logic goes here
     # ###################################################################
@@ -407,7 +295,7 @@ def run_sauce_test():
     #
     # # console.log(driver.capabilities['testobject_test_report_url'])
     # # print(driver.capabilities['testobject_test_live_view_url'])
-    # sleep(10)
+    sleep(15)
     # driver.close_app()
     # sleep(10)
 
@@ -476,29 +364,15 @@ def run_sauce_test():
 
     # driver.execute_script('sauce:context=Get URL')
     # try:
-    #     print (colored("looking for class check mark", 'green'))
-    #     # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
-    #     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated')))
-    #     interact = driver.find_element_by_class("sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated")
-    #     # interact = driver.find_element_by_name("bersa-uat")
-    #     interact.click()
-    #     print (colored("found class check mark!!!", 'green'))
-    #     sleep(10)
+    #     print (colored("looking for bersa-uat", 'green'))
+    #     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+    #     # WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//*[@name='quickBalance_header']")))
+    #     # interact = driver.find_element_by_xpath("//*XCUIElementTypeButton[@name='noThanks_btn']")
+    #     interact = driver.find_element_by_name("bersa-uat")
+    #     # interact.click()
+    #     print (colored("found bersa-uat!!!", 'green'))
     # except:
-    #     print (colored("Can not find class check mark", 'red'))
-    #
-    #
-    # try:
-    #     print (colored("looking for xpath agree", 'green'))
-    #     # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
-    #     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, '//XCUIElementTypeButton[@name="Agree"]')))
-    #     interact = driver.find_element_by_xpath("//XCUIElementTypeButton[@name='Agree']")
-    #     # interact = driver.find_element_by_name("bersa-uat")
-    #     interact.click()
-    #     print (colored("found agree!!!", 'green'))
-    #     sleep(10)
-    # except:
-    #     print (colored("Can not find xpath agree", 'red'))
+    #     print (colored("Can not find bersa-uat", 'red'))
     #
     # try:
     #     print (colored("looking for Soy", 'green'))
@@ -529,71 +403,7 @@ def run_sauce_test():
     # print (str(datetime.datetime.now()))
     # sleep(55)
     #
-    # driver.get('https://google.com/')
-    # try:
-    #     WebDriverWait(driver, 15).until(EC.alert_is_present())
-    #
-    #     alert = browser.switch_to.alert
-    #     alert.dismiss()
-    #     print("alert accepted")
-    # except:
-    #     print("no alert")
-    #
-    # try:
-    #     WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.NAME, 'q')))
-    #     print('found1')
-    #     interact = driver.find_element_by_name("q")
-    #     interact.click()
-    #     print('clicked')
-    #     interact.send_keys('click google search button')
-    #     print('sent keys')
-    #
-    #     interact = driver.find_element_by_name("btnK")
-    #     print('found search button')
-    #     interact.click()
-    #
-    #     print('clicked')
-    #
-    #     sleep(5)
-    # except:
-    #     print("did not work")
-    #
-    # try:
-    #     WebDriverWait(driver, 15).until(EC.alert_is_present())
-    #
-    #     alert = browser.switch_to.alert
-    #     alert.dismiss()
-    #     print("alert accepted")
-    # except:
-    #     print("no alert")
-    #
-    # driver.get('https://google.com/')
-    # try:
-    #     WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.NAME, 'q')))
-    #     print('found2')
-    #
-    #     interact = driver.find_element_by_name("q")
-    #     interact.click()
-    #     print('clicked')
-    #     interact.send_keys('submitting after send keys')
-    #     print('sent keys')
-    #
-    #     interact.submit()
-    #     sleep(5)
-    # except:
-    #     print("did not work")
-
-    # driver.get('https://google.com/')
-    # try:
-    #     WebDriverWait(driver, 30).until(EC.EC.presence_of_element_located((By.CLASS_NAME, 'q')))
-    #     interact = driver.find_element_by_name("q")
-    #     interact.click()
-    #     interact.send_keys('submitting after send keys')
-    #     interact.submit()
-    #
-    # except:
-    #     print("did not work")
-
+    # driver.get('https://google.com/maps')
     # print (str(datetime.datetime.now()))
     # sleep(55)
     #
@@ -640,57 +450,9 @@ def run_sauce_test():
 
     # # sleep(10)
     # # driver.launch_app(com.apple.Preferences)
-    driver.activate_app("com.apple.mobilesafari");
+    # # driver.activate_app("com.apple.Preferences");
     # #
-    sleep(10)
-    source = driver.page_source
-    print(colored(source, 'red'))
-    print (colored(driver.contexts, 'blue'))
-    driver.activate_app("com.apple.mobilesafari");
-    print (colored(driver.contexts, 'blue'))
-    # try:
-    #     WebDriverWait(driver, 15).until(EC.alert_is_present())
-    #
-    #     alert = browser.switch_to.alert
-    #     alert.dismiss()
-    #     print("alert accepted")
-    #     driver.get('https://whatismyipaddress.com/')
-    # except:
-    #     print("no alert")
-    #     print (colored(driver.contexts, 'blue'))
-
-
-    try:
-        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//XCUIElementTypeButton[@name='URL']")))
-        # driver.switch_to.context('WEBVIEW_442.1')
-        # interact = driver.find_element_by_xpath("//XCUIElementTypeButton[@name='Google']").click()
-        # interact.send_keys("google.com")
-        # sleep(5)
-        # alert = browser.switch_to.alert
-        # alert.dismiss()
-        # print("alert accepted")
-        print (colored(driver.contexts, 'blue'))
-        webview = driver.contexts[1]
-        driver.switch_to.context(webview)
-        driver.get('https://whatismyipaddress.com/')
-                # alert = browser.switch_to.alert
-                # alert.dismiss()
-                # print("alert accepted")
-    except:
-        print("no alert")
-        print (colored(driver.contexts, 'blue'))
-        # interact = driver.find_element_by_xpath("//XCUIElementTypeButton[@name=\"Continue\"]").click()
-        # <XCUIElementTypeButton type="XCUIElementTypeButton" value="Search or enter website name" name="URL" label="Address" enabled="true" visible="true" accessible="false" x="234" y="24" width="644" height="36" index="1">
-        #             <XCUIElementTypeOther type="XCUIElementTypeOther" value="Search or enter website name" name="Address" label="Address" enabled="true" visible="true" accessible="true" x="452" y="32" width="228" height="21" index="0"/>
-
-
-
-
-        # driver.get('https://whatismyipaddress.com/')
-        # alert = browser.switch_to.alert
-        # alert.dismiss()
-        # print("alert accepted")
-
+    # # driver.get('https://whatismyipaddress.com/')
     # driver.get('https://google.com/maps')
     # driver.get('https://gps-coordinates.org/my-location.php')
     # sleep(5)

@@ -71,7 +71,7 @@ sauceParameters = {
     #     # 'iedriverVersion': '3.4.0',
     #     # 'chromedriverVersion': '2.40',
     #     # 'requireWindowFocus' : True,
-        'maxDuration': 5000,
+    #     # 'maxDuration': 1800,
     #     # 'idleTimeout': 1000,
     #     # 'commandTimeout': 600,
     #     # 'videoUploadOnPass':False,
@@ -80,19 +80,15 @@ sauceParameters = {
 
     # },
     # 'count': 1,
-    'platformName': 'macos 11.00',
-    # 'platformName': 'windows 10',
-    'browserName': 'firefox',
-    'acceptInsecureCerts': True,
+    'platformName': 'macOS 11',
+    # 'browserName': 'firefox',
     # 'browserName': 'MicrosoftEdge',
     # 'browserName': 'internet explorer',
     # 'browserName': 'chrome',
-    # 'browserName': 'safari',
+    'browserName': 'safari',
     # 'version': '13',
     # 'browserVersion': 'dev',
-    'browserVersion': '92',
-    # 'extendedDebugging':'true',
-
+    'browserVersion': 'latest',
     # 'seleniumVersion': '3.141.59',
     # 'maxDuration': 1800,
     # 'commandTimeout': 300,
@@ -104,17 +100,12 @@ sauceParameters = {
         'name':'Test One',
         # 'tags':'13128733',
         # 'extendedDebugging':'true',
-        # 'prerun':{
-        #     'executable':'storage:filename=disable_fraud.sh',
-        #     'background': 'false'
-        # }
-        'build':'Selenium 4 tests',
-        # 'screenResolution':'2560x1600',
+        # 'build':'Different versions of Chrome Tests with HTTP vs HTTPS vs plain localhost',
+        # 'screenResolution':'1600x1200',
 
         # 'avoidProxy': 'true',
         # 'capturePerformance': 'true',
-        'seleniumVersion': '4.0.0',
-        "idleTimeout": 450,
+        # 'seleniumVersion': '3.141.59',
         # 'public':'private',
         # 'name': 'https://dev.testinghub.autodesk.com/ test of drop down menu',
         # 'extendedDebugging':'true',
@@ -141,7 +132,7 @@ sauceParameters = {
 
     # Options used by Chrome
     # 'goog:chromeOptions':{
-    #     # 'w3c': True,    # Required for a W3C Chrome test
+    #     'w3c': True,    # Required for a W3C Chrome test
     #     # 'mobileEmulation':{'deviceName':'iPhone X'},
     #     # 'prefs': {
     #     #     'profile': {
@@ -149,14 +140,13 @@ sauceParameters = {
     #     #         },
     #     #         'credentials_enable_service': False,
     #     #     },
-    #     'args': ['--auto-open-devtools-for-tabs'],
+    #     # 'args': ['--auto-open-devtools-for-tabs'],
     # },
-    'moz:firefoxOptions':{
-        # "log": {"level": "trace"},
-        # 'geckodriverVersion':'0.27.0',
-        # 'args': ['--headless']
-    },
-    'moz:debuggerAddress': True
+    # 'moz:firefoxOptions':{
+    #     # "log": {"level": "trace"},
+    #     # 'geckodriverVersion':'0.27.0',
+    #     # 'args': ['--headless']
+    # },
 }
 
 
@@ -174,7 +164,7 @@ except NameError:
 if region != 'EU':
     print("You are using the US data center")
     driver = webdriver.Remote(
-        # command_executor='https://sso-discover-blane:939627a8-6f4d-426e-bc5a-7d3853e6981c@ondemand.saucelabs.com:443/wd/hub',
+        # command_executor='https://tj.invitationtest3:16e9429a-cc5d-4c36-8caf-087a1e4e899a@ondemand.saucelabs.com:443/wd/hub',
         command_executor='https://'+os.environ['SAUCE_USERNAME']+':'+os.environ['SAUCE_ACCESS_KEY']+'@ondemand.us-west-1.saucelabs.com:443/wd/hub',
         # command_executor='https://'+os.environ['SAUCE_USERNAME']+':'+os.environ['SAUCE_ACCESS_KEY']+'@ondemand.saucelabs.com:443/wd/hub',
         desired_capabilities=sauceParameters)
@@ -202,193 +192,203 @@ elif region == 'EU':
 #
 #
 print (driver.capabilities)
-
-# testURL = 'https://cgi-lib.berkeley.edu/ex/fup.html'
+driver.implicitly_wait(50)
+# testURL = 'localhost:8000'
 # testURL = 'http://localhost:8000'
 # testURL = 'https://localhost:8000'
 # testURL = 'trytjloughry.com:8000'
-# testURL = 'https://media.raven.news/'
-# testURL = "https://www.filebin.net"
-testURL = 'https://saucelabs.com'
+# testURL = 'http://trytjloughry.com'
+testURL = "https://ruconsumercenter.mysynchrony.com/consumercenter/"
+# testURL = 'https://saucelabs.com'
 
 #
 #
+driver.get(testURL)
 
-
-driver.execute_script('sauce:job-name=Testing ' + driver.capabilities['browserName'] + ' ' + driver.capabilities['browserVersion'] + ' for ' + testURL +' ')
-# driver.execute_script('sauce:throttleCPU', {
-#     "rate": 4
-# })
-
-
-
-# driver.get(testURL)
-#
-# driver.execute_script("sauce:intercept", {
-#     "url": "https://saucelabs.com/",
-#         "response": {
-#             "status": 400,
-#             "headers": {
-#                 "x-custom-header": "foobar"
-#             },
-#             "body": [{
-#                 "title": "Hello",
-#                 "order": 1,
-#                 "completed": False,
-#                 "url": "https://google.com"
-#             }]
-#         }
-#     })
-# driver.get("https://saucelabs.com")
-#
-# driver.execute_script("sauce:intercept", {
-#     "url": "https://saucelabs.com/*",
-#     "error": "Failed"})
-# sleep(5)
-# driver.get("https://saucelabs.com/pricing")
-# sleep(2)
-# # driver.execute_script('sauce:intercept', {
-# #     "url": "https://saucelabs.com/",
-# #     "redirect": "https://google.com"
-# # })
-# # driver.execute_script('sauce:intercept', {
-# #     "url": "https://saucelabs.com/",
-# #     "redirect": "https://google.com"
-# # })
-# # sleep(2)
-# driver.execute_script("sauce:intercept", {
-#     "url": "*saucelabs*",
-#     "error": "Failed"})
-#
-# driver.get("https://docs.saucelabs.com/insights/debug/#sauceintercept--redirect")
-# sleep(2)
-
-# driver.execute_script("sauce:intercept", {
-#     "url": "https://*media.raven.news/",
-#     "error": "Failed"})
-# sleep(5)
-# driver.get("https://media.raven.news")
-# sleep(2)
-# # driver.execute_script('sauce:intercept', {
-# #     "url": "https://saucelabs.com/",
-# #     "redirect": "https://google.com"
-# # })
-# # driver.execute_script('sauce:intercept', {
-# #     "url": "https://saucelabs.com/",
-# #     "redirect": "https://google.com"
-# # })
-# # sleep(2)
-# driver.execute_script("sauce:intercept", {
-#     "url": "https://*media.raven.news/**",
-#     "error": "Failed"})
-#
-# driver.get("https://media.raven.news")
-# sleep(2)
-
+# driver.execute_script('sauce:job-name=Testing ' + driver.capabilities['browserName'] + ' ' + driver.capabilities['browserVersion'] + ' for ' + testURL +' ')
 # performance = driver.execute('sauce:log', {type: 'sauce:performance'});
 # lighthouseScore = performance.score;
 # driver.execute_script("sauce:break")
 
-# #filebin.net testing
-# driver.get("https://www.filebin.net")
-#
-# try:
-#     print (colored("looking for input type 'file'", 'green'))
-#     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, "upfile")))
-#     # WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME, "react-fine-uploader-file-input")))
-#     print (colored("found input type 'file'", 'green'))
-#
-#     interact = driver.find_element_by_css_selector("[type='file']")
-#     # interact
-#     # interact.click()
-#     # JavascriptExecutor driver = (JavascriptExecutor)getDriver();
-#     # driver.execute_script("arguments[0].click();", interact);
-#     # driver.execute_script("sauce:job-result={}".format(sauce_result))
-#     interact.send_keys('/Users/terranceloughry/Desktop/possumSmall.jpeg')
-#     print (colored("uploading image", 'green'))
-#     # print (colored(driver.contexts, 'blue'))
-# except:
-#     print (colored("Can not find input type 'file'", 'red'))
-#
-# try:
-#     print (colored("looking for input type 'submit'", 'green'))
-#     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, "upfile")))
-#     # WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME, "react-fine-uploader-submit-input")))
-#     print (colored("found input type 'submit'", 'green'))
-#
-#     interact = driver.find_element_by_css_selector("[type='submit']")
-#     # interact
-#     interact.click()
-#     # JavascriptExecutor driver = (JavascriptExecutor)getDriver();
-#     # driver.execute_script("arguments[0].click();", interact);
-#     # driver.execute_script("sauce:job-result={}".format(sauce_result))
-#
-#     # print (colored(driver.contexts, 'blue'))
-# except:
-#     print (colored("Can not find input type 'submit'", 'red'))
-
-sleep(10)
-# driver.execute_script("sauce:job-result={}".format('passed'))
-# driver.execute_script("sauce:job-result={}".format('failed'))
-
-# def test_speed_index(self, driver):
-# self.setUpClass(driver)
-# metrics = ["load", "speedIndex", "pageWeight", "pageWeightEncoded", "timeToFirstByte",
-#            "timeToFirstInteractive", "firstContentfulPaint", "perceptualSpeedIndex", "domContentLoaded"]
-# performance = driver.execute_script("sauce:log", {"type": "sauce:performance"})
-# print (metrics)
-# for metric in metrics:
-#     assert performance["speedIndex"] < 1000
 
 
-# try:
-#     print (colored("looking for Message", 'green'))
-#     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "message")))
-# #
-# #
-# #     interact = driver.find_element_by_id("box1")
-# #     interact.click()
-# #     print ("placed X")
-# #     interact = driver.find_element_by_id("box2")
-# #     interact.click()
-# #     print ("placed O")
-# #     interact = driver.find_element_by_id("box3")
-# #     interact.click()
-# #     print ("placed X")
-# #     interact = driver.find_element_by_id("box5")
-# #     interact.click()
-# #     print ("placed O")
-# #     interact = driver.find_element_by_id("box6")
-# #     interact.click()
-# #     print ("placed X")
-# #     interact = driver.find_element_by_id("box4")
-# #     interact.click()
-# #     print ("placed O")
-# #     interact = driver.find_element_by_id("box8")
-# #     interact.click()
-# #     print ("placed X")
-# #     interact = driver.find_element_by_id("box9")
-# #     interact.click()
-# #     print ("placed O")
-# #     interact = driver.find_element_by_id("box7")
-# #     interact.click()
-# #     print ("placed X")
-# #     sleep(5)
-# #     interact = driver.find_element_by_link_text("Emergency Bees")
-# #     interact.click()
-# #     driver.execute_script('sauce:context=Emergency Bees')
-# #     sleep(15)
-#     driver.execute_script("sauce:job-result={}".format('passed'))
-# #     # print (driver.current_url)
-# except:
-#     print (colored("Can not find message", 'red'))
-#     driver.execute_script("sauce:job-result={}".format('failed'))
-#
+try:
+    print (colored("looking for LoginusernameId", 'green'))
+
+    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "LoginusernameId")))
+    print (colored("Found LoginusernameId", 'green'))
+    interact = driver.find_element_by_id("LoginusernameId")
+    interact.click()
+    interact.send_keys("CCUAT5678")
+    driver.get_screenshot_as_base64()
+
+    # driver.execute_script("sauce:job-result={}".format('passed'))
 #     # print (driver.current_url)
+except:
+    print (colored("Can not find LoginusernameId", 'red'))
+    driver.execute_script("sauce:job-result={}".format('failed'))
+
+    # print (driver.current_url)
+try:
+    print (colored("looking for LoginpasswordId", 'green'))
+    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "LoginpasswordId")))
+    print (colored("Found LoginpasswordId", 'green'))
+    interact = driver.find_element_by_id("LoginpasswordId")
+    interact.click()
+    interact.send_keys("Test12test")
+    driver.get_screenshot_as_base64()
+
+    # driver.execute_script("sauce:job-result={}".format('passed'))
+#     # print (driver.current_url)
+except:
+    print (colored("Can not find LoginpasswordId", 'red'))
+    driver.execute_script("sauce:job-result={}".format('failed'))
 #
 #
-#
-# driver.execute_script('sauce:job-info={"public":"share"}')
+
+try:
+    print (colored("looking for loginSubmit", 'green'))
+    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "loginSubmit")))
+    print (colored("Found loginSubmit", 'green'))
+    interact = driver.find_element_by_id("loginSubmit")
+    interact.click()
+
+    driver.get_screenshot_as_base64()
+
+    # driver.execute_script("sauce:job-result={}".format('passed'))
+#     # print (driver.current_url)
+except:
+    print (colored("Can not find loginSubmit", 'red'))
+    driver.execute_script("sauce:job-result={}".format('failed'))
+
+
+try:
+    print (colored("looking for readyState", 'green'))
+    WebDriverWait(driver, 10).until(lambda driver: driver.execute_script('return document.readyState') == 'complete')
+    print (colored("Found readyState", 'green'))
+    # interact = driver.find_element_by_id("readyState")
+    # interact.click()
+
+    driver.get_screenshot_as_base64()
+
+    # driver.execute_script("sauce:job-result={}".format('passed'))
+#     # print (driver.current_url)
+except:
+    print (colored("Can not find readyState", 'red'))
+    driver.execute_script("sauce:job-result={}".format('failed'))
+
+try:
+    print (colored("looking for //input[@id='questionId']/../label", 'green'))
+    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//input[@id='questionId']/../label")))
+    print (colored("Found //input[@id='questionId']/../label", 'green'))
+    interact = driver.find_element_by_xpath("//input[@id='questionId']/../label")
+    interact.click()
+
+    driver.get_screenshot_as_base64()
+
+    # driver.execute_script("sauce:job-result={}".format('passed'))
+#     # print (driver.current_url)
+except:
+    print (colored("Can not find //input[@id='questionId']/../label", 'red'))
+    driver.execute_script("sauce:job-result={}".format('failed'))
+
+
+try:
+    print (colored("looking for securityAns", 'green'))
+    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "securityAns")))
+    print (colored("Found securityAns", 'green'))
+    interact = driver.find_element_by_id("securityAns")
+    interact.click()
+    interact.send_keys("wedding")
+
+    driver.get_screenshot_as_base64()
+
+    # driver.execute_script("sauce:job-result={}".format('passed'))
+#     # print (driver.current_url)
+except:
+    print (colored("Can not find securityAns", 'red'))
+    driver.execute_script("sauce:job-result={}".format('failed'))
+
+
+try:
+    print (colored("looking for remindme", 'green'))
+    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "remindme")))
+    print (colored("Found remindme", 'green'))
+    interact = driver.find_element_by_id("remindme")
+    interact.click()
+    # interact.send_keys("wedding")
+
+    driver.get_screenshot_as_base64()
+
+    # driver.execute_script("sauce:job-result={}".format('passed'))
+#     # print (driver.current_url)
+except:
+    print (colored("Can not find remindme", 'red'))
+    driver.execute_script("sauce:job-result={}".format('failed'))
+
+try:
+    print (colored("looking for readyState", 'green'))
+    WebDriverWait(driver, 10).until(lambda driver: driver.execute_script('return document.readyState') == 'complete')
+    print (colored("Found readyState", 'green'))
+    # interact = driver.find_element_by_id("readyState")
+    # interact.click()
+
+    driver.get_screenshot_as_base64()
+
+    # driver.execute_script("sauce:job-result={}".format('passed'))
+#     # print (driver.current_url)
+except:
+    print (colored("Can not find readyState", 'red'))
+    driver.execute_script("sauce:job-result={}".format('failed'))
+
+
+
+try:
+    print (colored("looking for //button[@data-title='update required now']", 'green'))
+    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//button[@data-title='update required now']")))
+    print (colored("Found //button[@data-title='update required now']", 'green'))
+    interact = driver.find_element_by_xpath("//button[@data-title='update required now']")
+    # interact.click()
+
+    driver.get_screenshot_as_base64()
+
+    # driver.execute_script("sauce:job-result={}".format('passed'))
+#     # print (driver.current_url)
+except:
+    print (colored("Can not find //button[@data-title='update required now']", 'red'))
+    driver.execute_script("sauce:job-result={}".format('failed'))
+
+try:
+    print (colored("looking for //p[contains(text(),'Please update your Personal')]", 'green'))
+    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//p[contains(text(),'Please update your Personal')]")))
+    print (colored("Found //p[contains(text(),'Please update your Personal')]", 'green'))
+    interact = driver.find_element_by_xpath("//p[contains(text(),'Please update your Personal')]")
+    interact.click()
+
+    driver.get_screenshot_as_base64()
+
+    # driver.execute_script("sauce:job-result={}".format('passed'))
+#     # print (driver.current_url)
+except:
+    print (colored("Can not find //p[contains(text(),'Please update your Personal')]", 'red'))
+    driver.execute_script("sauce:job-result={}".format('failed'))
+
+
+
+try:
+    print (colored("looking for (//input[@class='form-control number-field'])[2]", 'green'))
+    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "(//input[@class='form-control number-field'])[2]")))
+    print (colored("Found (//input[@class='form-control number-field'])[2]", 'green'))
+    interact = driver.find_element_by_xpath("(//input[@class='form-control number-field'])[2]")
+    interact.click()
+
+    driver.get_screenshot_as_base64()
+
+    # driver.execute_script("sauce:job-result={}".format('passed'))
+#     # print (driver.current_url)
+except:
+    print (colored("Can not find (//input[@class='form-control number-field'])[2]", 'red'))
+    driver.execute_script("sauce:job-result={}".format('failed'))# driver.execute_script('sauce:job-info={"public":"share"}')
 
 # driver.execute_script("sauce:job-result={}".format('passed'))
 

@@ -44,8 +44,8 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # Choose if you want Android of iOS capabilities
 # Uncomment one of those lines
 ###################################################################
-# androidTest = True
-iosTest = True
+androidTest = True
+# iosTest = True
 
 ###################################################################
 # Choose The Platform and Data Center you want to test on
@@ -83,9 +83,6 @@ def run_sauce_test():
     ###################################################################
     projectParameters = {
         'name': 'Run: ' + str(datetime.datetime.now()),
-        'recordDeviceVitals': True,
-        # 'name': 'AEM home page options validation -256390 home page displayed',
-        # "timeZone": "Honolulu",
         # 'commandTimeout':600,
         # 'build': "really?",
         # "recordDeviceVitals": 'true',
@@ -102,7 +99,7 @@ def run_sauce_test():
 
 
         # 'app': 'storage:filename=mynewfilename.ipa',
-        # 'app': 'storage:filename=Broker_Plus-UATOCP-1205',
+
         # 'app': 'storage:2e9da00c-8086-4c34-b0a1-7c6048ba6803',
         # 'app': 'storage:0debe8c2-bc55-48e1-ad44-8dac657d0051',
 
@@ -128,7 +125,7 @@ def run_sauce_test():
 
 
 
-        # 'appiumVersion': '1.18.1',
+        'appiumVersion': '1.17.0',
         # 'testobject_test_live_view_url': True
         # "testobject_session_creation_timeout": "180000",
         # 'name': 'Run: ' + getNumber(),
@@ -156,9 +153,11 @@ def run_sauce_test():
         # 'app': 'storage:521f9d7b-2106-49b8-80c5-4b9b8c617a5d', #childplace app android
         # 'app': 'storage:bc8ce2eb-4c15-4463-9521-4af2639ba664', #swag-labs iOS US SIM
         # 'app': 'storage:640aa9b0-a50a-46a6-bae7-0e47fa70f211', #swag-labs android EU
-        'app': 'storage:1f77b56e-e9aa-4c4d-951c-31c1b97a18b9', #SelfHelp ios Real
-        # 'app': 'storage:co.uk.simplyhealth.simplyplan.staging',
-        # 'app': 'storage:ad8710ff-d8b4-4448-a017-0686f4d8c1bb', #swag-labs Android US
+        # 'app': 'storage:c4e97ccc-cd8c-45c7-a98c-6854185663a2', #costco ios
+        # 'app': 'storage:58e76ced-f64f-4983-a0a3-828de283b262', #broker_plus Android US mine
+        'app': 'storage:d796b187-f220-4db5-9c7d-5961f39a48af', #broker_plus Android US theirs
+
+        # 'app': 'storage:997b1f88-5576-4959-8465-89b372457262',
         # 'app': 'storage:b427aa17-d3a2-4a38-9b5f-277888910265',
 
 
@@ -172,20 +171,21 @@ def run_sauce_test():
     androidParameters = { # Define Android parameters here
         # 'platformVersion' : '10',
         # 'automationName': 'uiautomator2',
-        'deviceName' : 'Google.*',
         # 'deviceName' : 'Samsung.*Galaxy.*',
         # 'appium:deviceName' : 'Samsung Galaxy S20.*',
-        # 'deviceName' : '.*Pixel.*',
-        # 'deviceName' : '	Google_Pixel_5a_real_us',
+        'deviceName' : 'LG.*',
+        "privateDevicesOnly":True,
+        # 'deviceName' : 'Google_Pixel_4_XL_real_us',
 
-        'browserName' : 'chrome',
+        # 'browserName' : 'chrome',
         # 'deviceOrientation' : 'PORTRAIT',
         # 'appium:platformName' : 'Android',
         'platformName' : 'Android',
-        'platformVersion' : '11',
-        'recordVideo':False,
+        'platformVersion' : '8.0.0',
+        "parentTunnel":"tlemmonds",
+        "tunnelIdentifier":"AnthemUnified1",
         # "orientation": "portrait",
-        "orientation": "PORTRAIT",
+        # "orientation": "PORTRAIT",
         # "recordDeviceVitals": 'true',
         # "sauce:options":{
 
@@ -216,16 +216,14 @@ def run_sauce_test():
     }
 
     iosParameters = { # Define iOS Parameters here
-        # 'phoneOnly': 'false',
-        'tabletOnly': 'true',
-        'includeSafariInWebviews': True,
+        # 'phoneOnly': 'true',
         # 'deviceName' : 'iPhone 11',
         # 'deviceName' : 'iPhone X Simulator',
         # 'deviceName' : 'iPhone_8_14_7_real_us',
         # 'deviceOrientation' : 'portrait',
         # 'browserName' : 'Chrome',
         # 'browserName' : 'safari',
-        'platformVersion' : '12',
+        'platformVersion' : '14',
         'platformName' : 'iOS',
         # "recordDeviceVitals": 'true',
         # "bundleId" : "com.apple.Preferences",
@@ -267,9 +265,9 @@ def run_sauce_test():
         sauceParameters.update(unifiedPlatformAppStorage)
         print (colored('You are testing on the Sauce Labs US Datacenter', 'green', attrs=['blink', 'underline']))
         driver = webdriver.Remote(
-            command_executor='https://'+os.environ['SAUCE_USERNAME']+':'+os.environ['SAUCE_ACCESS_KEY']+'@ondemand.us-west-1.saucelabs.com:443/wd/hub',
+            # command_executor='https://'+os.environ['SAUCE_USERNAME']+':'+os.environ['SAUCE_ACCESS_KEY']+'@ondemand.us-west-1.saucelabs.com:443/wd/hub',
             # command_executor='https://enriquegh:66af84ca-670f-4647-84c2-54b703833015@ondemand.us-west-1.saucelabs.com:443/wd/hub',
-            # command_executor='https://TJLoughry:69e79050-5358-440b-b38e-453e30f71d6f@ondemand.us-west-1.saucelabs.com:443/wd/hub',
+            command_executor='https://AG67264:36d83836-ce1c-40bf-b407-aa0b510514c3@ondemand.us-west-1.saucelabs.com:443/wd/hub',
             # command_executor='https://'+os.environ['SAUCE_USERNAME']+':'+os.environ['SAUCE_ACCESS_KEY']+'@ondemand.saucelabs.com:443/wd/hub',
             # command_executor='https://<user>.<access_key>.us-west-1.saucelabs.com:443/wd/hub',
             desired_capabilities=sauceParameters)
@@ -278,7 +276,7 @@ def run_sauce_test():
         sauceParameters.update(unifiedPlatformAppStorage)
         print (colored('You are testing on the Sauce Labs EU Datacenter', 'green', attrs=['blink', 'underline']))
         driver = webdriver.Remote(
-            command_executor='https://'+os.environ['SAUCE_USERNAME']+':'+os.environ['SAUCE_ACCESS_KEY']+'@ondemand.eu-central-1.saucelabs.com:443/wd/hub',
+            command_executor='https://'+os.environ['SAUCE_USERNAME']+':'+os.environ['SAUCE_ACCESS_KEY']+' @ondemand.eu-central-1.saucelabs.com:443/wd/hub',
             # command_executor='https://'+os.environ['SAUCE_USERNAME']+':'+os.environ['SAUCE_ACCESS_KEY']+' @ondemand.eu-central-1.saucelabs.com:443/wd/hub/session',
             desired_capabilities=sauceParameters)
 
@@ -304,46 +302,38 @@ def run_sauce_test():
         print (colored(', not both', 'red', attrs=['underline']))
 
 
-    # driver.execute_script("mobile: shell", {"args":["--allow-insecure=adb_shell"]});
-    # driver.execute_script('mobile: shell', {"command": "su root service call alarm 3 s16 Europe/Volgograd"})
-    # print (driver.execute_script('mobile: shell', {"command": "wm size"}))
-# adb shell wm size
-    # driver.get('https://www.google.com/search?q=current+time&oq=current+time&aqs=chrome..69i57j0i402l2j0i131i433i512j69i64l3j69i61.2821j0j4&sourceid=chrome&ie=UTF-8')
-
-    # sleep(10)
-    size = driver.get_window_size()
-    print(size)
     print (driver.capabilities)
-    print (driver.capabilities['testobject_test_report_url'])
-    driver.implicitly_wait(5)
+    print (colored(str(datetime.datetime.now()), 'green', attrs=['blink', 'underline']))
+    source = driver.page_source
+    print(colored(source, 'red'))
+
+    try:
+        print (colored("looking for usernameInput", 'green'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'android.widget.EditText')))
+        print (colored("found usernameInput", 'green'))
 
 
 
-    driver.implicitly_wait(0)
-    # print (colored(str(datetime.datetime.now()), 'green', attrs=['blink', 'underline']))
-    # source = driver.page_source
-    # print(colored(source, 'red'))
-    # try:
-    #     print (colored("looking for Allow Once", 'green'))
-    #     # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
-    #     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'Allow Once')))
-    #     # print (colored("found login_overview_btn_sign_in", 'green'))
-    #
-    #
-    #
-    #     interact = driver.find_element_by_name("Allow Once")
-    #     interact.click()
-    #     sleep(5)
-    #     # print (colored("clicked type == 'login_overview_btn_sign_in", 'green'))
-    #     # interact.click()
-    #
-    #     print (colored("clicked Allow Once", 'green'))
-    #     sleep(10)
-    #     source = driver.page_source
-    #     print(colored(source, 'red'))
-    # except:
-    #     print (colored("Can not find Allow Once", 'red'))
+        interact = driver.find_element_by_accessibility_id("usernameInput")
+        interact.click()
+        sleep(5)
+        # print (colored("clicked type == 'login_overview_btn_sign_in", 'green'))
+        # interact.click()
 
+        print (colored("clicked usernameInput", 'green'))
+        sleep(10)
+        source = driver.page_source
+        print(colored(source, 'red'))
+    except:
+        print (colored("Can not find usernameInput", 'red'))
+        source = driver.page_source
+        print(colored(source, 'red'))
+        interact = driver.find_elements_by_xpath(".//*")
+        # print (interact.get_attribute(“resourceId”))
+        print(colored("------------------------", 'red'))
+
+        print(interact)
     # sleep(10)
     # media = driver.media_devices.get_user_media({audio: true, video: true})
     # print (media)
@@ -640,57 +630,9 @@ def run_sauce_test():
 
     # # sleep(10)
     # # driver.launch_app(com.apple.Preferences)
-    driver.activate_app("com.apple.mobilesafari");
+    # # driver.activate_app("com.apple.Preferences");
     # #
-    sleep(10)
-    source = driver.page_source
-    print(colored(source, 'red'))
-    print (colored(driver.contexts, 'blue'))
-    driver.activate_app("com.apple.mobilesafari");
-    print (colored(driver.contexts, 'blue'))
-    # try:
-    #     WebDriverWait(driver, 15).until(EC.alert_is_present())
-    #
-    #     alert = browser.switch_to.alert
-    #     alert.dismiss()
-    #     print("alert accepted")
-    #     driver.get('https://whatismyipaddress.com/')
-    # except:
-    #     print("no alert")
-    #     print (colored(driver.contexts, 'blue'))
-
-
-    try:
-        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//XCUIElementTypeButton[@name='URL']")))
-        # driver.switch_to.context('WEBVIEW_442.1')
-        # interact = driver.find_element_by_xpath("//XCUIElementTypeButton[@name='Google']").click()
-        # interact.send_keys("google.com")
-        # sleep(5)
-        # alert = browser.switch_to.alert
-        # alert.dismiss()
-        # print("alert accepted")
-        print (colored(driver.contexts, 'blue'))
-        webview = driver.contexts[1]
-        driver.switch_to.context(webview)
-        driver.get('https://whatismyipaddress.com/')
-                # alert = browser.switch_to.alert
-                # alert.dismiss()
-                # print("alert accepted")
-    except:
-        print("no alert")
-        print (colored(driver.contexts, 'blue'))
-        # interact = driver.find_element_by_xpath("//XCUIElementTypeButton[@name=\"Continue\"]").click()
-        # <XCUIElementTypeButton type="XCUIElementTypeButton" value="Search or enter website name" name="URL" label="Address" enabled="true" visible="true" accessible="false" x="234" y="24" width="644" height="36" index="1">
-        #             <XCUIElementTypeOther type="XCUIElementTypeOther" value="Search or enter website name" name="Address" label="Address" enabled="true" visible="true" accessible="true" x="452" y="32" width="228" height="21" index="0"/>
-
-
-
-
-        # driver.get('https://whatismyipaddress.com/')
-        # alert = browser.switch_to.alert
-        # alert.dismiss()
-        # print("alert accepted")
-
+    # # driver.get('https://whatismyipaddress.com/')
     # driver.get('https://google.com/maps')
     # driver.get('https://gps-coordinates.org/my-location.php')
     # sleep(5)

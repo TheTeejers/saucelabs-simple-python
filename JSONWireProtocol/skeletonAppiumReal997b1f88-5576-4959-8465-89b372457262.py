@@ -11,6 +11,7 @@ from time import sleep
 import os
 import sys
 from appium.webdriver.common.touch_action import TouchAction
+from appium.webdriver.common.multi_action import MultiAction
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -64,7 +65,7 @@ RandoNumber = random.randint(0,100000)
 ###################################################################
 # This makes the functions below execute 'run' amount of times
 ###################################################################
-run = 1
+run = 10
 
 ###################################################################
 # Choose if you want Android of iOS capabilities
@@ -83,9 +84,6 @@ def run_sauce_test():
     ###################################################################
     projectParameters = {
         'name': 'Run: ' + str(datetime.datetime.now()),
-        'recordDeviceVitals': True,
-        # 'name': 'AEM home page options validation -256390 home page displayed',
-        # "timeZone": "Honolulu",
         # 'commandTimeout':600,
         # 'build': "really?",
         # "recordDeviceVitals": 'true',
@@ -114,11 +112,9 @@ def run_sauce_test():
         # 'parentTunnel':'TJLoughry'
 
         # 'sauceLabsImageInjectionEnabled': 'true',
-        # "eventLoopIdleDelaySec": 4,
+
         # 'wdaEventloopIdleDelay': '5',
         # "waitForQuiescence": False,
-        # "waitForQuietness": False,
-
 
         # "cacheId": "1234",
         # "noReset": "true",
@@ -128,7 +124,7 @@ def run_sauce_test():
 
 
 
-        # 'appiumVersion': '1.18.1',
+        # 'appiumVersion': '1.16.0',
         # 'testobject_test_live_view_url': True
         # "testobject_session_creation_timeout": "180000",
         # 'name': 'Run: ' + getNumber(),
@@ -154,15 +150,10 @@ def run_sauce_test():
         # 'app': 'storage:filename=interact.ipa',
         # 'app': 'storage:264d3821-e02c-4aa6-a678-e9df4f164d9e', #bersa-uat
         # 'app': 'storage:521f9d7b-2106-49b8-80c5-4b9b8c617a5d', #childplace app android
-        # 'app': 'storage:bc8ce2eb-4c15-4463-9521-4af2639ba664', #swag-labs iOS US SIM
+        # 'app': 'storage:cc43e997-045d-4534-916e-98e2c1b008ac', #swag-labs
         # 'app': 'storage:640aa9b0-a50a-46a6-bae7-0e47fa70f211', #swag-labs android EU
-        'app': 'storage:1f77b56e-e9aa-4c4d-951c-31c1b97a18b9', #SelfHelp ios Real
-        # 'app': 'storage:co.uk.simplyhealth.simplyplan.staging',
-        # 'app': 'storage:ad8710ff-d8b4-4448-a017-0686f4d8c1bb', #swag-labs Android US
-        # 'app': 'storage:b427aa17-d3a2-4a38-9b5f-277888910265',
-
-
-
+        # 'app': 'storage:c4e97ccc-cd8c-45c7-a98c-6854185663a2', #costco ios
+        'app': 'storage:ab77e011-349c-4b05-9811-78ffdde021b1',
 
 
 
@@ -172,20 +163,16 @@ def run_sauce_test():
     androidParameters = { # Define Android parameters here
         # 'platformVersion' : '10',
         # 'automationName': 'uiautomator2',
-        'deviceName' : 'Google.*',
-        # 'deviceName' : 'Samsung.*Galaxy.*',
+        'deviceName' : 'Vivo_Y70_real',
         # 'appium:deviceName' : 'Samsung Galaxy S20.*',
-        # 'deviceName' : '.*Pixel.*',
-        # 'deviceName' : '	Google_Pixel_5a_real_us',
+        # 'deviceName' : 'Google_Pixel_3a_real',
+        # 'deviceName' : 'Google_Pixel_4_XL_real_us',
 
-        'browserName' : 'chrome',
-        # 'deviceOrientation' : 'PORTRAIT',
+        # 'browserName' : 'chrome',
+        'deviceOrientation' : 'portrait',
         # 'appium:platformName' : 'Android',
         'platformName' : 'Android',
-        'platformVersion' : '11',
-        'recordVideo':False,
-        # "orientation": "portrait",
-        "orientation": "PORTRAIT",
+        # 'platformVersion' : '11',
         # "recordDeviceVitals": 'true',
         # "sauce:options":{
 
@@ -216,16 +203,14 @@ def run_sauce_test():
     }
 
     iosParameters = { # Define iOS Parameters here
-        # 'phoneOnly': 'false',
-        'tabletOnly': 'true',
-        'includeSafariInWebviews': True,
+        'phoneOnly': 'true',
         # 'deviceName' : 'iPhone 11',
         # 'deviceName' : 'iPhone X Simulator',
-        # 'deviceName' : 'iPhone_8_14_7_real_us',
+        # 'deviceName' : 'iPad_10_2_2020_real_us',
         # 'deviceOrientation' : 'portrait',
         # 'browserName' : 'Chrome',
-        # 'browserName' : 'safari',
-        'platformVersion' : '12',
+        'browserName' : 'safari',
+        'platformVersion' : '14',
         'platformName' : 'iOS',
         # "recordDeviceVitals": 'true',
         # "bundleId" : "com.apple.Preferences",
@@ -278,7 +263,7 @@ def run_sauce_test():
         sauceParameters.update(unifiedPlatformAppStorage)
         print (colored('You are testing on the Sauce Labs EU Datacenter', 'green', attrs=['blink', 'underline']))
         driver = webdriver.Remote(
-            command_executor='https://'+os.environ['SAUCE_USERNAME']+':'+os.environ['SAUCE_ACCESS_KEY']+'@ondemand.eu-central-1.saucelabs.com:443/wd/hub',
+            command_executor='https://'+os.environ['SAUCE_USERNAME']+':'+os.environ['SAUCE_ACCESS_KEY']+' @ondemand.eu-central-1.saucelabs.com:443/wd/hub',
             # command_executor='https://'+os.environ['SAUCE_USERNAME']+':'+os.environ['SAUCE_ACCESS_KEY']+' @ondemand.eu-central-1.saucelabs.com:443/wd/hub/session',
             desired_capabilities=sauceParameters)
 
@@ -304,46 +289,10 @@ def run_sauce_test():
         print (colored(', not both', 'red', attrs=['underline']))
 
 
-    # driver.execute_script("mobile: shell", {"args":["--allow-insecure=adb_shell"]});
-    # driver.execute_script('mobile: shell', {"command": "su root service call alarm 3 s16 Europe/Volgograd"})
-    # print (driver.execute_script('mobile: shell', {"command": "wm size"}))
-# adb shell wm size
-    # driver.get('https://www.google.com/search?q=current+time&oq=current+time&aqs=chrome..69i57j0i402l2j0i131i433i512j69i64l3j69i61.2821j0j4&sourceid=chrome&ie=UTF-8')
-
-    # sleep(10)
-    size = driver.get_window_size()
-    print(size)
     print (driver.capabilities)
-    print (driver.capabilities['testobject_test_report_url'])
-    driver.implicitly_wait(5)
-
-
-
-    driver.implicitly_wait(0)
-    # print (colored(str(datetime.datetime.now()), 'green', attrs=['blink', 'underline']))
+    print (colored(str(datetime.datetime.now()), 'green', attrs=['blink', 'underline']))
     # source = driver.page_source
     # print(colored(source, 'red'))
-    # try:
-    #     print (colored("looking for Allow Once", 'green'))
-    #     # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
-    #     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'Allow Once')))
-    #     # print (colored("found login_overview_btn_sign_in", 'green'))
-    #
-    #
-    #
-    #     interact = driver.find_element_by_name("Allow Once")
-    #     interact.click()
-    #     sleep(5)
-    #     # print (colored("clicked type == 'login_overview_btn_sign_in", 'green'))
-    #     # interact.click()
-    #
-    #     print (colored("clicked Allow Once", 'green'))
-    #     sleep(10)
-    #     source = driver.page_source
-    #     print(colored(source, 'red'))
-    # except:
-    #     print (colored("Can not find Allow Once", 'red'))
-
     # sleep(10)
     # media = driver.media_devices.get_user_media({audio: true, video: true})
     # print (media)
@@ -475,18 +424,603 @@ def run_sauce_test():
     # driver.get("https://saucelabs.com")
 
     # driver.execute_script('sauce:context=Get URL')
-    # try:
-    #     print (colored("looking for class check mark", 'green'))
-    #     # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
-    #     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated')))
-    #     interact = driver.find_element_by_class("sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated")
-    #     # interact = driver.find_element_by_name("bersa-uat")
-    #     interact.click()
-    #     print (colored("found class check mark!!!", 'green'))
-    #     sleep(10)
-    # except:
-    #     print (colored("Can not find class check mark", 'red'))
+
+
+
+
+
+    try:
+        print (colored("looking for Allow app tracking", 'green'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, 'Allow app tracking')))
+        print (colored("found Allow app tracking", 'green'))
+
+
+        # interact = driver.find_element_by_ios_predicate("type == 'XCUIElementTypeButton' AND index == 1")
+        # print (colored("found XCUIElementTypeButton", 'green'))
+        interact = driver.find_element_by_name("Allow app tracking")
+        interact.click()
+        print (colored("clicked type == 'Allow app tracking", 'green'))
+        # print (colored("clicked type == 'XCUIElementTypeButton' AND index == 1", 'green'))
+        sleep(10)
+        # source = driver.page_source
+        # print(colored(source, 'red'))
+    except:
+        print (colored("Can not find type == 'Allow app tracking", 'red'))
+        source = driver.page_source
+        print(colored(source, 'red'))
+
+
+    try:
+        print (colored("looking for login_overview_btn_sign_in", 'green'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, 'login_overview_btn_sign_in')))
+        print (colored("found login_overview_btn_sign_in", 'green'))
+
+
+        # interact = driver.find_element_by_ios_predicate("type == 'XCUIElementTypeButton' AND index == 1")
+        # print (colored("found XCUIElementTypeButton", 'green'))
+        interact = driver.find_element_by_name("login_overview_btn_sign_in")
+        interact.click()
+        print (colored("clicked type == 'login_overview_btn_sign_in", 'green'))
+        # print (colored("clicked type == 'XCUIElementTypeButton' AND index == 1", 'green'))
+        sleep(10)
+        # source = driver.page_source
+        # print(colored(source, 'red'))
+    except:
+        print (colored("Can not find type == 'login_overview_btn_sign_in", 'red'))
+        source = driver.page_source
+        print(colored(source, 'red'))
+
+
+    try:
+        print (colored("looking for login_e_mail_email_text_field", 'green'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, 'login_e_mail_email_text_field')))
+        print (colored("found login_e_mail_email_text_field", 'green'))
+
+        interact = driver.find_element_by_name("login_e_mail_email_text_field")
+        interact.click()
+        interact.send_keys('fdg7y.saucesupport@inbox.testmail.app')
+
+        interact = driver.find_element_by_name("login_e_mail_password_text_field")
+        interact.click()
+        triple_click = TouchAction(driver)
+        print (colored("found page", 'green'))
+
+        # the parameters for tap are element, x-offset, y-offset, and count
+        triple_click.tap(interact, 0, 0, 8)
+        triple_click.perform()
+        print (colored("found page", 'green'))
+        interact.send_keys('SauceLabs123!')
+        # interact.submit()
+
+        interact = driver.find_element_by_name("login_e_mail_btn_sign_in")
+        interact.click()
+
+        sleep(10)
+        # source = driver.page_source
+        # print(colored(source, 'red'))
+        print (colored("clicked type == 'login_e_mail_email_text_field", 'green'))
+
+
+    except:
+        print (colored("Can not find type == 'login_e_mail_email_text_field", 'red'))
+
+
+    try:
+        print (colored("looking for Agility", 'green'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, 'Agility')))
+        # print (colored("found login_overview_btn_sign_in", 'green'))
+        print (colored("found Agility", 'green'))
+
+        interact = driver.find_element_by_name("general_page_title")
+        driver.execute_script("mobile: twoFingerTap", interact)
+        driver.execute_script("mobile: twoFingerTap", interact)
+        print (colored("did double twoFingerTap", 'green'))
+
+        action0 = TouchAction().tap(interact)
+        action1 = TouchAction().tap(interact)
+        # MultiAction().add(action0).add(action1).perform()
+        ma = MultiAction(driver)
+        print (colored("set multitouch", 'green'))
+
+        ma.add(action0, action1)
+        print (colored("set add", 'green'))
+
+        ma.perform()
+        print (colored("did perform", 'green'))
+
+
+
+
+
+        # interact = driver.find_element_by_ios_predicate("type == 'XCUIElementTypeButton' AND index == 1")
+        # print (colored("found type == 'XCUIElementTypeButton' AND index == 1", 'green'))
+
+        # interact.click()
+        sleep(5)
+        # source = driver.page_source
+        # print(colored(source, 'red'))
+        # print (colored("clicked type == 'login_overview_btn_sign_in", 'green'))
+        # interact.click()
+        #
+        # print (colored("clicked type == 'XCUIElementTypeButton' AND index == 1", 'green'))
+        # sleep(10)
+        # source = driver.page_source
+        # print(colored(source, 'red'))
+    except:
+        print (colored("Can not find type == 'login_overview_btn_sign_in", 'red'))
     #
+    try:
+        print (colored("looking for Show QA Exercises", 'green'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, 'Show QA Exercises')))
+        # print (colored("found login_overview_btn_sign_in", 'green'))
+        print (colored("found Show QA Exercises", 'green'))
+
+        interact = driver.find_element_by_name("Show QA Exercises")
+        interact.click()
+        sleep(5)
+
+        interact = driver.find_element_by_name("Close")
+        interact.click()
+
+    except:
+        print (colored("Can not Show QA Exercises", 'red'))
+
+
+
+
+
+
+    try:
+        print (colored("looking for Agility", 'green'))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, 'Agility')))
+        print (colored("found Agility", 'green'))
+        # source = driver.page_source
+        # print(colored(source, 'red'))
+        interact = driver.find_element_by_ios_predicate("type == 'XCUIElementTypeButton' AND index == 2")
+        print (colored("found type == 'XCUIElementTypeButton' AND index == 2", 'green'))
+        #
+        interact.click()
+        # print (colored("clicked type == 'XCUIElementTypeButton' AND index == 2", 'green'))
+        # sleep(5)
+
+        interact = driver.find_element_by_ios_predicate("type == 'XCUIElementTypeButton' AND index == 1")
+        print (colored("found type == 'XCUIElementTypeButton' AND index == 1", 'green'))
+
+        interact.click()
+        print (colored("clicked type == 'XCUIElementTypeButton' AND index == 1", 'green'))
+
+        # interact = driver.find_element_by_ios_predicate("type == 'XCUIElementTypeButton' AND index == 0")
+        # print (colored("found type == 'XCUIElementTypeButton' AND index == 0", 'green'))
+        #
+        # interact.click()
+        # print (colored("clicked type == 'XCUIElementTypeButton' AND index == 0", 'green'))
+
+        interact = driver.find_element_by_ios_predicate("label CONTAINS 'T-Test with Ball'")
+        print (colored("found T-Test with Ball", 'green'))
+        # interact = driver.find_element_by_ios_predicate("label CONTAINS 'Q Round-Based Exercise'")
+        # print (colored("found Q Round-Based Exercise", 'green'))
+        interact.click()
+        sleep(2)
+
+
+    except:
+        print (colored("Can not find Q Round-Based Exercise", 'red'))
+
+    try:
+        print (colored("looking for Agility", 'green'))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, 'general_navigation_back_button')))
+        print (colored("found Agility", 'green'))
+        # source = driver.page_source
+        # print(colored(source, 'red'))
+        interact = driver.find_element_by_ios_predicate("type == 'XCUIElementTypeButton' AND index == 2")
+        print (colored("found type == 'XCUIElementTypeButton' AND index == 2", 'green'))
+        #
+        interact.click()
+        # print (colored("clicked type == 'XCUIElementTypeButton' AND index == 2", 'green'))
+        # sleep(5)
+
+        interact = driver.find_element_by_ios_predicate("type == 'XCUIElementTypeButton' AND index == 1")
+        print (colored("found type == 'XCUIElementTypeButton' AND index == 1", 'green'))
+
+        interact.click()
+        print (colored("clicked type == 'XCUIElementTypeButton' AND index == 1", 'green'))
+
+        # interact = driver.find_element_by_ios_predicate("type == 'XCUIElementTypeButton' AND index == 0")
+        # print (colored("found type == 'XCUIElementTypeButton' AND index == 0", 'green'))
+        #
+        # interact.click()
+        # print (colored("clicked type == 'XCUIElementTypeButton' AND index == 0", 'green'))
+
+        interact = driver.find_element_by_ios_predicate("label CONTAINS 'Q Round-Based Exercise'")
+        print (colored("found Q Round-Based Exercise", 'green'))
+        # interact = driver.find_element_by_ios_predicate("label CONTAINS 'Q Round-Based Exercise'")
+        # print (colored("found Q Round-Based Exercise", 'green'))
+        interact.click()
+        sleep(2)
+
+
+    except:
+        print (colored("Can not find Q Round-Based Exercise", 'red'))
+
+
+    try:
+        print (colored("looking for exercise_button_measure", 'green'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, 'exercise_button_measure')))
+        # print (colored("found login_overview_btn_sign_in", 'green'))
+        # source = driver.page_source
+        # print(colored(source, 'red'))
+        print (colored("found exercise_button_measure", 'green'))
+
+        interact = driver.find_element_by_name("exercise_button_measure")
+        interact.click()
+        sleep(5)
+        # source = driver.page_source
+        # print(colored(source, 'red'))
+
+
+    except:
+        print (colored("Can not exercise_button_measure", 'red'))
+
+    try:
+        print (colored("looking for exercise_review_button_redo", 'green'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, 'exercise_review_button_redo')))
+        # print (colored("found login_overview_btn_sign_in", 'green'))
+        # source = driver.page_source
+        # print(colored(source, 'red'))
+        print (colored("found exercise_review_button_redo", 'green'))
+
+        interact = driver.find_element_by_name("exercise_review_button_redo")
+        interact.click()
+        sleep(5)
+        # source = driver.page_source
+        # print(colored(source, 'red'))
+
+
+    except:
+        print (colored("Can not exercise_review_button_redo", 'red'))
+
+    try:
+        print (colored("looking for exercise_review_button_redo", 'green'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, 'exercise_review_button_redo')))
+        # print (colored("found login_overview_btn_sign_in", 'green'))
+        # source = driver.page_source
+        # print(colored(source, 'red'))
+        print (colored("found exercise_review_button_redo", 'green'))
+
+        interact = driver.find_element_by_name("exercise_review_button_redo")
+        interact.click()
+        sleep(5)
+        # source = driver.page_source
+        # print(colored(source, 'red'))
+
+
+    except:
+        print (colored("Can not exercise_review_button_redo", 'red'))
+
+    try:
+        print (colored("looking for exercise_button_measure", 'green'))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, 'exercise_button_measure')))
+        # print (colored("found login_overview_btn_sign_in", 'green'))
+        # source = driver.page_source
+        # print(colored(source, 'red'))
+        print (colored("found exercise_button_measure", 'green'))
+
+        interact = driver.find_element_by_name("exercise_button_measure")
+        interact.click()
+        sleep(5)
+        # source = driver.page_source
+        # print(colored(source, 'red'))
+
+
+    except:
+        print (colored("Can not exercise_button_measure", 'red'))
+
+
+
+    # try:
+    #     print (colored("looking for exercise_setup_btn_start_assessment", 'green'))
+    #     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, 'exercise_setup_btn_start_assessment')))
+    #     print (colored("found exercise_setup_btn_start_assessment", 'green'))
+    #     sleep(3)
+    #
+    #     interact = driver.find_element_by_name("exercise_setup_btn_start_assessment")
+    #     sleep(3)
+    #     interact.click()
+    #     print (colored("Clicked exercise_setup_btn_start_assessment", 'green'))
+    #
+    #     # sleep(5)
+    #     # interact.click()
+    #
+    #     # source = driver.page_source
+    #     # print(colored(source, 'red'))
+    #
+    #
+    # except:
+    #     print (colored("Can not exercise_setup_btn_start_assessment", 'red'))
+
+        # source = driver.page_source
+        # print(colored(source, 'red'))
+
+    try:
+        print (colored("looking for exercise_recording_button_record", 'green'))
+        # source = driver.page_source
+        # print(colored(source, 'red'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, 'exercise_recording_button_record')))
+        # print (colored("found login_overview_btn_sign_in", 'green'))
+        print (colored("found exercise_recording_button_record", 'green'))
+
+
+        # interact1 = driver.find_element_by_name("exercise_recording_button_gyroscope")
+        # interact1.click()
+        # sleep(3)
+        # print (colored("found exercise_recording_button_record", 'green'))
+
+
+        interact = driver.find_element_by_name("exercise_recording_button_timer")
+        interact.click()
+        triple_click = TouchAction(driver)
+        print (colored("found page", 'green'))
+
+        # the parameters for tap are element, x-offset, y-offset, and count
+        triple_click.tap(interact, 0, 0, 4)
+        triple_click.perform()
+        sleep(5)
+#
+        print (colored("found exercise_recording_button_record", 'green'))
+
+        interact = driver.find_element_by_name("exercise_recording_button_record")
+        print (colored("found exercise_recording_button_record", 'green'))
+        interact.click()
+        sleep(15)
+        interact.click()
+        # sleep(5)
+        # interact.click()
+        sleep(10)
+        # interact.click()
+        # sleep(5)
+        # triple_click = TouchAction(driver)
+        # print (colored("found page", 'green'))
+
+        # the parameters for tap are element, x-offset, y-offset, and count
+        # triple_click.tap(interact, 0, 0, 8)
+        # print (colored("found page", 'green'))
+        # source = driver.page_source
+        # print(colored(source, 'red'))
+
+
+    except:
+        print (colored("Can not exercise_recording_button_record", 'red'))
+
+
+
+    try:
+        print (colored("looking for exercise_trim_continue", 'green'))
+        source = driver.page_source
+        print(colored(source, 'red'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, 'exercise_trim_continue')))
+        # print (colored("found login_overview_btn_sign_in", 'green'))
+        print (colored("found exercise_trim_continue", 'green'))
+
+        interact = driver.find_element_by_name("exercise_trim_continue")
+        print (colored("found exercise_trim_continue", 'green'))
+        interact.click()
+
+
+
+    except:
+        print (colored("Can not exercise_trim_continue", 'red'))
+
+
+    try:
+        print (colored("looking for submit_text_height", 'green'))
+        source = driver.page_source
+        print(colored(source, 'red'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, 'submit_text_height')))
+        # print (colored("found login_overview_btn_sign_in", 'green'))
+        print (colored("found submit_text_height", 'green'))
+
+        interact = driver.find_element_by_name("submit_text_height")
+        print (colored("found submit_text_height", 'green'))
+        interact.click()
+
+        # sleep(5)
+        # interact.click()
+        sleep(10)
+        # interact.click()
+        # sleep(5)
+        # triple_click = TouchAction(driver)
+        # print (colored("found page", 'green'))
+
+        # the parameters for tap are element, x-offset, y-offset, and count
+        # triple_click.tap(interact, 0, 0, 8)
+        # print (colored("found page", 'green'))
+        source = driver.page_source
+        print(colored(source, 'red'))
+
+
+    except:
+        print (colored("Can not submit_text_height", 'red'))
+
+    try:
+        print (colored("looking for body_height_button_confirm", 'green'))
+        source = driver.page_source
+        print(colored(source, 'red'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, 'body_height_button_confirm')))
+        # print (colored("found login_overview_btn_sign_in", 'green'))
+        print (colored("found body_height_button_confirm", 'green'))
+
+        interact = driver.find_element_by_name("body_height_button_confirm")
+        print (colored("found body_height_button_confirm", 'green'))
+        interact.click()
+
+        # sleep(5)
+        # interact.click()
+        sleep(10)
+        # interact.click()
+        # sleep(5)
+        # triple_click = TouchAction(driver)
+        # print (colored("found page", 'green'))
+
+        # the parameters for tap are element, x-offset, y-offset, and count
+        # triple_click.tap(interact, 0, 0, 8)
+        # print (colored("found page", 'green'))
+        source = driver.page_source
+        print(colored(source, 'red'))
+
+
+    except:
+        print (colored("Can not body_height_button_confirm", 'red'))
+
+
+
+
+    try:
+        print (colored("looking for submit_button_submit", 'green'))
+        source = driver.page_source
+        print(colored(source, 'red'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, 'submit_button_submit')))
+        # print (colored("found login_overview_btn_sign_in", 'green'))
+        print (colored("found submit_button_submit", 'green'))
+
+        interact = driver.find_element_by_name("submit_button_submit")
+        print (colored("found submit_button_submit", 'green'))
+        interact.click()
+
+        # sleep(5)
+        # interact.click()
+        sleep(10)
+        # interact.click()
+        # sleep(5)
+        # triple_click = TouchAction(driver)
+        # print (colored("found page", 'green'))
+
+        # the parameters for tap are element, x-offset, y-offset, and count
+        # triple_click.tap(interact, 0, 0, 8)
+        # print (colored("found page", 'green'))
+
+
+
+    except:
+        print (colored("Can not submit_button_submit", 'red'))
+
+    try:
+        print (colored("looking for submit_button_submit", 'green'))
+        source = driver.page_source
+        print(colored(source, 'red'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, 'submit_button_submit')))
+        # print (colored("found login_overview_btn_sign_in", 'green'))
+        print (colored("found submit_button_submit", 'green'))
+
+        interact = driver.find_element_by_name("submit_button_submit")
+        print (colored("found submit_button_submit", 'green'))
+        interact.click()
+
+        # sleep(5)
+        # interact.click()
+        sleep(10)
+        # interact.click()
+        # sleep(5)
+        # triple_click = TouchAction(driver)
+        # print (colored("found page", 'green'))
+
+        # the parameters for tap are element, x-offset, y-offset, and count
+        # triple_click.tap(interact, 0, 0, 8)
+        # print (colored("found page", 'green'))
+        source = driver.page_source
+        print(colored(source, 'red'))
+        sauce_result = "passed"
+
+
+    except:
+        print (colored("Can not submit_button_submit", 'red'))
+        sauce_result = "failed"
+
+    # try:
+    #     print (colored("looking for exercise_setup_btn_start_assessment", 'green'))
+    #     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, 'exercise_setup_btn_start_assessment')))
+    #     print (colored("found exercise_setup_btn_start_assessment", 'green'))
+    #     sleep(3)
+    #
+    #     interact = driver.find_element_by_name("exercise_setup_btn_start_assessment")
+    #     sleep(3)
+    #     interact.click()
+    #     print (colored("Clicked exercise_setup_btn_start_assessment", 'green'))
+    #
+    #     # sleep(5)
+    #     # interact.click()
+    #
+    #     # source = driver.page_source
+    #     # print(colored(source, 'red'))
+    #
+    #
+    # except:
+    #     print (colored("Can not exercise_setup_btn_start_assessment", 'red'))
+    #     sleep(5)
+
+#     try:
+#         print (colored("looking for exercise_recording_button_record", 'green'))
+#         # source = driver.page_source
+#         # print(colored(source, 'red'))
+#         # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+#         WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, 'exercise_recording_button_record')))
+#         # print (colored("found login_overview_btn_sign_in", 'green'))
+#         print (colored("found exercise_recording_button_record", 'green'))
+#
+#
+#         # interact1 = driver.find_element_by_name("exercise_recording_button_gyroscope")
+#         # interact1.click()
+#         # sleep(3)
+#         # print (colored("found exercise_recording_button_record", 'green'))
+#
+#
+# #         interact = driver.find_element_by_name("exercise_recording_button_timer")
+# #         interact.click()
+# #         triple_click = TouchAction(driver)
+# #         print (colored("found page", 'green'))
+# #
+# #         # the parameters for tap are element, x-offset, y-offset, and count
+# #         triple_click.tap(interact, 0, 0, 8)
+# #         triple_click.perform()
+# #         sleep(5)
+# # #
+#         # print (colored("found exercise_recording_button_record", 'green'))
+#
+#         interact = driver.find_element_by_name("exercise_recording_button_record")
+#         print (colored("found exercise_recording_button_record", 'green'))
+#         interact.click()
+#         # sleep(5)
+#         # interact1.click()
+#         # sleep(5)
+#         # interact.click()
+#         sleep(30)
+#         # interact.click()
+#         # sleep(5)
+#         # triple_click = TouchAction(driver)
+#         # print (colored("found page", 'green'))
+#
+#         # the parameters for tap are element, x-offset, y-offset, and count
+#         # triple_click.tap(interact, 0, 0, 8)
+#         # print (colored("found page", 'green'))
+#         # source = driver.page_source
+#         # print(colored(source, 'red'))
+#
+#
+#     except:
+#         print (colored("Can not exercise_recording_button_record", 'red'))
     #
     # try:
     #     print (colored("looking for xpath agree", 'green'))
@@ -640,57 +1174,9 @@ def run_sauce_test():
 
     # # sleep(10)
     # # driver.launch_app(com.apple.Preferences)
-    driver.activate_app("com.apple.mobilesafari");
+    # # driver.activate_app("com.apple.Preferences");
     # #
-    sleep(10)
-    source = driver.page_source
-    print(colored(source, 'red'))
-    print (colored(driver.contexts, 'blue'))
-    driver.activate_app("com.apple.mobilesafari");
-    print (colored(driver.contexts, 'blue'))
-    # try:
-    #     WebDriverWait(driver, 15).until(EC.alert_is_present())
-    #
-    #     alert = browser.switch_to.alert
-    #     alert.dismiss()
-    #     print("alert accepted")
-    #     driver.get('https://whatismyipaddress.com/')
-    # except:
-    #     print("no alert")
-    #     print (colored(driver.contexts, 'blue'))
-
-
-    try:
-        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//XCUIElementTypeButton[@name='URL']")))
-        # driver.switch_to.context('WEBVIEW_442.1')
-        # interact = driver.find_element_by_xpath("//XCUIElementTypeButton[@name='Google']").click()
-        # interact.send_keys("google.com")
-        # sleep(5)
-        # alert = browser.switch_to.alert
-        # alert.dismiss()
-        # print("alert accepted")
-        print (colored(driver.contexts, 'blue'))
-        webview = driver.contexts[1]
-        driver.switch_to.context(webview)
-        driver.get('https://whatismyipaddress.com/')
-                # alert = browser.switch_to.alert
-                # alert.dismiss()
-                # print("alert accepted")
-    except:
-        print("no alert")
-        print (colored(driver.contexts, 'blue'))
-        # interact = driver.find_element_by_xpath("//XCUIElementTypeButton[@name=\"Continue\"]").click()
-        # <XCUIElementTypeButton type="XCUIElementTypeButton" value="Search or enter website name" name="URL" label="Address" enabled="true" visible="true" accessible="false" x="234" y="24" width="644" height="36" index="1">
-        #             <XCUIElementTypeOther type="XCUIElementTypeOther" value="Search or enter website name" name="Address" label="Address" enabled="true" visible="true" accessible="true" x="452" y="32" width="228" height="21" index="0"/>
-
-
-
-
-        # driver.get('https://whatismyipaddress.com/')
-        # alert = browser.switch_to.alert
-        # alert.dismiss()
-        # print("alert accepted")
-
+    # # driver.get('https://whatismyipaddress.com/')
     # driver.get('https://google.com/maps')
     # driver.get('https://gps-coordinates.org/my-location.php')
     # sleep(5)
@@ -1304,7 +1790,7 @@ def run_sauce_test():
     # driver.execute_script('sauce:job-name=Name Changed via JavascriptExecutor ' + sauceParameters["name"])
 
     # print (type(driver.current_url))
-    sauce_result = "failed" if 1 != 1 else "passed"
+    # sauce_result = "failed" if 1 != 1 else "passed"
     # sauce_result = "failed" if str(driver.current_url) != 'https://saucelabs.com/' else "passed"
     driver.execute_script("sauce:job-result={}".format(sauce_result))
 
@@ -1318,6 +1804,7 @@ if __name__ == '__main__':
         jobs.append(jobRun) # Add to the array.
         jobRun.start() #Start the functions.
         num = i+1
+
         # print(type(i))
         # print(num)
         print('this is the run for: '+ str(num))

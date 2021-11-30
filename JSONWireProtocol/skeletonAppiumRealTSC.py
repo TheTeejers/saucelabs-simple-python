@@ -82,7 +82,7 @@ def run_sauce_test():
     # For Test Object tests
     ###################################################################
     projectParameters = {
-        'name': 'Run: ' + str(datetime.datetime.now()),
+        'name': 'TSC app Run: ' + str(datetime.datetime.now()),
         'recordDeviceVitals': True,
         # 'name': 'AEM home page options validation -256390 home page displayed',
         # "timeZone": "Honolulu",
@@ -156,10 +156,10 @@ def run_sauce_test():
         # 'app': 'storage:521f9d7b-2106-49b8-80c5-4b9b8c617a5d', #childplace app android
         # 'app': 'storage:bc8ce2eb-4c15-4463-9521-4af2639ba664', #swag-labs iOS US SIM
         # 'app': 'storage:640aa9b0-a50a-46a6-bae7-0e47fa70f211', #swag-labs android EU
-        'app': 'storage:1f77b56e-e9aa-4c4d-951c-31c1b97a18b9', #SelfHelp ios Real
+        # 'app': 'storage:1f77b56e-e9aa-4c4d-951c-31c1b97a18b9', #SelfHelp ios Real
         # 'app': 'storage:co.uk.simplyhealth.simplyplan.staging',
         # 'app': 'storage:ad8710ff-d8b4-4448-a017-0686f4d8c1bb', #swag-labs Android US
-        # 'app': 'storage:b427aa17-d3a2-4a38-9b5f-277888910265',
+        'app': 'storage:75d0a868-0eae-47bf-99a9-43105ba76065',
 
 
 
@@ -216,16 +216,16 @@ def run_sauce_test():
     }
 
     iosParameters = { # Define iOS Parameters here
-        # 'phoneOnly': 'false',
-        'tabletOnly': 'true',
-        'includeSafariInWebviews': True,
+        'phoneOnly': 'true',
+        # 'tabletOnly': 'true',
+        # 'includeSafariInWebviews': True,
         # 'deviceName' : 'iPhone 11',
         # 'deviceName' : 'iPhone X Simulator',
         # 'deviceName' : 'iPhone_8_14_7_real_us',
         # 'deviceOrientation' : 'portrait',
         # 'browserName' : 'Chrome',
         # 'browserName' : 'safari',
-        'platformVersion' : '12',
+        'platformVersion' : '14',
         'platformName' : 'iOS',
         # "recordDeviceVitals": 'true',
         # "bundleId" : "com.apple.Preferences",
@@ -315,35 +315,66 @@ def run_sauce_test():
     print(size)
     print (driver.capabilities)
     print (driver.capabilities['testobject_test_report_url'])
-    driver.implicitly_wait(5)
+    # driver.implicitly_wait(5)
 
 
 
-    driver.implicitly_wait(0)
+    # driver.implicitly_wait(0)
     # print (colored(str(datetime.datetime.now()), 'green', attrs=['blink', 'underline']))
     # source = driver.page_source
     # print(colored(source, 'red'))
-    # try:
-    #     print (colored("looking for Allow Once", 'green'))
-    #     # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
-    #     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'Allow Once')))
-    #     # print (colored("found login_overview_btn_sign_in", 'green'))
-    #
-    #
-    #
-    #     interact = driver.find_element_by_name("Allow Once")
-    #     interact.click()
-    #     sleep(5)
-    #     # print (colored("clicked type == 'login_overview_btn_sign_in", 'green'))
-    #     # interact.click()
-    #
-    #     print (colored("clicked Allow Once", 'green'))
-    #     sleep(10)
-    #     source = driver.page_source
-    #     print(colored(source, 'red'))
-    # except:
-    #     print (colored("Can not find Allow Once", 'red'))
+    try:
+        print (colored("looking for close_promo", 'green'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, 'close_promo')))
+        print (colored("found close_promo", 'green'))
 
+
+
+        interact = driver.find_element_by_accessibility_id("close_promo")
+        interact.click()
+        # sleep(5)
+        # print (colored("clicked type == 'login_overview_btn_sign_in", 'green'))
+        # interact.click()
+
+        print (colored("clicked close_promo", 'green'))
+        # sleep(10)
+        # source = driver.page_source
+        # print(colored(source, 'red'))
+    except:
+        print (colored("Can not find close_promo", 'red'))
+
+    try:
+        print (colored("looking for auth_skip_for_now", 'green'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, 'auth_skip_for_now')))
+        print (colored("found auth_skip_for_now", 'green'))
+
+
+
+        interact = driver.find_element_by_accessibility_id("auth_skip_for_now")
+        interact.click()
+        # sleep(5)
+        # print (colored("clicked type == 'login_overview_btn_sign_in", 'green'))
+        # interact.click()
+
+        print (colored("clicked auth_skip_for_now", 'green'))
+
+    except:
+        print (colored("Can not find auth_skip_for_now", 'red'))
+
+    try:
+        print (colored("looking for MENU", 'green'))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//*[@label= 'MENU']")))
+        interact = driver.find_element_by_xpath("//*[@label= 'MENU']")
+
+        # interact.click()
+        print (colored("found MENU!!!", 'green'))
+    except:
+        print (colored("Can not find MENU", 'red'))
+        sleep(10)
+        source = driver.page_source
+        print(colored(source, 'red'))
     # sleep(10)
     # media = driver.media_devices.get_user_media({audio: true, video: true})
     # print (media)
@@ -640,45 +671,45 @@ def run_sauce_test():
 
     # # sleep(10)
     # # driver.launch_app(com.apple.Preferences)
-    driver.activate_app("com.apple.mobilesafari");
+    # driver.activate_app("com.apple.mobilesafari");
+    # # #
+    # sleep(10)
+    # source = driver.page_source
+    # print(colored(source, 'red'))
+    # print (colored(driver.contexts, 'blue'))
+    # driver.activate_app("com.apple.mobilesafari");
+    # print (colored(driver.contexts, 'blue'))
+    # # try:
+    # #     WebDriverWait(driver, 15).until(EC.alert_is_present())
     # #
-    sleep(10)
-    source = driver.page_source
-    print(colored(source, 'red'))
-    print (colored(driver.contexts, 'blue'))
-    driver.activate_app("com.apple.mobilesafari");
-    print (colored(driver.contexts, 'blue'))
-    # try:
-    #     WebDriverWait(driver, 15).until(EC.alert_is_present())
+    # #     alert = browser.switch_to.alert
+    # #     alert.dismiss()
+    # #     print("alert accepted")
+    # #     driver.get('https://whatismyipaddress.com/')
+    # # except:
+    # #     print("no alert")
+    # #     print (colored(driver.contexts, 'blue'))
     #
-    #     alert = browser.switch_to.alert
-    #     alert.dismiss()
-    #     print("alert accepted")
+    #
+    # try:
+    #     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//XCUIElementTypeButton[@name='URL']")))
+    #     # driver.switch_to.context('WEBVIEW_442.1')
+    #     # interact = driver.find_element_by_xpath("//XCUIElementTypeButton[@name='Google']").click()
+    #     # interact.send_keys("google.com")
+    #     # sleep(5)
+    #     # alert = browser.switch_to.alert
+    #     # alert.dismiss()
+    #     # print("alert accepted")
+    #     print (colored(driver.contexts, 'blue'))
+    #     webview = driver.contexts[1]
+    #     driver.switch_to.context(webview)
     #     driver.get('https://whatismyipaddress.com/')
+    #             # alert = browser.switch_to.alert
+    #             # alert.dismiss()
+    #             # print("alert accepted")
     # except:
     #     print("no alert")
     #     print (colored(driver.contexts, 'blue'))
-
-
-    try:
-        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//XCUIElementTypeButton[@name='URL']")))
-        # driver.switch_to.context('WEBVIEW_442.1')
-        # interact = driver.find_element_by_xpath("//XCUIElementTypeButton[@name='Google']").click()
-        # interact.send_keys("google.com")
-        # sleep(5)
-        # alert = browser.switch_to.alert
-        # alert.dismiss()
-        # print("alert accepted")
-        print (colored(driver.contexts, 'blue'))
-        webview = driver.contexts[1]
-        driver.switch_to.context(webview)
-        driver.get('https://whatismyipaddress.com/')
-                # alert = browser.switch_to.alert
-                # alert.dismiss()
-                # print("alert accepted")
-    except:
-        print("no alert")
-        print (colored(driver.contexts, 'blue'))
         # interact = driver.find_element_by_xpath("//XCUIElementTypeButton[@name=\"Continue\"]").click()
         # <XCUIElementTypeButton type="XCUIElementTypeButton" value="Search or enter website name" name="URL" label="Address" enabled="true" visible="true" accessible="false" x="234" y="24" width="644" height="36" index="1">
         #             <XCUIElementTypeOther type="XCUIElementTypeOther" value="Search or enter website name" name="Address" label="Address" enabled="true" visible="true" accessible="true" x="452" y="32" width="228" height="21" index="0"/>

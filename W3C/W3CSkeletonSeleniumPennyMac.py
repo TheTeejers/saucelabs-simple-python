@@ -101,19 +101,19 @@ sauceParameters = {
     # 'tunnelIdentifier': 'tj',
     # 'public':'private',
     'sauce:options': {
-        'name':'Test One',
+        'name':'Penny Mac Testing',
         # 'tags':'13128733',
         # 'extendedDebugging':'true',
         # 'prerun':{
         #     'executable':'storage:filename=disable_fraud.sh',
         #     'background': 'false'
         # }
-        'build':'Selenium 4 tests',
+        'build':'Penny Mac Testing',
         # 'screenResolution':'2560x1600',
 
         # 'avoidProxy': 'true',
         # 'capturePerformance': 'true',
-        'seleniumVersion': '4.0.0',
+        # 'seleniumVersion': '4.0.0',
         "idleTimeout": 450,
         # 'public':'private',
         # 'name': 'https://dev.testinghub.autodesk.com/ test of drop down menu',
@@ -151,12 +151,12 @@ sauceParameters = {
     #     #     },
     #     'args': ['--auto-open-devtools-for-tabs'],
     # },
-    'moz:firefoxOptions':{
-        # "log": {"level": "trace"},
-        # 'geckodriverVersion':'0.27.0',
-        # 'args': ['--headless']
-    },
-    'moz:debuggerAddress': True
+    # 'moz:firefoxOptions':{
+    #     # "log": {"level": "trace"},
+    #     # 'geckodriverVersion':'0.27.0',
+    #     # 'args': ['--headless']
+    # },
+    # 'moz:debuggerAddress': True
 }
 
 
@@ -206,10 +206,10 @@ print (driver.capabilities)
 # testURL = 'https://cgi-lib.berkeley.edu/ex/fup.html'
 # testURL = 'http://localhost:8000'
 # testURL = 'https://localhost:8000'
-# testURL = 'trytjloughry.com:8000'
+testURL = 'https://6451889658.encompasstpoconnect.com/#/content/home_336257'
 # testURL = 'https://media.raven.news/'
 # testURL = "https://www.filebin.net"
-testURL = 'https://saucelabs.com'
+# testURL = 'https://saucelabs.com'
 
 #
 #
@@ -222,7 +222,7 @@ driver.execute_script('sauce:job-name=Testing ' + driver.capabilities['browserNa
 
 
 
-# driver.get(testURL)
+driver.get(testURL)
 #
 # driver.execute_script("sauce:intercept", {
 #     "url": "https://saucelabs.com/",
@@ -292,24 +292,100 @@ driver.execute_script('sauce:job-name=Testing ' + driver.capabilities['browserNa
 # #filebin.net testing
 # driver.get("https://www.filebin.net")
 #
-# try:
-#     print (colored("looking for input type 'file'", 'green'))
-#     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, "upfile")))
-#     # WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME, "react-fine-uploader-file-input")))
-#     print (colored("found input type 'file'", 'green'))
-#
-#     interact = driver.find_element_by_css_selector("[type='file']")
-#     # interact
-#     # interact.click()
-#     # JavascriptExecutor driver = (JavascriptExecutor)getDriver();
-#     # driver.execute_script("arguments[0].click();", interact);
-#     # driver.execute_script("sauce:job-result={}".format(sauce_result))
-#     interact.send_keys('/Users/terranceloughry/Desktop/possumSmall.jpeg')
-#     print (colored("uploading image", 'green'))
-#     # print (colored(driver.contexts, 'blue'))
-# except:
-#     print (colored("Can not find input type 'file'", 'red'))
-#
+try:
+    print (colored("looking for input type '[ng-submit='vm.loadIdpLogin()']'", 'green'))
+    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CSS_SELECTOR, "[ng-submit='vm.loadIdpLogin()']")))
+    # WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME, "react-fine-uploader-file-input")))
+    print (colored("found [ng-submit='vm.loadIdpLogin()']", 'green'))
+
+    interact = driver.find_element_by_css_selector("[ng-submit='vm.loadIdpLogin()']")
+    # interact
+    interact.click()
+    # JavascriptExecutor driver = (JavascriptExecutor)getDriver();
+    # driver.execute_script("arguments[0].click();", interact);
+    # driver.execute_script("sauce:job-result={}".format(sauce_result))
+    # interact.send_keys('/Users/terranceloughry/Desktop/possumSmall.jpeg')
+    print (colored("clicked [ng-submit='vm.loadIdpLogin()']", 'green'))
+    # print (colored(driver.contexts, 'blue'))
+    seq = driver.find_elements_by_tag_name('iframe')
+
+    print("No of frames present in the web page are: ", len(seq))
+    for index in range(len(seq)):
+
+        # driver.switch_to_default_content()
+
+        iframe = driver.find_elements_by_tag_name('iframe')[index]
+
+        driver.switch_to.frame(iframe)
+    interact = driver.find_element_by_xpath("//*[@id='userId']")
+    # interact
+    interact.click()
+    interact.clear()
+    interact.send_keys("tpouser@pnmac.com")
+
+    interact = driver.find_element_by_xpath("//*[@id='password']")
+    # interact
+    interact.click()
+    interact.clear()
+    interact.send_keys("Pnmac$5678")
+    interact.submit()
+except:
+    print (colored("Can not find [ng-submit='vm.loadIdpLogin()']", 'red'))
+
+
+try:
+    print (colored("looking for input type './/input[@id='userId']'", 'green'))
+    # WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, 'userId')))
+    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.TAG_NAME, "iframe")))
+    #     # WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//*[@name='quickBalance_header']")))
+# path('//input[@id=\"userID\"')
+    seq = driver.find_elements_by_tag_name('iframe')
+
+    print("No of frames present in the web page are: ", len(seq))
+    for index in range(len(seq)):
+
+        # driver.switch_to_default_content()
+
+        iframe = driver.find_elements_by_tag_name('iframe')[index]
+
+        driver.switch_to.frame(iframe)
+    print (colored("found //*input[@id='userId']", 'green'))
+
+    interact = driver.find_element_by_xpath("//*[@id='userId']")
+    # interact
+    interact.click()
+    interact.clear()
+    interact.send_keys("tpouser@pnmac.com")
+
+    interact = driver.find_element_by_xpath("//*[@id='password']")
+    # interact
+    interact.click()
+    interact.clear()
+    interact.send_keys("Pnmac$5678")
+    interact.submit()
+
+    # JavascriptExecutor driver = (JavascriptExecutor)getDriver();
+    # driver.execute_script("arguments[0].click();", interact);
+    # driver.execute_script("sauce:job-result={}".format(sauce_result))
+    # interact.send_keys('/Users/terranceloughry/Desktop/possumSmall.jpeg')
+    print (colored("clicked .//input[@id='userId']", 'green'))
+    # print (colored(driver.contexts, 'blue'))
+except:
+    print (colored("Can not find .//input[@id='userId']", 'red'))
+    # source = driver.page_source
+    # print(colored(source, 'red'))
+    seq = driver.find_elements_by_tag_name('iframe')
+
+    print("No of frames present in the web page are: ", len(seq))
+    for index in range(len(seq)):
+
+        # driver.switch_to_default_content()
+
+        iframe = driver.find_elements_by_tag_name('iframe')[index]
+
+        driver.switch_to.frame(iframe)
+        source = driver.page_source
+        print(colored(source, 'red'))
 # try:
 #     print (colored("looking for input type 'submit'", 'green'))
 #     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, "upfile")))

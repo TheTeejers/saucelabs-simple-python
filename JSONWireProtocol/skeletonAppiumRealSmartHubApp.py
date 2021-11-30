@@ -44,8 +44,8 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # Choose if you want Android of iOS capabilities
 # Uncomment one of those lines
 ###################################################################
-# androidTest = True
-iosTest = True
+androidTest = True
+# iosTest = True
 
 ###################################################################
 # Choose The Platform and Data Center you want to test on
@@ -156,10 +156,11 @@ def run_sauce_test():
         # 'app': 'storage:521f9d7b-2106-49b8-80c5-4b9b8c617a5d', #childplace app android
         # 'app': 'storage:bc8ce2eb-4c15-4463-9521-4af2639ba664', #swag-labs iOS US SIM
         # 'app': 'storage:640aa9b0-a50a-46a6-bae7-0e47fa70f211', #swag-labs android EU
-        'app': 'storage:1f77b56e-e9aa-4c4d-951c-31c1b97a18b9', #SelfHelp ios Real
+        # 'app': 'storage:1f77b56e-e9aa-4c4d-951c-31c1b97a18b9', #SelfHelp ios Real
         # 'app': 'storage:co.uk.simplyhealth.simplyplan.staging',
         # 'app': 'storage:ad8710ff-d8b4-4448-a017-0686f4d8c1bb', #swag-labs Android US
         # 'app': 'storage:b427aa17-d3a2-4a38-9b5f-277888910265',
+        'app': 'storage:20d5a97f-483c-4196-98cc-0e0733f625be',
 
 
 
@@ -172,7 +173,7 @@ def run_sauce_test():
     androidParameters = { # Define Android parameters here
         # 'platformVersion' : '10',
         # 'automationName': 'uiautomator2',
-        'deviceName' : 'Google.*',
+        # 'deviceName' : 'Google.*',
         # 'deviceName' : 'Samsung.*Galaxy.*',
         # 'appium:deviceName' : 'Samsung Galaxy S20.*',
         # 'deviceName' : '.*Pixel.*',
@@ -182,7 +183,7 @@ def run_sauce_test():
         # 'deviceOrientation' : 'PORTRAIT',
         # 'appium:platformName' : 'Android',
         'platformName' : 'Android',
-        'platformVersion' : '11',
+        'platformVersion' : '10',
         'recordVideo':False,
         # "orientation": "portrait",
         "orientation": "PORTRAIT",
@@ -315,39 +316,402 @@ def run_sauce_test():
     print(size)
     print (driver.capabilities)
     print (driver.capabilities['testobject_test_report_url'])
-    driver.implicitly_wait(5)
+    # driver.implicitly_wait(5)
 
 
 
-    driver.implicitly_wait(0)
+    # driver.implicitly_wait(0)
     # print (colored(str(datetime.datetime.now()), 'green', attrs=['blink', 'underline']))
     # source = driver.page_source
     # print(colored(source, 'red'))
     # try:
-    #     print (colored("looking for Allow Once", 'green'))
+    #     print (colored("looking for loading", 'green'))
     #     # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
-    #     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'Allow Once')))
+    #     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'loading')))
     #     # print (colored("found login_overview_btn_sign_in", 'green'))
     #
     #
     #
-    #     interact = driver.find_element_by_name("Allow Once")
+    #     interact = driver.find_element_by_id("loading")
+    #     # interact.click()
+    #     # sleep(5)
+    #     # print (colored("clicked type == 'login_overview_btn_sign_in", 'green'))
+    #     # interact.click()
+    #
+    #     # print (colored("clicked Allow Once", 'green'))
+    #     # sleep(10)
+    #     # source = driver.page_source
+    #     # print(colored(source, 'red'))
+    # except:
+    #     print (colored("Can not find loading", 'red'))
+    #     source = driver.page_source
+    #     print(colored(source, 'red'))
+    #
+    # try:
+    #     print (colored("looking for OKAY got it", 'green'))
+    #     # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+    #     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[@text='Okay, got it!']")))
+    #     # print (colored("found login_overview_btn_sign_in", 'green'))
+    #
+    #
+    #
+    #     interact = driver.find_element_by_xpath("//*[@text='Okay, got it!']")
+    #     # interact = driver.find_element_by_id("phone-sign-in")
     #     interact.click()
     #     sleep(5)
     #     # print (colored("clicked type == 'login_overview_btn_sign_in", 'green'))
     #     # interact.click()
     #
-    #     print (colored("clicked Allow Once", 'green'))
-    #     sleep(10)
+    #     print (colored("clicked phone-sign-in", 'green'))
+    #
+    # except:
+    #     print (colored("Can not find phone-sign-in", 'red'))
+
+
+    try:
+        print (colored("looking for phone-sign-in", 'green'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, "android.widget.TextView")))
+        print (colored("found login_overview_btn_sign_in", 'green'))
+
+        interact = driver.find_element_by_accessibility_id("phone-sign-in")
+        interact.click()
+        sleep(5)
+        # print (colored("clicked type == 'login_overview_btn_sign_in", 'green'))
+        # interact.click()
+
+        print (colored("clicked phone-sign-in", 'green'))
+
+    except:
+        print (colored("Can not find phone-sign-in", 'red'))
+        elements = driver.find_elements_by_xpath("//*[not(*)]")
+        print(elements)
+        actual_list = []
+        print(len(elements))
+        for i in elements:
+            ele = i.get_attribute("text")
+            ele2 = i.get_attribute("clickable")
+            actual_list.append(ele)
+            actual_list.append(ele2)
+            # actual_list.append(i)
+            if ele == "Sign in with Phone":
+                # elements[i].click()
+                # print(elements)
+
+                print(actual_list)
+
+
+    try:
+        print (colored("looking for OKAY got it", 'green'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//android.view.ViewGroup[@content-desc='bypass-verification-switch']/android.view.ViewGroup")))
+        # print (colored("found login_overview_btn_sign_in", 'green'))
+
+
+
+        interact = driver.find_element_by_xpath("//android.view.ViewGroup[@content-desc='bypass-verification-switch']/android.view.ViewGroup")
+        # interact = driver.find_element_by_id("phone-sign-in")
+        interact.click()
+        sleep(5)
+        interact = driver.find_element_by_accessibility_id("phone-input")
+        interact.click()
+        interact.clear()
+        interact.send_keys("5555550005")
+        interact = driver.hide_keyboard()
+        interact
+
+        sleep(5)
+        interact = driver.find_element_by_accessibility_id("send-verification-button")
+        interact.click()
+        sleep(5)
+        interact = driver.find_element_by_accessibility_id("send-verification-button")
+        interact.click()
+        # print (colored("clicked type == 'login_overview_btn_sign_in", 'green'))
+        # interact.click()
+
+        print (colored("clicked phone-sign-in", 'green'))
+
+    except:
+        print (colored("Can not find phone-sign-in", 'red'))
+        # source = driver.page_source
+        # print(colored(source, 'red'))
+        # for i in range(len(source.split(' '))):
+        #     # if len(source.split(' ')[i]) > 0:
+        #     # if source.split(' ')[i][0] == 'r' and source.split(' ')[i][1] == 'e':
+        #     if len(source.split(' ')[i]) > 0 and source.split(' ')[i][0] == 'r' and source.split(' ')[i][1] == 'e':
+        #         # print('things:    ', len(source.split(' ')[i]))
+        #         print('ID:    ', source.split(' ')[i])
+        #     elif len(source.split(' ')[i]) > 0 and source.split(' ')[i][0] == 'c' and source.split(' ')[i][2] == 'a':
+        #         # print('things:    ', len(source.split(' ')[i]))
+        #         print('CLASS:    ', source.split(' ')[i])
+    try:
+        print (colored("looking for OKAY got it", 'green'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[@text='Dismiss']")))
+        # print (colored("found login_overview_btn_sign_in", 'green'))
+
+
+
+        interact = driver.find_element_by_xpath("//*[@text='Dismiss']")
+        # interact = driver.find_element_by_id("phone-sign-in")
+        interact.click()
+        sleep(5)
+        # print (colored("clicked type == 'login_overview_btn_sign_in", 'green'))
+        # interact.click()
+
+        print (colored("clicked phone-sign-in", 'green'))
+
+    except:
+        print (colored("Can not find phone-sign-in", 'red'))
+        # source = driver.page_source
+        # print(colored(source, 'red'))
+        # interact = driver.find_element_by_link_text("Dismiss")
+        # interact.click()
+    # media = driver.media_devices.get_user_media({audio: true, video: true})
+    # # print (media)
+    # try:
+    #     print (colored("looking for OKAY got it", 'green'))
+    #     # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+    #     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[@text='Dismiss']")))
+    #     # print (colored("found login_overview_btn_sign_in", 'green'))
+    #
+    #
+    #
+    #     interact = driver.find_element_by_xpath("//*[@text='Dismiss']")
+    #     # interact = driver.find_element_by_id("phone-sign-in")
+    #     interact.click()
+    #     sleep(5)
+    #
+    #
+    #     print (colored("clicked phone-sign-in", 'green'))
+    #     driver.implicitly_wait(10)
+    #
+    #
+    # except:
+    #     print (colored("Can not find phone-sign-in", 'red'))
+        # source = driver.page_source
+        # print(colored(source, 'red'))
+
+    try:
+        print (colored("looking for phone-sign-in", 'green'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, "android.widget.TextView")))
+        print (colored("found login_overview_btn_sign_in", 'green'))
+
+        interact = driver.find_element_by_accessibility_id("verification-code-input")
+        interact.click()
+        sleep(5)
+        interact.send_keys("111111")
+        interact = driver.hide_keyboard()
+        interact
+
+
+        interact = driver.find_element_by_accessibility_id("sign-in-button")
+        interact.click()
+        sleep(5)
+        interact = driver.find_element_by_accessibility_id("sign-in-button")
+        interact.click()
+        sleep(5)
+        # print (colored("clicked type == 'login_overview_btn_sign_in", 'green'))
+        # interact.click()
+
+        print (colored("clicked phone-sign-in", 'green'))
+
+    except:
+        print (colored("Can not find phone-sign-in", 'red'))
+
+    # try:
+    #     print (colored("looking for loading", 'green'))
+    #     # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+    #     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'loading')))
+    #     # print (colored("found login_overview_btn_sign_in", 'green'))
+    #
+    #
+    #
+    #     interact = driver.find_element_by_id("loading")
+    #     # interact.click()
+    #     # sleep(5)
+    #     # print (colored("clicked type == 'login_overview_btn_sign_in", 'green'))
+    #     # interact.click()
+    #
+    #     # print (colored("clicked Allow Once", 'green'))
+    #     # sleep(10)
+    #     # source = driver.page_source
+    #     # print(colored(source, 'red'))
+    # except:
+    #     print (colored("Can not find loading", 'red'))
     #     source = driver.page_source
     #     print(colored(source, 'red'))
+
+
+    try:
+        print (colored("looking for OKAY got it", 'green'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[@text='Okay, got it!']")))
+        # print (colored("found login_overview_btn_sign_in", 'green'))
+
+
+
+        interact = driver.find_element_by_xpath("//*[@text='Okay, got it!']")
+        # interact = driver.find_element_by_id("phone-sign-in")
+        interact.click()
+        sleep(5)
+        # interact = driver.find_element_by_xpath("//*[@text='Okay, got it!']")
+        # interact = driver.find_element_by_id("phone-sign-in")
+        interact.click()
+        sleep(5)
+        # print (colored("clicked type == 'login_overview_btn_sign_in", 'green'))
+        # interact.click()
+        interact = driver.find_element_by_accessibility_id("notices-icon")
+        interact.click()
+        sleep(5)
+        # interact = driver.find_element_by_xpath("//*[@text='Okay, got it!']")
+        # interact = driver.find_element_by_id("phone-sign-in")
+        interact.click()
+        sleep(5)
+        print (colored("clicked phone-sign-in", 'green'))
+
+    except:
+        print (colored("Can not find phone-sign-in", 'red'))
+
+
+    try:
+        print (colored("looking for OKAY got it", 'green'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "android.widget.TextView")))
+        # print (colored("found login_overview_btn_sign_in", 'green'))
+
+
+
+
+        interact = driver.find_element_by_accessibility_id("notices-icon")
+        interact.click()
+        sleep(5)
+        # interact = driver.find_element_by_xpath("//*[@text='Okay, got it!']")
+        # interact = driver.find_element_by_id("phone-sign-in")
+        interact.click()
+        sleep(5)
+        # print (colored("clicked type == 'login_overview_btn_sign_in", 'green'))
+        # interact.click()
+
+
+
+
+        print (colored("clicked phone-sign-in", 'green'))
+
+    except:
+        print (colored("Can not find phone-sign-in", 'red'))
+        # source = driver.page_source
+        # print(colored(source, 'blue'))
+
+    try:
+        print (colored("looking for Show More", 'green'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[@text='Show more']")))
+        # print (colored("found login_overview_btn_sign_in", 'green'))
+
+        print (colored("found Show More 2", 'green'))
+
+
+
+        interact = driver.find_element_by_xpath("//*[@text='Show more']")
+        print (colored("found Show More 2", 'green'))
+
+        interact.click()
+        print (colored("clicked Show More 2", 'green'))
+
+        sleep(5)
+        # interact = driver.find_element_by_xpath("//*[@text='Okay, got it!']")
+        # interact = driver.find_element_by_id("phone-sign-in")
+        # interact.click()
+        # sleep(5)
+        # print (colored("clicked type == 'login_overview_btn_sign_in", 'green'))
+        # interact.click()
+
+
+
+
+        print (colored("clicked Show More", 'green'))
+
+    except:
+        print (colored("Can not find Show More", 'red'))
+        # source = driver.page_source
+        # print(colored(source, 'green'))
+
+
+    try:
+        print (colored("looking for Show less", 'green'))
+        print(driver.contexts)
+
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[@text='Show less']")))
+        # print (colored("found login_overview_btn_sign_in", 'green'))
+
+        print (colored("found Show less 2", 'green'))
+
+
+
+        interact = driver.find_element_by_xpath("//*[@text='Show less']")
+        print (colored("found Show less 2", 'green'))
+
+        interact.click()
+        print (colored("clicked Show less 2", 'green'))
+
+        sleep(15)
+        # interact = driver.find_element_by_xpath("//*[@text='Okay, got it!']")
+        # interact = driver.find_element_by_id("phone-sign-in")
+        # interact.click()
+        # sleep(5)
+        # print (colored("clicked type == 'login_overview_btn_sign_in", 'green'))
+        # interact.click()
+
+
+
+
+        print (colored("clicked Show less", 'green'))
+
+    except:
+        print (colored("Can not find Show less", 'red'))
+        print(driver.contexts)
+
+
+        # driver.swipe(470, 1400, 470, 1000, 400)
+        # source = driver.page_source
+        # print(colored(source, 'green'))
+    # try:
+    #     print (colored("looking for Show More", 'green'))
+    #     # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+    #     WebDriverWait(driver, 40).until(EC.presence_of_element_located((By.XPATH, "/*[@text='Show more']")))
+    #     # print (colored("found login_overview_btn_sign_in", 'green'))
+    #
+    #
+    #
+    #
+    #     interact = driver.find_elements_by_xpath("/*[@text='Show more']")
+    #     interact.click()
+    #     sleep(5)
+    #     # interact = driver.find_element_by_xpath("//*[@text='Okay, got it!']")
+    #     # interact = driver.find_element_by_id("phone-sign-in")
+    #     interact.click()
+    #     sleep(5)
+    #     # print (colored("clicked type == 'login_overview_btn_sign_in", 'green'))
+    #     # interact.click()
+    #
+    #
+    #
+    #
+    #     print (colored("clicked phone-sign-in", 'green'))
+    #
     # except:
-    #     print (colored("Can not find Allow Once", 'red'))
-
-    # sleep(10)
-    # media = driver.media_devices.get_user_media({audio: true, video: true})
-    # print (media)
-
+    #     print (colored("Can not find Show More", 'red'))
+    #     source = driver.page_source
+    #     print(colored(source, 'blue'))
+# try:
+#     print (colored("looking for OKAY got it", 'green'))
+#     # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+#     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[@text='Okay, got it!']")))
+#     # print (colored("found login_overview_btn_sign_in", 'green'))
+#
     # (async () => {
     #     await navigator.mediaDevices.getUserMedia({audio: true, video: true});
     #     let devices = await navigator.mediaDevices.enumerateDevices();
@@ -563,7 +927,7 @@ def run_sauce_test():
     #
     #     alert = browser.switch_to.alert
     #     alert.dismiss()
-    #     print("alert accepted")
+    #     print("alert spted")
     # except:
     #     print("no alert")
     #
@@ -638,16 +1002,16 @@ def run_sauce_test():
     # driver.toggle_location_services()
 
 
-    # # sleep(10)
-    # # driver.launch_app(com.apple.Preferences)
-    driver.activate_app("com.apple.mobilesafari");
-    # #
-    sleep(10)
-    source = driver.page_source
-    print(colored(source, 'red'))
-    print (colored(driver.contexts, 'blue'))
-    driver.activate_app("com.apple.mobilesafari");
-    print (colored(driver.contexts, 'blue'))
+    # # # sleep(10)
+    # # # driver.launch_app(com.apple.Preferences)
+    # driver.activate_app("com.apple.mobilesafari");
+    # # #
+    # sleep(10)
+    # source = driver.page_source
+    # print(colored(source, 'red'))
+    # print (colored(driver.contexts, 'blue'))
+    # driver.activate_app("com.apple.mobilesafari");
+    # print (colored(driver.contexts, 'blue'))
     # try:
     #     WebDriverWait(driver, 15).until(EC.alert_is_present())
     #
@@ -658,27 +1022,27 @@ def run_sauce_test():
     # except:
     #     print("no alert")
     #     print (colored(driver.contexts, 'blue'))
-
-
-    try:
-        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//XCUIElementTypeButton[@name='URL']")))
-        # driver.switch_to.context('WEBVIEW_442.1')
-        # interact = driver.find_element_by_xpath("//XCUIElementTypeButton[@name='Google']").click()
-        # interact.send_keys("google.com")
-        # sleep(5)
-        # alert = browser.switch_to.alert
-        # alert.dismiss()
-        # print("alert accepted")
-        print (colored(driver.contexts, 'blue'))
-        webview = driver.contexts[1]
-        driver.switch_to.context(webview)
-        driver.get('https://whatismyipaddress.com/')
-                # alert = browser.switch_to.alert
-                # alert.dismiss()
-                # print("alert accepted")
-    except:
-        print("no alert")
-        print (colored(driver.contexts, 'blue'))
+    #
+    #
+    # try:
+    #     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//XCUIElementTypeButton[@name='URL']")))
+    #     # driver.switch_to.context('WEBVIEW_442.1')
+    #     # interact = driver.find_element_by_xpath("//XCUIElementTypeButton[@name='Google']").click()
+    #     # interact.send_keys("google.com")
+    #     # sleep(5)
+    #     # alert = browser.switch_to.alert
+    #     # alert.dismiss()
+    #     # print("alert accepted")
+    #     print (colored(driver.contexts, 'blue'))
+    #     webview = driver.contexts[1]
+    #     driver.switch_to.context(webview)
+    #     driver.get('https://whatismyipaddress.com/')
+    #             # alert = browser.switch_to.alert
+    #             # alert.dismiss()
+    #             # print("alert accepted")
+    # except:
+    #     print("no alert")
+    #     print (colored(driver.contexts, 'blue'))
         # interact = driver.find_element_by_xpath("//XCUIElementTypeButton[@name=\"Continue\"]").click()
         # <XCUIElementTypeButton type="XCUIElementTypeButton" value="Search or enter website name" name="URL" label="Address" enabled="true" visible="true" accessible="false" x="234" y="24" width="644" height="36" index="1">
         #             <XCUIElementTypeOther type="XCUIElementTypeOther" value="Search or enter website name" name="Address" label="Address" enabled="true" visible="true" accessible="true" x="452" y="32" width="228" height="21" index="0"/>
