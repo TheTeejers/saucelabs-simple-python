@@ -64,7 +64,7 @@ RandoNumber = random.randint(0,100000)
 ###################################################################
 # This makes the functions below execute 'run' amount of times
 ###################################################################
-run = 1
+run = 5
 
 ###################################################################
 # Choose if you want Android of iOS capabilities
@@ -160,7 +160,7 @@ def run_sauce_test():
         # 'app': 'storage:1f77b56e-e9aa-4c4d-951c-31c1b97a18b9', #SelfHelp ios Real
         # 'app': 'storage:co.uk.simplyhealth.simplyplan.staging',
         # 'app': 'storage:ad8710ff-d8b4-4448-a017-0686f4d8c1bb', #swag-labs Android US
-        # 'app': 'storage:b427aa17-d3a2-4a38-9b5f-277888910265',
+        'app': 'storage:filename=passport-app-20220110.ipa',
 
 
 
@@ -218,7 +218,7 @@ def run_sauce_test():
     }
 
     iosParameters = { # Define iOS Parameters here
-        # 'phoneOnly': 'false',
+        'phoneOnly': 'true',
         # 'tabletOnly': 'true',
         # 'includeSafariInWebviews': True,
         # 'deviceName' : 'iPhone 11',
@@ -226,22 +226,17 @@ def run_sauce_test():
         # ':deviceName' : 'iPhone_SE_16GB_13_6_real_us',
         # 'deviceOrientation' : 'portrait',
         # 'browserName' : 'Chrome',
-        'browserName' : 'safari',
-        'platformVersion' : '13',
+        # 'browserName' : 'safari',
+        'platformVersion' : '14',
         'platformName' : 'iOS',
         # "recordDeviceVitals": 'true',
         # "bundleId" : "com.apple.Preferences",
-        # 'name' : "Sauce Labs Test",
+        'name' : "MobApp-iOS_18F_FPT_GU_Business_PaymentPage_PassportMembership",
         # 'testobject_suite_name': 'BOTW_Mobile_App_Automation_iOS',
         # 'testobject_test_name': "iPhone App: #{scenario.name}",
         # 'testobject_app_id': ['1'],
-        'autoAcceptAlerts': True,
-        "sauce:options": {
-            "name": "MES_End2End_Mobile_Test111111",
-            "realDevice": True,
-            "build": "MES_End2End_Build",
-            "commandTimeouts": "60000",
-     },
+        'autoAcceptAlerts': 'true',
+
         # 'w3c': True,
         # "nativeWebTap": True,
         # "realMobile": True,
@@ -323,34 +318,33 @@ def run_sauce_test():
     print(size)
     print (driver.capabilities)
     print (driver.capabilities['testobject_test_report_url'])
-    driver.implicitly_wait(5)
 
-
-
-    driver.implicitly_wait(0)
     # print (colored(str(datetime.datetime.now()), 'green', attrs=['blink', 'underline']))
     # source = driver.page_source
     # print(colored(source, 'red'))
-    # try:
-    #     print (colored("looking for Allow Once", 'green'))
-    #     # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
-    #     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'Allow Once')))
-    #     # print (colored("found login_overview_btn_sign_in", 'green'))
-    #
-    #
-    #
-    #     interact = driver.find_element_by_name("Allow Once")
-    #     interact.click()
-    #     sleep(5)
-    #     # print (colored("clicked type == 'login_overview_btn_sign_in", 'green'))
-    #     # interact.click()
-    #
-    #     print (colored("clicked Allow Once", 'green'))
-    #     sleep(10)
-    #     source = driver.page_source
-    #     print(colored(source, 'red'))
-    # except:
-    #     print (colored("Can not find Allow Once", 'red'))
+    try:
+        print (colored("looking for Allow Once", 'green'))
+        # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'bersa-uat')))
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//XCUIElementTypeStaticText[@name='Continue as guest']")))
+        print (colored("//XCUIElementTypeStaticText[@name='Continue as guest']", 'green'))
+
+
+
+        interact = driver.find_element_by_xpath("//XCUIElementTypeStaticText[@name='Continue as guest']")
+        print("clicking //XCUIElementTypeStaticText[@name='Continue as guest']")
+        interact.click()
+        print("clicking //XCUIElementTypeStaticText[@name='Continue as guest']")
+
+        sleep(5)
+        print (colored("clicked //XCUIElementTypeStaticText[@name='Continue as guest']", 'green'))
+        # interact.click()
+
+
+        sleep(10)
+        # source = driver.page_source
+        # print(colored(source, 'red'))
+    except:
+        print (colored("Can not find //XCUIElementTypeStaticText[@name='Continue as guest']", 'red'))
 
     # sleep(10)
     # media = driver.media_devices.get_user_media({audio: true, video: true})

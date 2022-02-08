@@ -82,9 +82,8 @@ def run_sauce_test():
     # For Test Object tests
     ###################################################################
     projectParameters = {
-        # 'name': 'Run: ' + str(datetime.datetime.now()),
-        # 'pageLoadStrategy': 'none',
-        # 'recordDeviceVitals': True,
+        'name': 'Run: ' + str(datetime.datetime.now()),
+        'recordDeviceVitals': True,
         # 'name': 'AEM home page options validation -256390 home page displayed',
         # "timeZone": "Honolulu",
         # 'commandTimeout':600,
@@ -102,7 +101,7 @@ def run_sauce_test():
         # 'app': 'storage:59549449-8b97-47c5-9343-f76799cc4fe4', #android smartsheets
 
 
-        # 'app': 'storage:filename=HB D v9.ipa',
+        # 'app': 'storage:filename=mynewfilename.ipa',
         # 'app': 'storage:filename=Broker_Plus-UATOCP-1205',
         # 'app': 'storage:2e9da00c-8086-4c34-b0a1-7c6048ba6803',
         # 'app': 'storage:0debe8c2-bc55-48e1-ad44-8dac657d0051',
@@ -160,14 +159,7 @@ def run_sauce_test():
         # 'app': 'storage:1f77b56e-e9aa-4c4d-951c-31c1b97a18b9', #SelfHelp ios Real
         # 'app': 'storage:co.uk.simplyhealth.simplyplan.staging',
         # 'app': 'storage:ad8710ff-d8b4-4448-a017-0686f4d8c1bb', #swag-labs Android US
-        # 'app': 'storage:b427aa17-d3a2-4a38-9b5f-277888910265',
-
-
-
-
-
-
-
+        'app': 'storage:e9e8a918-a1e4-4064-b244-47cffcf9789f', #Team Viewpoint application iOS
     }
 
     androidParameters = { # Define Android parameters here
@@ -187,7 +179,6 @@ def run_sauce_test():
         'recordVideo':False,
         # "orientation": "portrait",
         "orientation": "PORTRAIT",
-
         # "recordDeviceVitals": 'true',
         # "sauce:options":{
 
@@ -218,16 +209,16 @@ def run_sauce_test():
     }
 
     iosParameters = { # Define iOS Parameters here
-        # 'phoneOnly': 'false',
+        'phoneOnly': 'true',
         # 'tabletOnly': 'true',
         # 'includeSafariInWebviews': True,
         # 'deviceName' : 'iPhone 11',
-        # 'deviceName' : 'iPhone X Simulator',
-        # ':deviceName' : 'iPhone_SE_16GB_13_6_real_us',
+        'deviceName' : 'iPhone_12_Pro_real_us',
+        # 'deviceName' : 'iPhone_11_15_real_us',
         # 'deviceOrientation' : 'portrait',
         # 'browserName' : 'Chrome',
-        'browserName' : 'safari',
-        'platformVersion' : '13',
+        # 'browserName' : 'safari',
+        # 'platformVersion' : '15',
         'platformName' : 'iOS',
         # "recordDeviceVitals": 'true',
         # "bundleId" : "com.apple.Preferences",
@@ -235,13 +226,7 @@ def run_sauce_test():
         # 'testobject_suite_name': 'BOTW_Mobile_App_Automation_iOS',
         # 'testobject_test_name': "iPhone App: #{scenario.name}",
         # 'testobject_app_id': ['1'],
-        'autoAcceptAlerts': True,
-        "sauce:options": {
-            "name": "MES_End2End_Mobile_Test111111",
-            "realDevice": True,
-            "build": "MES_End2End_Build",
-            "commandTimeouts": "60000",
-     },
+        'autoAcceptAlerts': 'true',
         # 'w3c': True,
         # "nativeWebTap": True,
         # "realMobile": True,
@@ -320,14 +305,15 @@ def run_sauce_test():
 
     # sleep(10)
     size = driver.get_window_size()
+    size
     print(size)
     print (driver.capabilities)
-    print (driver.capabilities['testobject_test_report_url'])
-    driver.implicitly_wait(5)
+    # print (driver.capabilities['testobject_test_report_url'])
 
 
 
-    driver.implicitly_wait(0)
+
+
     # print (colored(str(datetime.datetime.now()), 'green', attrs=['blink', 'underline']))
     # source = driver.page_source
     # print(colored(source, 'red'))
@@ -650,7 +636,7 @@ def run_sauce_test():
     # # driver.launch_app(com.apple.Preferences)
     # driver.activate_app("com.apple.mobilesafari");
     # # #
-    # # sleep(10)
+    # sleep(10)
     # source = driver.page_source
     # print(colored(source, 'red'))
     # print (colored(driver.contexts, 'blue'))

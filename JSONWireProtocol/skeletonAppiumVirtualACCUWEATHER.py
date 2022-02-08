@@ -38,8 +38,8 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # Uncomment one of those lines
 ###################################################################
 
-androidTest = True
-# iosTest = True
+# androidTest = True
+iosTest = True
 
 
 ###################################################################
@@ -56,20 +56,15 @@ region = 'US'
 # Add in the location to the stored app too
 ###################################################################
 
-useApp = True
+# useApp = True
 
 
 # appLocation = 'https://github.com/truongsinh/android_flutter_host/releases/download/0.0.1/app-free-debug.apk'
 # appLocation = 'maps'
 # appLocation = 'https://mobile-app-archive-prod-us-east-1.s3.amazonaws.com/Android/release/Tasty_QA_11858/1480002_1.48.0-QA/Tasty-1.48.0-QA-RC.apk'
 # appLocation = 'storage:filename=app-gms-debug.apk'
-# appLocation = 'storage:965416a7-6cd3-42cf-bd4d-c125b814526d' #Parsable Android old
-appLocation = 'storage:59db87cf-e9d8-4790-bb64-2fe12c5b3b47' #Parsable Android new---------------
-
-
-# appLocation = 'storage:5e553b48-fb19-4399-8213-e1ce4ac629e7' #Parsable iOS old
-# appLocation = 'storage:97b95677-4f03-4975-bd79-47bea8cfb4c0' #Parsable iOS new--------------
-
+# appLocation = 'storage:filename=app-tcpProd-release (1).apk'
+appLocation = 'storage:e57bfe5b-673d-4edd-adfc-a317d069a65b'
 
 # appLocation = 'storage:25e76be0-bc67-49d1-a785-a22bfd0e1d90'
 # appLocation = 'storage:f9232cab-fb1c-4340-b3f9-e3d8f2398abb'
@@ -94,11 +89,11 @@ run = 1
 
 def run_sauce_test():
     projectParameters = {
-        # 'tags':[''],
-        # 'appiumVersion': '1.17.1',
-        'name': 'Testing Parsable App at Run Time: ' + str(datetime.datetime.now()),
+        'tags':[''],
+        'appiumVersion': '1.20.0',
+        'name': 'Testing ACCUWEATHER App at Run Time: ' + str(datetime.datetime.now()),
         # 'name': 'Validating search by Order Completion status: "Incomplete" in iMFM – 10.0',
-        # 'build': 'SI-Mobile_Automation, Pipeline Execution at: Run_16-Sep-2021 07 PM',
+        'build': '',
         #
         # 'commandTimeout': 200,
         # "idleTimeout": 200,
@@ -133,17 +128,15 @@ def run_sauce_test():
 
     androidParameters = { # Define Android parameters here
         'deviceOrientation' : 'portrait',
-        'appPackage': 'com.parsable.executeenterprise',
-        'appActivity':'com.parsable.executeenterprise.MainActivity',
         # 'relaxedSecurityEnabled': True,
         # 'autoGrantPermissions': True,
         # 'ignoreUnimportantViews': True,
         'automationName': 'UiAutomator2',
-        # 'newCommandTimeout':30000,
+        'newCommandTimeout':30000,
         # 'gpsEnabled': True,
         # 'maxDuration': 10800,
         # 'recordScreenshots': False
-        # 'browserName': 'chrome',
+        'browserName': 'chrome',
         # 'platformVersion': 'latest',
         # 'apppackage':'com.buzzfeed.tasty',
         # "appActivity":".LauncherActivity",
@@ -152,7 +145,7 @@ def run_sauce_test():
         # 'deviceName': 'Google Pixel 3.*',
 
         # 'platformVersion': '9.0',
-        'platformVersion': '11',
+        'platformVersion': '11.0',
         'platformName': 'Android',
         # 'testdroid_testTimeout': 1200,
         # 'gpsEnabled': False
@@ -168,10 +161,10 @@ def run_sauce_test():
 
     iosParameters = { # Define iOS Parameters here
 
-        'deviceName' : 'iPhone 12 Simulator',
+        'deviceName' : 'iPhone 12 Pro Max Simulator',
         # 'deviceName' : 'iPhone 12 Pro Simulator',
         'deviceOrientation' : 'portrait',
-        'platformVersion' : '15',
+        'platformVersion' : '14.3',
         'platformName' : 'iOS',
         # 'simpleIsVisibleCheck': True,
         # 'waitForQuiescence': False,
@@ -184,7 +177,7 @@ def run_sauce_test():
         # 'showXcodeLog': False,
         # 'recordScreenshots': False,
         # 'videoUploadOnPass': False
-        # 'avoidProxy': True,
+        'avoidProxy': True,
         # 'platformName' : 'iOS',
         # 'autoWebview': 'true',
         # 'bundleId': 'com.apple.Maps',
@@ -217,7 +210,7 @@ def run_sauce_test():
         if useApp:
             sauceParameters['app'] = appLocation
             # sauceParameters.update({'build': ' '.join(sauceParameters.get('tags')) + ' platform: ' +sauceParameters['platformName'] + ' version: '+ sauceParameters['platformVersion'] + ' device: ' + sauceParameters['deviceName']})  # Use app if it's specified
-            # sauceParameters.update({'build': ' '.join(sauceParameters.get('tags')) + ' platform: ' +sauceParameters['platformName'] + ' version: '+ sauceParameters['platformVersion']})  # Use app if it's specified
+            sauceParameters.update({'build': ' '.join(sauceParameters.get('tags')) + ' platform: ' +sauceParameters['platformName'] + ' version: '+ sauceParameters['platformVersion']})  # Use app if it's specified
         else:
             sauceParameters['browserName'] = 'Chrome' # Otherwise use Chrome
             #Note! Replace 'Chrome' with 'Browser' for older versions of Android to use the stock browser
@@ -258,7 +251,7 @@ def run_sauce_test():
 
             desired_capabilities=sauceParameters)
     elif region == 'EU':
-        print (colored("You are using the EU data center", 'green'))
+        # print (colored("You are using the EU data center", 'green'))
         driver = webdriver.Remote(
             command_executor='https://'+os.environ['SAUCE_USERNAME']+':'+os.environ['SAUCE_ACCESS_KEY']+'@ondemand.eu-central-1.saucelabs.com:443/wd/hub',
             desired_capabilities=sauceParameters)
@@ -266,99 +259,171 @@ def run_sauce_test():
     # ###################################################################
     # # Test logic goes here
     # ###################################################################
-
-
+    # # Navigating to a website
+    # print (colored(str(datetime.datetime.now()), 'green'))
+    # datetime.datetime.now()
+    # print (driver.capabilities)
+    # sleep(15)
     print (colored(str(datetime.datetime.now()), 'green', attrs=['blink', 'underline']))
-    driver.execute_script('sauce:context=Running Test at ' + (str(datetime.datetime.now())))
-
+    # sleep(5)
+    # driver.get('https://www.saucelabs.com')
+    # driver.execute_script('mobile: shell', {"command": "su root service call alarm 3 s16 Europe/Volgograd"})
+    driver.get('https://enhancedalerts-dev.accuweather.com/')
 
     try:
-        driver.execute_script('sauce:context=looking for email input')
-        print (colored("looking for login-email_email_input", 'green'))
-        if androidTest:
-            WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//*[@text='Email']")))
-        else:
-            WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//*[@value='Email']")))
-        print (colored("found login-email_email_input", 'green'))
-
-        interact = driver.find_element_by_accessibility_id("login-email_email_input")
-        driver.execute_script('sauce:context=Found email input')
-        print (colored("found login-email_email_input", 'green'))
+        print (colored("looking for 'Select a Plan'", 'green'))
+        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, "landing-button")))
+        # interact = driver.find_element_by_accessibility_id("I already have an account")
+        interact = driver.find_element_by_class_name("landing-button")
         interact.click()
-
-        print (colored("clicked login-email_email_input", 'green'))
-        interact.clear()
-        interact.send_keys("ex.qa@parsable.com")
-        driver.execute_script('sauce:context=looking for login-email_continue_button')
-        interact = driver.find_element_by_accessibility_id("login-email_continue_button")
-        interact.click()
-        driver.execute_script('sauce:context=Clicked login-email_continue_button')
-        print (colored("clicked login-email_continue_button", 'green'))
-
-        interact = driver.find_element_by_accessibility_id("Continue")
-        interact.click()
-        print (colored("clicked Continue", 'green'))
-
-    except:
-        print (colored("did not find login-email_email_input", 'red'))
-        source = driver.page_source
-        print(colored(source, 'red'))
-
-
-    if len(driver.contexts) > 1:
-        print (driver.contexts)
-        webview = driver.contexts[1]
-        driver.switch_to.context(webview)
-    else:
         sleep(5)
-        print (driver.contexts)
-        driver.execute_script('sauce:context=Checking Context')
-        webview = driver.contexts[1]
-        driver.switch_to.context(webview)
-        driver.execute_script('sauce:context=Switched Context')
+        # triple_click = TouchAction()
+        # TouchAction().tap(interact)
+        # triple_click = TouchAction(driver)
+        # print (colored("found page", 'green'))
+        #
+        # # the parameters for tap are element, x-offset, y-offset, and count
+        # triple_click.tap(interact, 0, 0, 8)
+        # print (colored("found page", 'green'))
+        #
+        # triple_click.perform()
+        # # triple_click.tap(interact)
+        # print (colored("found page", 'green'))
+        #
+        # sauce_result = "passed"
+
+        # print (colored(driver.contexts, 'blue'))
+    except:
+        print (colored("button not found", 'red'))
+
 
     try:
-        driver.execute_script('sauce:context=Looking for password input')
-        print (colored("looking for password input", 'green'))
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR, "#password")))
-        print (colored("found password", 'green'))
-        driver.execute_script('sauce:context=Found password input')
-        interact = driver.find_element_by_css_selector("#password")
+        print (colored("looking for 'Select a Plan 2'", 'green'))
+        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, "plans__button")))
+        # interact = driver.find_element_by_accessibility_id("I already have an account")
+        interact = driver.find_element_by_xpath("//button[@value='2']")
         interact.click()
-        print (colored("clicked #password", 'green'))
-        # interact.clear()
-        interact.send_keys("Pass1234!")
-        interact = driver.find_element_by_css_selector("#submit-login")
+        sleep(5)
+        # triple_click = TouchAction()
+        # TouchAction().tap(interact)
+        # triple_click = TouchAction(driver)
+        # print (colored("found page", 'green'))
+        #
+        # # the parameters for tap are element, x-offset, y-offset, and count
+        # triple_click.tap(interact, 0, 0, 8)
+        # print (colored("found page", 'green'))
+        #
+        # triple_click.perform()
+        # # triple_click.tap(interact)
+        # print (colored("found page", 'green'))
+        #
+        # sauce_result = "passed"
 
-        # interact.submit()
-        # driver.hide_keyboard()
-        # driver.long_press_keycode(66)
+        # print (colored(driver.contexts, 'blue'))
+    except:
+        print (colored("button not found 2", 'red'))
 
 
-        # interact = driver.find_element_by_id("submit-login")
-        interact.click()
-        # driver.execute_script('sauce:context=Clicked Login')
-        # print (colored("clicked submit-login", 'green'))
-        # interact = driver.find_element_by_xpath("//XCUIElementTypeButton[@name=\"Sign In\"]")
+    try:
+        print (colored("looking for email input", 'green'))
+        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "email")))
+        # interact = driver.find_element_by_accessibility_id("I already have an account")
+        interact = driver.find_element_by_id("email")
         # interact.click()
-        sleep(5)
-    except:
-        print (colored("did not find ogin-email_email_input", 'red'))
-        source = driver.page_source
-        print(colored(source, 'red'))
+        # sleep(5)
+        # interact.send_keys("some@email.com")
+        driver.execute_script("return document.getElementById('email').value='some@email.com'")
+        # interact.click()
 
-    if len(driver.contexts) > 1:
-        print (driver.contexts)
-        native = driver.contexts[0]
-        driver.switch_to.context(native)
-    else:
         # sleep(5)
-        print (driver.contexts)
-        driver.execute_script('sauce:context=Checking Context')
-        native = driver.contexts[0]
-        driver.switch_to.context(native)
-        driver.execute_script('sauce:context=Switched Context')
+        interact = driver.find_element_by_id("firstName")
+        # interact.click()
+        driver.execute_script("return document.getElementById('firstName').value='some@email.com'")
         # sleep(5)
+        # interact.send_keys("some@email.com")
+        # triple_click = TouchAction()
+        # TouchAction().tap(interact)
+        # triple_click = TouchAction(driver)
+        # print (colored("found page", 'green'))
+        #
+        # # the parameters for tap are element, x-offset, y-offset, and count
+        # triple_click.tap(interact, 0, 0, 8)
+        # print (colored("found page", 'green'))
+        #
+        # triple_click.perform()
+        # # triple_click.tap(interact)
+        # print (colored("found page", 'green'))
+        #
+        # sauce_result = "passed"
+
+        # print (colored(driver.contexts, 'blue'))
+    except:
+        print (colored("button not found 2", 'red'))
+
+
+
+    try:
+        print (colored("looking for email input", 'green'))
+        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "email")))
+        # interact = driver.find_element_by_accessibility_id("I already have an account")
+
+        # sleep(5)
+        interact = driver.find_element_by_id("lastName")
+        driver.execute_script("return document.getElementById('lastName').value='some@email.com'")
+
+        # interact.click()
+        # sleep(5)
+        # interact.send_keys("some@email.com")
+        # triple_click = TouchAction()
+        # TouchAction().tap(interact)
+        # triple_click = TouchAction(driver)
+        # print (colored("found page", 'green'))
+        #
+        # # the parameters for tap are element, x-offset, y-offset, and count
+        # triple_click.tap(interact, 0, 0, 8)
+        # print (colored("found page", 'green'))
+        #
+        # triple_click.perform()
+        # # triple_click.tap(interact)
+        # print (colored("found page", 'green'))
+        #
+        # sauce_result = "passed"
+
+        # print (colored(driver.contexts, 'blue'))
+    except:
+        print (colored("button not found 2", 'red'))
+
+    try:
+        print (colored("looking for email input", 'green'))
+        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "email")))
+        # interact = driver.find_element_by_accessibility_id("I already have an account")
+
+        # sleep(5)
+        interact = driver.find_element_by_id("industry")
+        element = driver.execute_script("return document.querySelector(\"[text='Retail']\")")
+        driver.execute_script("arguments[0].click();", element)
+
+        # interact.click()
+        # sleep(5)
+        # interact.send_keys("some@email.com")
+        # triple_click = TouchAction()
+        # TouchAction().tap(interact)
+        # triple_click = TouchAction(driver)
+        # print (colored("found page", 'green'))
+        #
+        # # the parameters for tap are element, x-offset, y-offset, and count
+        # triple_click.tap(interact, 0, 0, 8)
+        # print (colored("found page", 'green'))
+        #
+        # triple_click.perform()
+        # # triple_click.tap(interact)
+        # print (colored("found page", 'green'))
+        #
+        # sauce_result = "passed"
+
+        # print (colored(driver.contexts, 'blue'))
+    except:
+        print (colored("button not found 2", 'red'))
     # driver.get('https://www.childrensplace.com/ca/home')
     # # # interact = driver.find_element_by_name("q")
     # # # interact.click()

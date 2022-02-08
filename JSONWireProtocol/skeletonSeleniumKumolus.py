@@ -21,8 +21,6 @@ import requests
 import json
 from selenium.webdriver.common.by import By
 from termcolor import colored
-import requests
-from requests.auth import HTTPBasicAuth
 # from reusableFxns import *
 
 ###################################################################
@@ -39,14 +37,6 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # Set region to 'US' or 'EU'
 # Test will default to 'US' if left blank or set to any other than 'US' or 'EU'
 ###################################################################
-response = requests.get('https://api.us-west-1.saucelabs.com/team-management/v1/teams/',
-            # auth = HTTPBasicAuth('sandeepvar', '01434d00-9812-4379-959b-776bf87e4145'))
-            auth = HTTPBasicAuth(os.environ['SAUCE_USERNAME'], os.environ['SAUCE_ACCESS_KEY']))
-
-
-# print request object
-print(response)
-print(response.content)
 
 region = 'US'
 # region = 'EU'
@@ -59,27 +49,123 @@ region = 'US'
 sauceParameters = {
     'tags':['New', 'Build',],
     # 'name': 'Run: ' + str(datetime.datetime.now()),
+
+    # "browserName": "chrome",
+
+
     # 'name': 'Run without search between clicks',
     # 'platform': 'macos 11.00',
     # 'pageLoadStrategy': 'none',
-    # 'platform': 'windows 7',
     # 'platform': 'windows 10',
     # 'platform': 'windows 8.1',
     # 'browserName': 'chrome',
     # 'browserName': 'internet explorer',
-    # 'browserName': 'MicrosoftEdge',
     # 'browserName': 'firefox',
+    # 'browserName': 'chrome',
+
     'browserName': 'safari',
-     "safari.options": {
-      },
+
     # 'cleanSession': 'true',
-    # "timeZone": "New_York",
-    # 'browserLogLevel': 'SEVERE',
+    # 'version': '93',
+    # 'timeZone': 'Chicago',
+
     # 'version': '75',
     # 'public':'share',
     # 'maxInstances': '5',
     # 'version': '11',
-    # 'avoidProxy': False,
+    # 'avoidProxy': True,
+    # 'isEnableCrossContextCheck': True,
+    # 'tunnelName': 'thisOne',
+    # "timeZone": "New_York",
+    'sauce:options': {
+    #     # 'seleniumVersion': '3.141.59',
+    #     'name': '111Run: ' + str(datetime.datetime.now()),
+    #
+    #     # 'name': 'https://dev.testinghub.autodesk.com/ test of drop down menu',
+    #     # 'extendedDebugging':'true',
+    #     # "timeZone": "New_York",
+    #     # 'tunnelIdentifier': 'tj'
+    # # 'safari.options':{},
+    #
+    #     # 'name': 'UI-Mobile-QA-Regression-tests-Hari',
+    #     # 'build': 'Trying to break it',
+    #     #
+    #     #
+    #     # 'tunnelIdentifier': 'tj',
+    },
+
+        # "prerun":"sauce-storage:disable-intranet-compatibility-mode-in-ie.bat",
+            # 'prerun':{
+            #     'executable': 'https://raw.githubusercontent.com/phillsauce/saucelabs-import-files/master/WinDownloadFiles.bat',
+            #     'args': ['--silent'],
+            #     'timeout': 500,
+            #     'background': 'false',
+            # },
+    # 'browserVersion':'latest',
+    # 'sauce:options': {
+    #     # 'seleniumVersion': '3.141.59',
+    #     'public':''
+    # },
+    # 'extendedDebugging': 'true',
+    # 'chromedriverVersion': '94.0.4606.61',
+    # 'capturePerformance': 'true',
+    # 'screenResolution':'2360x1770',
+    # 'screenResolution':'2560x1600',
+    # 'screenResolution':'800x600',
+
+
+
+    # 'name': 'Run: ' + getNumber(),
+    # 'tunnelIdentifier':"test",
+
+    # 'tunnelIdentifier': 'tj111::TheTeejers::e5d5d60ca0c04cbcbc87d42cfa86f333'
+    # 'parentTunnel':"tj.invitationtest4"
+    # 'seleniumVersion': '4.0.0',
+    # 'iedriverVersion': '3.141.59',
+    # 'chromedriverVersion': '2.40',
+    # 'requireWindowFocus' : True,
+    # 'maxDuration': 1800,
+    # 'idleTimeout': 1000,
+    # 'commandTimeout': 600,
+    # 'videoUploadOnPass':False,
+    # 'extendedDebugging':'true',
+    # 'prerun':{
+    #     'executable': 'https://raw.githubusercontent.com/phillsauce/saucelabs-import-files/master/WinDownloadFiles.bat',
+    #     'args': ['--silent'],
+    #     'timeout': 500,
+    #     'background': 'false',
+    # },
+    # 'goog:chromeOptions':{
+    #      # "binary": "D:\\Program Files\\Chrome 66\\chrome.exe",
+    #      "args": [ '--disable-notifications, start-maximized, window-size=1920,1080' ],
+    #      # 'public':'private',
+    #     # mobileEmulation':{'deviceName':'iPhone X'},
+    # #     # 'prefs': {
+    # #     #     'profile': {
+    # #     #         'password_manager_enabled': False
+    # #     #         },
+    # #     #         'credentials_enable_service': False,
+    # #     #     },
+    # #     'args': ['test-type', 'disable-infobars'],
+    # },
+    # 'moz:firefoxOptions':{
+    #
+    #     'geckodriverVersion':'0.27.0',
+    # },
+    # "sauce:options":{
+    #     "seleniumVersion": "3.141.0",
+    #     "name": "Test using W3C protocol",
+    #     "iedriverVersion": "3.150.1",
+    # },
+    #     "acceptSslCerts": 'false',
+    #     "idleTimeout": "120",
+    #     "name": "AFW - TTAB02CHR PackageTracer https://hp.myway.com/packagetracer/ttab02chr/ [ Windows 10 ] - [ Inter...",
+    #     "platform": "Windows 10",
+    #     "browserName": "Internet Explorer",
+    #     "version": "11",
+    #     "iedriverVersion": "3.150.1",
+    #     "screenResolution": "1024x768",
+    #     "seleniumVersion":  "3.141.0"
     }
 
 
@@ -119,7 +205,7 @@ elif region == 'EU':
 
 # print ('Platform Set: ' + driver.capabilities['platform'])
 print (driver.capabilities)
-print (driver.capabilities['webdriver.remote.sessionid'])
+# print (driver.capabilities['webdriver.remote.sessionid'])
 # print (sauceParameters)
 # print ('Screen Resolution Set: ' + driver.capabilities['screenResolution'])
 # driver.delete_all_cookies()
@@ -141,25 +227,169 @@ print (driver.capabilities['webdriver.remote.sessionid'])
 
 # driver.execute_script('sauce:context=Open google.com')
 #
-# driver.get("https://www-qa1.dominos.com/en/?reset=1")
-driver.get("https://google.com")
-# document.querySelector(f)?.contentDocument.readyState, frame#
-try:
-    print (colored("looking for Page", 'green'))
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@name='user']")))
-    # interact = driver.find_element_by_accessibility_id("I already have an account")
-    # interact.click()
-    print (colored("user input found", 'red'))
-    interact = driver.find_element_by_xpath("//*[@name='user']")
-    print (colored("site failed to load", 'red'))
 
-    interact.click()
-    interact.send_keys('subrahmanyam.atmakuru@ice.com')
-    interact = driver.find_element_by_xpath("//*[@name='password']")
-    interact.click()
-    interact.send_keys('Ice@9977#')
-    interact = driver.find_element_by_xpath("//*[@name='loginPageSubmitBtn']")
-    interact.click()
+driver.get("https://web.kumolus.com/signup")
+# driver.get("https://the-internet.herokuapp.com/basic_auth")
+# print(driver.get_cookies())
+
+
+
+
+# try:
+#     print (colored("looking for //input[@placeholder='Enter Username']", 'green'))
+#     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "username")))
+#     # interact = driver.find_element_by_accessibility_id("I already have an account")
+#     # interact.click()
+#     print (colored("//input[@placeholder='Enter Username'] found", 'red'))
+#     # interact1 = driver.find_element_by_xpath("//input[@placeholder='Enter Username']")
+#     interact1 = driver.find_element_by_id("username")
+#     interact1.click()
+#     interact1.clear()
+#     interact1.send_keys('automationDB')
+#     # interact1.get_attribute('value')
+#     # print(interact1.get_attribute('value'))
+#     # interact1 = driver.find_element_by_xpath("//input[@placeholder='Enter Username']")
+#     # driver.execute_script('document.querySelector(\"input[value="automationDB"]\").value = ""')
+#     # driver.execute_script('document.getElementById("username").value = ""')
+#     # driver.execute_script("document.querySelector(\"input[placeholder='Enter Username']\").checked=true")
+#     interact1.send_keys(Keys.COMMAND, 'a')
+#     # sleep(3)
+#     interact1.send_keys(Keys.DELETE)
+#     interact1.send_keys(Keys.DELETE)
+#     # interact1.send_keys(Keys.BACKSPACE)
+#     # interact1.send_keys(Keys.BACKSPACE)
+#     # interact1.send_keys(Keys.BACKSPACE)
+#     # interact1.send_keys(Keys.BACKSPACE)
+#     # interact1.send_keys(Keys.BACKSPACE)
+#     # interact1.send_keys(Keys.BACKSPACE)
+#     # interact1.send_keys(Keys.BACKSPACE)
+#     # interact1.send_keys(Keys.BACKSPACE)
+#     # interact1.send_keys(Keys.BACKSPACE)
+#     # interact1.send_keys(Keys.BACKSPACE)
+#     # interact1.send_keys(Keys.BACKSPACE)
+#     # interact1.send_keys(Keys.BACKSPACE)
+#
+#
+#
+#     sleep(5)
+#     # interact1.clear()
+#
+# except:
+#     print (colored("//input[@placeholder=Enter Username not found", 'red'))
+#
+#
+# try:
+#     print (colored("looking for //input[@placeholder='Enter password']", 'green'))
+#     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Enter password']")))
+#     # interact = driver.find_element_by_accessibility_id("I already have an account")
+#     # interact.click()
+#     print (colored("//input[@placeholder='Enter password'] found", 'red'))
+#     interact = driver.find_element_by_xpath("//input[@placeholder='Enter password']")
+#     interact.click()
+#     interact.clear()
+#     interact.send_keys('AutomationDB1!')
+#
+# except:
+#     print (colored("//input[@placeholder=Enter password not found", 'red'))
+
+
+
+interact = driver.find_element_by_css_selector('body')
+interact.send_keys(Keys.COMMAND + 't')
+sleep(3)
+# driver.key_down(Keys.COMMAND).send_keys('t').key_up(Keys.COMMAND).perform()
+# sleep(3)
+driver.get("https://accounts.google.com/signup")
+
+
+
+#prints parent window title
+print("Parent window title: " + driver.title)
+driver.find_element_by_link_text("Help").click()
+sleep(5)
+
+#get current window handle
+# p = driver.current_window_handle
+#
+# #get first child window
+# chwd = driver.window_handles
+#
+# for w in chwd:
+#     print (w)
+# #switch focus to child window
+#     if (w==p):
+#         driver.switch_to.window(w)
+#
+# sleep(0.9)
+# print("Child window title: " + driver.title)
+
+#obtain window handle of browser in focus
+p = driver.current_window_handle
+#obtain parent window handle
+parent = driver.window_handles[0]
+#obtain browser tab window
+chld = driver.window_handles[1]
+print (p)
+print (parent)
+print (chld)
+#switch to browser tab
+driver.switch_to.window(chld)
+print("Page title for browser tab: " + driver.title)
+# print(driver.title)
+sleep(3)
+#close browser tab window
+# driver.close()
+#switch to parent window
+driver.switch_to.window(parent)
+print("Page title for parent window: " + driver.title)
+# print(driver.title)
+# try:
+#     print (colored("looking for //input[@id='user_login_name']", 'green'))
+#     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//input[@id='user_login_name']")))
+#     print (colored("//input[@id='user_login_name'] found", 'red'))
+#     interact = driver.find_element_by_xpath("//input[@id='user_login_name']")
+#     interact.click()
+#     interact.clear()
+#     interact.send_keys('admin-user')
+#
+# except:
+#     print (colored("//input[@id='user_login_name'] not found", 'red'))
+#
+# try:
+#     print (colored("looking for //input[@id='user_password']", 'green'))
+#     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//input[@id='user_password']")))
+#     print (colored("//input[@id='user_password'] found", 'red'))
+#     interact = driver.find_element_by_xpath("//input[@id='user_password']")
+#     interact.click()
+#     interact.clear()
+#     interact.send_keys('C8]7necWj6LM')
+#
+# except:
+#     print (colored("//input[@id='user_password'] not found", 'red'))
+#
+# try:
+#     print (colored("looking for //input[@value=\"Sign in\"]", 'green'))
+#     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//input[@value=\"Sign in\"]")))
+#     print (colored("//input[@value=\"Sign in\"] found", 'red'))
+#     interact = driver.find_element_by_xpath("//input[@value=\"Sign in\"]")
+#     interact.click()
+#
+# except:
+#     print (colored("//input[@value=\"Sign in\"] not found", 'red'))
+#
+#
+# try:
+#     print (colored("looking for Page", 'green'))
+#     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[contains(@title,'Export to CSV')]")))
+#     # interact = driver.find_element_by_accessibility_id("I already have an account")
+#     # interact.click()
+#     print (colored("user input found", 'red'))
+#     interact = driver.find_element_by_xpath("//*[contains(@title,'Export to CSV')]")
+#     print (colored("site failed to load", 'red'))
+#
+#     interact.click()
+#     sleep(5)
+
 
     # sauce_result = "failed"
     # sauce_result = "failed" if str(driver.current_url) != 'https://saucelabs.com/' else "passed"
@@ -170,186 +400,6 @@ try:
 
 
     # print (colored(driver.contexts, 'blue'))
-except:
-    print (colored("site loaded", 'green'))
-
-# driver.get("https://the-internet.herokuapp.com/basic_auth")
-# # print(driver.get_cookies())
-#
-#
-# # print(driver.get_cookie('name'))
-# # driver.get_cookie('name')
-# # cookies_list = driver.get_cookies()
-# # cookies_dict = {}
-# # for cookie in cookies_list:
-# #     cookies_dict[cookie['name']] = cookie['value']
-# #
-# # print(cookies_dict)
-# # driver.key_down(Keys.CONTROL).send_keys('t').key_up(Keys.CONTROL).perform()
-# driver.execute_script('sauce:context=Open new tab')
-#
-# driver.execute_script("window.open('');")
-# driver.execute_script('sauce:context=Switch to new tab')
-#
-# driver.switch_to.window(driver.window_handles[1])
-#
-# driver.execute_script('sauce:context=Open saucelabs.com')
-# driver.get("https://saucelabs.com")
-#
-# driver.execute_script('sauce:context=Get URL')
-#
-# # driver.current_url
-#
-# # print(driver.get_cookies())
-# # driver.get_cookies()
-# # driver.execute_script('sauce:throttleNetwork', {
-# #     "condition": "offline"
-# # })
-# # sleep(180)
-# # driver.get("https://admin-61c3464f.test.duosecurity.com/login");
-# # #
-# # # driver.switch_to_frame("signInFrame");
-# # #
-# # try:
-# #     element = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "login_emailaddress_field")))
-# # finally:
-# #     print ("element found")
-# #
-# # # interact = driver.find_elements_by_xpath('//input[@id=\"login_emailaddress_field\"')
-# # interact = driver.find_element_by_id("login_emailaddress_field")
-# # interact.click()
-# # interact.send_keys("test_au_unrestricted_admin@example.com");
-# #
-# #
-# # interact = driver.find_element_by_id("login_continue_button")
-# # interact.click()
-# # interact.click()
-# #
-# #
-# # element = WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.ID, "login_password_field")))
-#
-# # interact = driver.find_element_by_css_selector("#password")
-# # interact.click()
-# # interact.send_keys("Testing1");
-# #
-# interact.submit()
-
-# driver.get('http://dev.newyorklife.com/resources/financial-calculators/retirement-savings-calculator')
-# driver.execute_script("window.open('','_blank');")
-# print(colored ("hello world!", "blue"))
-# print(colored (str(driver.title), "red"))
-# sleep(10)
-#
-# driver.execute_script("window.open('','_blank');")
-
-
-# Setup for finding an element and clicking it
-#__________________________________________________________________
-# interact = driver.find_element_by_id('menu-item-112')
-# interact.click()
-# try:
-#     print (colored("looking for Page", 'green'))
-#     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@name='user']")))
-#     # interact = driver.find_element_by_accessibility_id("I already have an account")
-#     # interact.click()
-#     print (colored("user input found", 'red'))
-#     interact = driver.find_element_by_xpath("//*[@name='user']")
-#     print (colored("site failed to load", 'red'))
-#
-#     interact.click()
-#     interact.send_keys('subrahmanyam.atmakuru@ice.com')
-#     interact = driver.find_element_by_xpath("//*[@name='password']")
-#     interact.click()
-#     interact.send_keys('Ice@9977#')
-#     interact = driver.find_element_by_xpath("//*[@name='loginPageSubmitBtn']")
-#     interact.click()
-#
-#     # sauce_result = "failed"
-#     # sauce_result = "failed" if str(driver.current_url) != 'https://saucelabs.com/' else "passed"
-#
-#     # driver.execute_script('site failed to load')
-#
-#     # driver.execute_script("sauce:job-result={}".format(failed))
-#
-#
-#     # print (colored(driver.contexts, 'blue'))
-# except:
-#     print (colored("site loaded", 'green'))
-
-
-# try:
-#     print (colored("looking for Page", 'green'))
-#     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@data-automation-id='application-menu-bar']")))
-#     # interact = driver.find_element_by_accessibility_id("I already have an account")
-#     # interact.click()
-#     print (colored("user input found", 'red'))
-#     interact = driver.find_element_by_xpath("//*[contains(text(),'Broker Share')]")
-#     print (colored("site failed to load", 'red'))
-#
-#     interact.click()
-#
-#
-#     # sauce_result = "failed"
-#     # sauce_result = "failed" if str(driver.current_url) != 'https://saucelabs.com/' else "passed"
-#
-#     # driver.execute_script('site failed to load')
-#
-#     # driver.execute_script("sauce:job-result={}".format(failed))
-#
-#
-#     # print (colored(driver.contexts, 'blue'))
-# except:
-#     print (colored("site loaded", 'green'))
-
-
-# try:
-#     print (colored("looking for Page", 'green'))
-#     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@title='Symbol linking']")))
-#     # interact = driver.find_element_by_accessibility_id("I already have an account")
-#     # interact.click()
-#     print (colored("user input found", 'red'))
-#     interact = driver.find_element_by_xpath("//*[@title='Symbol linking']")
-#     print (colored("site failed to load", 'red'))
-#
-#     interact.click()
-#
-#
-#     # sauce_result = "failed"
-#     # sauce_result = "failed" if str(driver.current_url) != 'https://saucelabs.com/' else "passed"
-#
-#     # driver.execute_script('site failed to load')
-#
-#     # driver.execute_script("sauce:job-result={}".format(failed))
-#
-#
-#     # print (colored(driver.contexts, 'blue'))
-# except:
-#     print (colored("site loaded", 'green'))
-#
-#
-#
-# try:
-#     print (colored("looking for Page", 'green'))
-#     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[contains(@title,'Export to CSV')]")))
-#     # interact = driver.find_element_by_accessibility_id("I already have an account")
-#     # interact.click()
-#     print (colored("user input found", 'red'))
-#     interact = driver.find_element_by_xpath("//*[contains(@title,'Export to CSV')]")
-#     print (colored("site failed to load", 'red'))
-#
-#     interact.click()
-#     sleep(5)
-#
-#
-#     # sauce_result = "failed"
-#     # sauce_result = "failed" if str(driver.current_url) != 'https://saucelabs.com/' else "passed"
-#
-#     # driver.execute_script('site failed to load')
-#
-#     # driver.execute_script("sauce:job-result={}".format(failed))
-#
-#
-#     # print (colored(driver.contexts, 'blue'))
 # except:
 #     print (colored("site loaded", 'green'))
 #
@@ -360,11 +410,130 @@ except:
 #     alert = driver.switch_to.alert
 #     alert.accept()
 #     print("alert accepted")
-# except TimeoutException:
+# except:
 #     print("no alert")
 #
-# sleep(10)
+# try:
+#     print (colored("looking for My profile", 'green'))
+#     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//li[@title=\"My profile\"]")))
+#     # interact = driver.find_element_by_accessibility_id("I already have an account")
+#     # interact.click()
+#     print (colored("My profile found", 'red'))
+#     interact = driver.find_element_by_xpath("//li[@title=\"My profile\"]")
 #
+# except:
+#     print (colored("My Profile not found", 'red'))
+#
+# try:
+#     print (colored("looking for //span[@class='b-topbar-sidemenu-link-button']", 'green'))
+#     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//span[@class='b-topbar-sidemenu-link-button']")))
+#     # interact = driver.find_element_by_accessibility_id("I already have an account")
+#     # interact.click()
+#     print (colored("My profile found", 'red'))
+#     interact = driver.find_element_by_xpath("//span[@class='b-topbar-sidemenu-link-button']")
+#     interact.click()
+#
+# except:
+#     print (colored("//span[@class='b-topbar-sidemenu-link-button'] not found", 'red'))
+#
+#
+# try:
+#     print (colored("looking for //a[@title=\"Admin\"]", 'green'))
+#     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//a[@title=\"Admin\"]")))
+#     # interact = driver.find_element_by_accessibility_id("I already have an account")
+#     # interact.click()
+#     print (colored("My profile found", 'red'))
+#     interact = driver.find_element_by_xpath("//a[@title=\"Admin\"]")
+#     interact.click()
+#
+# except:
+#     print (colored("//a[@title=\"Admin\"] not found", 'red'))
+#
+# try:
+#     print (colored("looking for //div[@class='l-admin-dashboard']", 'green'))
+#     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//div[@class='l-admin-dashboard']")))
+#     # interact = driver.find_element_by_accessibility_id("I already have an account")
+#     # interact.click()
+#     print (colored("My profile found", 'red'))
+#     interact = driver.find_element_by_xpath("//div[@class='l-admin-dashboard']")
+#     # interact.click()
+#
+# except:
+#     print (colored("//div[@class='l-admin-dashboard'] not found", 'red'))
+#
+#
+# try:
+#     print (colored("looking for //span[text()=\"New community\"]", 'green'))
+#     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//span[text()=\"New community\"]")))
+#     # interact = driver.find_element_by_accessibility_id("I already have an account")
+#     # interact.click()
+#     print (colored("My profile found", 'red'))
+#     interact = driver.find_element_by_xpath("//span[text()=\"New community\"]")
+#     interact.click()
+#
+# except:
+#     print (colored("//span[text()=\"New community\"] not found", 'red'))
+#
+# try:
+#     print (colored("looking for //input[@id='community_name']", 'green'))
+#     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//input[@id='community_name']")))
+#     # interact = driver.find_element_by_accessibility_id("I already have an account")
+#     # interact.click()
+#     print (colored("My profile found", 'red'))
+#     interact = driver.find_element_by_xpath("//input[@id='community_name']")
+#     interact.click()
+#     interact.clear()
+#     interact.send_keys('Community - New')
+# except:
+#     print (colored("//input[@id='community_name'] not found", 'red'))
+#
+# try:
+#     print (colored("looking for //input[@value=\"Create Community\"]", 'green'))
+#     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//input[@value=\"Create Community\"]")))
+#     # interact = driver.find_element_by_accessibility_id("I already have an account")
+#     # interact.click()
+#     print (colored("My profile found", 'red'))
+#     interact = driver.find_element_by_xpath("//input[@value=\"Create Community\"]")
+#     interact.click()
+#
+# except:
+#     print (colored("//input[@value=\"Create Community\"] not found", 'red'))
+#
+# try:
+#     print (colored("looking for //a[@class='b-back-button']", 'green'))
+#     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//a[@class='b-back-button']")))
+#     # interact = driver.find_element_by_accessibility_id("I already have an account")
+#     # interact.click()
+#     print (colored("My profile found", 'red'))
+#     interact = driver.find_element_by_xpath("//a[@class='b-back-button']")
+#     interact.click()
+#
+# except:
+#     print (colored("//a[@class='b-back-button'] not found", 'red'))
+#
+# try:
+#     print (colored("looking for //button[@class='b-save-action']", 'green'))
+#     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//button[@class='b-save-action']")))
+#     # interact = driver.find_element_by_accessibility_id("I already have an account")
+#     # interact.click()
+#     print (colored("My profile found", 'red'))
+#     interact = driver.find_element_by_xpath("//button[@class='b-save-action']")
+#     interact.click()
+#
+# except:
+#     print (colored("//button[@class='b-save-action'] not found", 'red'))
+#
+# try:
+#     print (colored("looking for //div[@class='alert alert-success']", 'green'))
+#     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//div[@class='alert alert-success']")))
+#     # interact = driver.find_element_by_accessibility_id("I already have an account")
+#     # interact.click()
+#     print (colored("My profile found", 'red'))
+#     interact = driver.find_element_by_xpath("//div[@class='alert alert-success']")
+#     interact.click()
+#
+# except:
+#     print (colored("//div[@class='alert alert-success'] not found", 'red'))
 # try:
 #     print (colored("looking for Page", 'green'))
 #     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[contains(@title,'Export to CSV')]")))
@@ -389,8 +558,8 @@ except:
 #     # print (colored(driver.contexts, 'blue'))
 # except:
 #     print (colored("site loaded", 'green'))
-
-sleep(10)
+#
+# sleep(10)
 # sauce_result = "passed" if str(driver.title) != 'dev.newyorklife.com' else "failed"
 #
 # # driver.execute_script('site failed to load')
